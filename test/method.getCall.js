@@ -1,8 +1,8 @@
 var chai = require('chai');
 var assert = chai.assert;
-var Method = require('../packages/web3-core-method');
+var Method = require('../packages/xdc3-core-method');
 
-describe('lib/web3/method', function () {
+describe('lib/xdc3/method', function () {
     describe('getCall', function () {
         it('should return call name', function () {
 

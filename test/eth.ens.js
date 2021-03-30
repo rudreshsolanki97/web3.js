@@ -2,13 +2,13 @@ var chai = require('chai');
 var assert = chai.assert;
 var FakeIpcProvider = require('./helpers/FakeIpcProvider');
 var FakeHttpProvider = require('./helpers/FakeHttpProvider');
-var Web3 = require('../packages/web3');
-var sha3 = require('../packages/web3-utils').sha3;
-var formatters = require('web3-core-helpers').formatters;
-var abiCoder = require('web3-eth-abi');
-var utils = require('web3-utils');
+var Web3 = require('../packages/xdc3');
+var sha3 = require('../packages/xdc3-utils').sha3;
+var formatters = require('../packages/xdc3-core-helpers').formatters;
+var abiCoder = require('../packages/xdc3-eth-abi');
+var utils = require('../packages/xdc3-utils');
 var namehash = require('eth-ens-namehash');
-var asciiToHex = require('../packages/web3-utils').asciiToHex;
+var asciiToHex = require('../packages/xdc3-utils').asciiToHex;
 
 /**
  * Injects the required validations and results for the `eth_sendTransaction` call
@@ -104,14 +104,14 @@ function isExpectedReceipt(receipt) {
 
 describe('ens', function () {
     let provider;
-    let web3;
+    let xdc3;
     const hashedName = namehash.hash('foobar.eth');
     const name = 'foobar.eth';
 
     describe('setters', function () {
         beforeEach(function () {
             provider = new FakeIpcProvider();
-            web3 = new Web3(provider);
+            xdc3 = new Web3(provider);
 
             provider.injectResult({
                 timestamp: Math.floor(new Date() / 1000) - 60,
@@ -142,9 +142,9 @@ describe('ens', function () {
         });
 
         it('should set the property "registryAddress" to "null" and not throw any error', function() {
-            web3.eth.ens.registryAddress = null;
+            xdc3.eth.ens.registryAddress = null;
 
-            assert.equal(web3.eth.ens.registryAddress, null);
+            assert.equal(xdc3.eth.ens.registryAddress, null);
         });
 
         it('should set the owner record for a name', async function () {
@@ -159,7 +159,7 @@ describe('ens', function () {
                 false
             );
 
-            const receipt = await web3.eth.ens.setOwner(
+            const receipt = await xdc3.eth.ens.setOwner(
                 name,
                 '0x0123456701234567012345670123456701234567',
                 {
@@ -183,7 +183,7 @@ describe('ens', function () {
                 true
             );
 
-            web3.eth.ens.setOwner(
+            xdc3.eth.ens.setOwner(
                 name,
                 '0x0123456701234567012345670123456701234567',
                 {
@@ -213,7 +213,7 @@ describe('ens', function () {
             );
 
             try {
-                await web3.eth.ens.setOwner(
+                await xdc3.eth.ens.setOwner(
                     name,
                     '0x0123456701234567012345670123456701234567',
                     {
@@ -246,7 +246,7 @@ describe('ens', function () {
                 false
             );
 
-            const receipt = await web3.eth.ens.setRecord(
+            const receipt = await xdc3.eth.ens.setRecord(
                 name,
                 '0x0123456701234567012345670123456701234567',
                 '0x0123456701234567012345670123456701234567',
@@ -277,7 +277,7 @@ describe('ens', function () {
                 true
             );
 
-            web3.eth.ens.setRecord(
+            xdc3.eth.ens.setRecord(
                 name,
                 '0x0123456701234567012345670123456701234567',
                 '0x0123456701234567012345670123456701234567',
@@ -314,7 +314,7 @@ describe('ens', function () {
             );
 
             try {
-                await web3.eth.ens.setRecord(
+                await xdc3.eth.ens.setRecord(
                     name,
                     '0x0123456701234567012345670123456701234567',
                     '0x0123456701234567012345670123456701234567',
@@ -350,7 +350,7 @@ describe('ens', function () {
                 false
             );
 
-            const receipt = await web3.eth.ens.setSubnodeRecord(
+            const receipt = await xdc3.eth.ens.setSubnodeRecord(
                 name,
                 'label',
                 '0x0123456701234567012345670123456701234567',
@@ -383,7 +383,7 @@ describe('ens', function () {
                 false
             );
 
-            const receipt = await web3.eth.ens.setSubnodeRecord(
+            const receipt = await xdc3.eth.ens.setSubnodeRecord(
                 name,
                 utils.sha3('label'),
                 '0x0123456701234567012345670123456701234567',
@@ -416,7 +416,7 @@ describe('ens', function () {
                 true
             );
 
-            web3.eth.ens.setSubnodeRecord(
+            xdc3.eth.ens.setSubnodeRecord(
                 name,
                 'label',
                 '0x0123456701234567012345670123456701234567',
@@ -455,7 +455,7 @@ describe('ens', function () {
             );
 
             try {
-                await web3.eth.ens.setSubnodeRecord(
+                await xdc3.eth.ens.setSubnodeRecord(
                     name,
                     'label',
                     '0x0123456701234567012345670123456701234567',
@@ -489,7 +489,7 @@ describe('ens', function () {
                 false
             );
 
-            const receipt = await web3.eth.ens.setApprovalForAll(
+            const receipt = await xdc3.eth.ens.setApprovalForAll(
                 '0x0123456701234567012345670123456701234567',
                 true,
                 {
@@ -516,7 +516,7 @@ describe('ens', function () {
                 true
             );
 
-            web3.eth.ens.setApprovalForAll(
+            xdc3.eth.ens.setApprovalForAll(
                 '0x0123456701234567012345670123456701234567',
                 true,
                 {
@@ -549,7 +549,7 @@ describe('ens', function () {
             );
 
             try {
-                await web3.eth.ens.setApprovalForAll(
+                await xdc3.eth.ens.setApprovalForAll(
                     '0x0123456701234567012345670123456701234567',
                     true,
                     {
@@ -577,7 +577,7 @@ describe('ens', function () {
                 false
             );
 
-            const receipt = await web3.eth.ens.setResolver(
+            const receipt = await xdc3.eth.ens.setResolver(
                 name,
                 '0x0123456701234567012345670123456701234567',
                 {
@@ -601,7 +601,7 @@ describe('ens', function () {
                 true
             );
 
-            web3.eth.ens.setResolver(
+            xdc3.eth.ens.setResolver(
                 name,
                 '0x0123456701234567012345670123456701234567',
                 {
@@ -631,7 +631,7 @@ describe('ens', function () {
             );
 
             try {
-                await web3.eth.ens.setResolver(
+                await xdc3.eth.ens.setResolver(
                     name,
                     '0x0123456701234567012345670123456701234567',
                     {
@@ -659,7 +659,7 @@ describe('ens', function () {
                 false
             );
 
-            const receipt = await web3.eth.ens.setTTL(
+            const receipt = await xdc3.eth.ens.setTTL(
                 name,
                 '1',
                 {
@@ -683,7 +683,7 @@ describe('ens', function () {
                 true
             );
 
-            web3.eth.ens.setTTL(
+            xdc3.eth.ens.setTTL(
                 name,
                 '1',
                 {
@@ -713,7 +713,7 @@ describe('ens', function () {
             );
 
             try {
-                await web3.eth.ens.setTTL(
+                await xdc3.eth.ens.setTTL(
                     name,
                     '1',
                     {
@@ -741,7 +741,7 @@ describe('ens', function () {
                 false
             );
 
-            const receipt = await web3.eth.ens.setSubnodeOwner(
+            const receipt = await xdc3.eth.ens.setSubnodeOwner(
                 name,
                 'label',
                 '0x0123456701234567012345670123456701234567',
@@ -766,7 +766,7 @@ describe('ens', function () {
                 false
             );
 
-            const receipt = await web3.eth.ens.setSubnodeOwner(
+            const receipt = await xdc3.eth.ens.setSubnodeOwner(
                 name,
                 utils.sha3('label'),
                 '0x0123456701234567012345670123456701234567',
@@ -791,7 +791,7 @@ describe('ens', function () {
                 true
             );
 
-            web3.eth.ens.setSubnodeOwner(
+            xdc3.eth.ens.setSubnodeOwner(
                 name,
                 'label',
                 '0x0123456701234567012345670123456701234567',
@@ -822,7 +822,7 @@ describe('ens', function () {
             );
 
             try {
-                await web3.eth.ens.setSubnodeOwner(
+                await xdc3.eth.ens.setSubnodeOwner(
                     name,
                     'label',
                     '0x0123456701234567012345670123456701234567',
@@ -844,7 +844,7 @@ describe('ens', function () {
     describe('getters', function () {
         beforeEach(function () {
             provider = new FakeHttpProvider();
-            web3 = new Web3(provider);
+            xdc3 = new Web3(provider);
 
             provider.injectResult({
                 timestamp: Math.floor(new Date() / 1000) - 60,
@@ -899,7 +899,7 @@ describe('ens', function () {
 
             provider.injectResult('0x0000000000000000000000000000000000000000000000000000000000000001');
 
-            const owner = await web3.eth.ens.supportsInterface('foobar.eth', '0x3b3b57de');
+            const owner = await xdc3.eth.ens.supportsInterface('foobar.eth', '0x3b3b57de');
 
             assert.equal(owner, true);
         });
@@ -929,7 +929,7 @@ describe('ens', function () {
 
             provider.injectResult('0x0000000000000000000000000000000000000000000000000000000000000001');
 
-            web3.eth.ens.supportsInterface('foobar.eth', '0x3b3b57de', function (error, owner) {
+            xdc3.eth.ens.supportsInterface('foobar.eth', '0x3b3b57de', function (error, owner) {
                 assert.equal(owner, true);
 
                 done();
@@ -968,7 +968,7 @@ describe('ens', function () {
                 message: 'ERROR'
             });
 
-            web3.eth.ens.supportsInterface(
+            xdc3.eth.ens.supportsInterface(
                 'foobar.eth',
                 'addr(bytes32)',
                 function (error, supported) {
@@ -1012,7 +1012,7 @@ describe('ens', function () {
             });
 
             try {
-                await web3.eth.ens.supportsInterface('foobar.eth', 'addr(bytes32)');
+                await xdc3.eth.ens.supportsInterface('foobar.eth', 'addr(bytes32)');
 
                 assert.fail();
             } catch (error) {
@@ -1035,7 +1035,7 @@ describe('ens', function () {
 
             provider.injectResult('0x0000000000000000000000000000000000000000000000000000000000000001');
 
-            const ttl = await web3.eth.ens.getTTL('foobar.eth');
+            const ttl = await xdc3.eth.ens.getTTL('foobar.eth');
 
             assert.equal(ttl, 1);
         });
@@ -1054,7 +1054,7 @@ describe('ens', function () {
 
             provider.injectResult('0x0000000000000000000000000000000000000000000000000000000000000001');
 
-            web3.eth.ens.getTTL('foobar.eth', function (error, ttl) {
+            xdc3.eth.ens.getTTL('foobar.eth', function (error, ttl) {
                 assert.equal(ttl, 1);
 
                 done();
@@ -1081,7 +1081,7 @@ describe('ens', function () {
                 message: 'ERROR'
             });
 
-            web3.eth.ens.getTTL(
+            xdc3.eth.ens.getTTL(
                 'foobar.eth',
                 function (error, ttl) {
                     assert.equal(ttl, null);
@@ -1112,7 +1112,7 @@ describe('ens', function () {
             });
 
             try {
-                await web3.eth.ens.getTTL('foobar.eth');
+                await xdc3.eth.ens.getTTL('foobar.eth');
 
                 assert.fail();
             } catch (error) {
@@ -1135,7 +1135,7 @@ describe('ens', function () {
 
             provider.injectResult('0x0000000000000000000000000000000000000000000000000000000000000001');
 
-            const isApproved = await web3.eth.ens.isApprovedForAll(
+            const isApproved = await xdc3.eth.ens.isApprovedForAll(
                 '0x0123456701234567012345670123456701234567',
                 '0x0123456701234567012345670123456701234567'
             );
@@ -1157,7 +1157,7 @@ describe('ens', function () {
 
             provider.injectResult('0x0000000000000000000000000000000000000000000000000000000000000001');
 
-            web3.eth.ens.isApprovedForAll(
+            xdc3.eth.ens.isApprovedForAll(
                 '0x0123456701234567012345670123456701234567',
                 '0x0123456701234567012345670123456701234567',
                 function (error, isApproved) {
@@ -1187,7 +1187,7 @@ describe('ens', function () {
                 message: 'ERROR'
             });
 
-            web3.eth.ens.isApprovedForAll(
+            xdc3.eth.ens.isApprovedForAll(
                 '0x0123456701234567012345670123456701234567',
                 '0x0123456701234567012345670123456701234567',
                 function (error, isApproved) {
@@ -1219,7 +1219,7 @@ describe('ens', function () {
             });
 
             try {
-                await web3.eth.ens.isApprovedForAll(
+                await xdc3.eth.ens.isApprovedForAll(
                     '0x0123456701234567012345670123456701234567',
                     '0x0123456701234567012345670123456701234567'
                 );
@@ -1245,7 +1245,7 @@ describe('ens', function () {
 
             provider.injectResult('0x0000000000000000000000000000000000000000000000000000000000000001');
 
-            const exists = await web3.eth.ens.recordExists(name);
+            const exists = await xdc3.eth.ens.recordExists(name);
 
             assert.equal(exists, true);
         });
@@ -1264,7 +1264,7 @@ describe('ens', function () {
 
             provider.injectResult('0x0000000000000000000000000000000000000000000000000000000000000001');
 
-            web3.eth.ens.recordExists(
+            xdc3.eth.ens.recordExists(
                 name,
                 function (error, exists) {
                     assert.equal(exists, true);
@@ -1293,7 +1293,7 @@ describe('ens', function () {
                 message: 'ERROR'
             });
 
-            web3.eth.ens.recordExists(
+            xdc3.eth.ens.recordExists(
                 name,
                 function (error, isApproved) {
                     assert.equal(isApproved, null);
@@ -1324,7 +1324,7 @@ describe('ens', function () {
             });
 
             try {
-                await web3.eth.ens.recordExists(name);
+                await xdc3.eth.ens.recordExists(name);
 
                 assert.fail();
             } catch (error) {
@@ -1346,7 +1346,7 @@ describe('ens', function () {
             });
             provider.injectResult('0x0000000000000000000000000123456701234567012345670123456701234567');
 
-            const owner = await web3.eth.ens.registry.getOwner('foobar.eth');
+            const owner = await xdc3.eth.ens.registry.getOwner('foobar.eth');
 
             assert.equal(owner, '0x0123456701234567012345670123456701234567');
         });
@@ -1364,7 +1364,7 @@ describe('ens', function () {
             });
             provider.injectResult('0x0000000000000000000000000123456701234567012345670123456701234567');
 
-            const owner = await web3.eth.ens.getOwner('foobar.eth');
+            const owner = await xdc3.eth.ens.getOwner('foobar.eth');
 
             assert.equal(owner, '0x0123456701234567012345670123456701234567');
         });
@@ -1382,7 +1382,7 @@ describe('ens', function () {
             });
             provider.injectResult('0x0000000000000000000000000123456701234567012345670123456701234567');
 
-            web3.eth.ens.getOwner('foobar.eth', function (error, owner) {
+            xdc3.eth.ens.getOwner('foobar.eth', function (error, owner) {
                 assert.equal(owner, '0x0123456701234567012345670123456701234567');
                 assert.equal(error, '0x0123456701234567012345670123456701234567'); // For backward compatibility
                 done();
@@ -1408,7 +1408,7 @@ describe('ens', function () {
                 message: 'ERROR'
             });
 
-            web3.eth.ens.getOwner('foobar.eth', function (error, owner) {
+            xdc3.eth.ens.getOwner('foobar.eth', function (error, owner) {
                 assert.equal(owner, null);
                 assert.equal(error.code, 1234);
                 assert.equal(error.message, 'ERROR');
@@ -1434,7 +1434,7 @@ describe('ens', function () {
                 message: 'ERROR'
             });
 
-            web3.eth.ens.getOwner('foobar.eth', function (error, owner) {
+            xdc3.eth.ens.getOwner('foobar.eth', function (error, owner) {
                 assert.equal(owner, null);
                 assert.equal(error.code, 1234);
                 assert.equal(error.message, 'ERROR');
@@ -1461,7 +1461,7 @@ describe('ens', function () {
             });
 
             try {
-                await web3.eth.ens.getOwner('foobar.eth');
+                await xdc3.eth.ens.getOwner('foobar.eth');
 
                 assert.fail();
             } catch (error) {
@@ -1483,7 +1483,7 @@ describe('ens', function () {
             });
             provider.injectResult('0x0000000000000000000000000123456701234567012345670123456701234567');
 
-            const resolver = await web3.eth.ens.getResolver('foobar.eth');
+            const resolver = await xdc3.eth.ens.getResolver('foobar.eth');
 
             assert.equal(resolver.options.address, '0x0123456701234567012345670123456701234567');
         });
@@ -1501,7 +1501,7 @@ describe('ens', function () {
             });
             provider.injectResult('0x0000000000000000000000000123456701234567012345670123456701234567');
 
-            web3.eth.ens.getResolver('foobar.eth', function (error, resolver) {
+            xdc3.eth.ens.getResolver('foobar.eth', function (error, resolver) {
                 assert.equal(resolver.options.address, '0x0123456701234567012345670123456701234567');
                 assert.equal(error.options.address, '0x0123456701234567012345670123456701234567'); // For backward compatibility
 
@@ -1522,7 +1522,7 @@ describe('ens', function () {
             });
             provider.injectResult('0x0000000000000000000000000123456701234567012345670123456701234567');
 
-            const resolver = await web3.eth.ens.getResolver('foobar.eth');
+            const resolver = await xdc3.eth.ens.getResolver('foobar.eth');
 
             assert.equal(resolver.options.address, '0x0123456701234567012345670123456701234567');
         });
@@ -1547,7 +1547,7 @@ describe('ens', function () {
             });
 
             try {
-                await web3.eth.ens.getResolver('foobar.eth');
+                await xdc3.eth.ens.getResolver('foobar.eth');
 
                 assert.fail();
             } catch (error) {
@@ -1574,7 +1574,7 @@ describe('ens', function () {
             });
 
             try {
-                await web3.eth.ens.getResolver('foobar.eth');
+                await xdc3.eth.ens.getResolver('foobar.eth');
 
                 assert.fail();
             } catch (error) {
@@ -1602,7 +1602,7 @@ describe('ens', function () {
                 message: 'ERROR'
             });
 
-            web3.eth.ens.getResolver('foobar.eth', function (error, resolver) {
+            xdc3.eth.ens.getResolver('foobar.eth', function (error, resolver) {
                 assert.equal(error.code, 1234);
                 assert.equal(error.message, 'ERROR');
                 assert.equal(resolver, null);
@@ -1646,7 +1646,7 @@ describe('ens', function () {
             });
             provider.injectResult('0x0000000000000000000000001234567012345670123456701234567012345670');
 
-            const addr = await web3.eth.ens.getAddress('foobar.eth');
+            const addr = await xdc3.eth.ens.getAddress('foobar.eth');
 
             assert.equal(addr, '0x1234567012345670123456701234567012345670');
         });
@@ -1686,7 +1686,7 @@ describe('ens', function () {
             });
             provider.injectResult('0x0000000000000000000000001234567012345670123456701234567012345670');
 
-            web3.eth.ens.getAddress('foobar.eth', function (error, addr) {
+            xdc3.eth.ens.getAddress('foobar.eth', function (error, addr) {
                 assert.equal(error, '0x1234567012345670123456701234567012345670'); // For backward compatibility
                 assert.equal(addr, '0x1234567012345670123456701234567012345670');
 
@@ -1740,7 +1740,7 @@ describe('ens', function () {
             });
 
             try {
-                await web3.eth.ens.getAddress('foobar.eth');
+                await xdc3.eth.ens.getAddress('foobar.eth');
 
                 assert.fail();
             } catch (error) {
@@ -1795,7 +1795,7 @@ describe('ens', function () {
                 message: 'ERROR'
             });
 
-            web3.eth.ens.getAddress('foobar.eth', function (error, addr) {
+            xdc3.eth.ens.getAddress('foobar.eth', function (error, addr) {
                 assert.equal(error.code, 1234);
                 assert.equal(error.message, 'ERROR');
                 assert.equal(addr, null);
@@ -1844,7 +1844,7 @@ describe('ens', function () {
                 pubkeyCoordinateAsHex
             ]);
 
-            const result = await web3.eth.ens.getPubkey('foobar.eth');
+            const result = await xdc3.eth.ens.getPubkey('foobar.eth');
 
             assert.equal(result[0][0], '0x3078303030303030303030303030303030303030303030303030303030303030');
             assert.equal(result[0][1], '0x3030303030303030303030303030303030303030303030303030303030303030');
@@ -1890,7 +1890,7 @@ describe('ens', function () {
                 pubkeyCoordinateAsHex
             ]);
 
-            web3.eth.ens.getPubkey(
+            xdc3.eth.ens.getPubkey(
                 'foobar.eth',
                 function (error, result) {
                     assert.equal(result[0][0], '0x3078303030303030303030303030303030303030303030303030303030303030');
@@ -1955,7 +1955,7 @@ describe('ens', function () {
                 message: 'ERROR'
             });
 
-            web3.eth.ens.getPubkey(
+            xdc3.eth.ens.getPubkey(
                 'foobar.eth',
                 function (error, result) {
                     assert.equal(error.code, 1234);
@@ -2019,7 +2019,7 @@ describe('ens', function () {
             });
 
             try {
-                await web3.eth.ens.getPubkey('foobar.eth');
+                await xdc3.eth.ens.getPubkey('foobar.eth');
 
                 assert.fail();
             } catch (error) {
@@ -2064,7 +2064,7 @@ describe('ens', function () {
 
             provider.injectResult('0x0000000000000000000000000000000000000000000000000000000000000000');
 
-            const result = await web3.eth.ens.getContent('foobar.eth');
+            const result = await xdc3.eth.ens.getContent('foobar.eth');
 
             assert.equal(result, '0x0000000000000000000000000000000000000000000000000000000000000000');
         });
@@ -2105,7 +2105,7 @@ describe('ens', function () {
 
             provider.injectResult('0x0000000000000000000000000000000000000000000000000000000000000000');
 
-            web3.eth.ens.getContent(
+            xdc3.eth.ens.getContent(
                 'foobar.eth',
                 function (error, result) {
                     assert.equal(result, '0x0000000000000000000000000000000000000000000000000000000000000000');
@@ -2161,7 +2161,7 @@ describe('ens', function () {
             });
 
             try {
-                await web3.eth.ens.getContent('foobar.eth');
+                await xdc3.eth.ens.getContent('foobar.eth');
 
                 assert.fail();
             } catch (error) {
@@ -2217,7 +2217,7 @@ describe('ens', function () {
                 message: 'ERROR'
             });
 
-            web3.eth.ens.getContent(
+            xdc3.eth.ens.getContent(
                 'foobar.eth',
                 function (error, result) {
                     assert.equal(error.code, 1234);
@@ -2253,7 +2253,7 @@ describe('ens', function () {
             provider.injectResult('0x0000000000000000000000000000000000000000000000000000000000000000');
 
             try {
-                await web3.eth.ens.getContenthash('foobar.eth');
+                await xdc3.eth.ens.getContenthash('foobar.eth');
 
                 assert.fail();
             } catch (error) {
@@ -2286,7 +2286,7 @@ describe('ens', function () {
             });
             provider.injectResult('0x0000000000000000000000000000000000000000000000000000000000000000');
 
-            web3.eth.ens.getContenthash(
+            xdc3.eth.ens.getContenthash(
                 'foobar.eth',
                 function (error, result) {
                     assert(error.message.includes('does not implement requested method: "contenthash"'));
@@ -2322,7 +2322,7 @@ describe('ens', function () {
             provider.injectResult('0x0000000000000000000000000000000000000000000000000000000000000000');
 
             try {
-                await web3.eth.ens.setContenthash(
+                await xdc3.eth.ens.setContenthash(
                     'foobar.eth',
                     'ipfs://QmUNLLsPACCz1vLxQVkXqqLX5R1X345qqfHbsf67hvA3Nn'
                 );
@@ -2358,7 +2358,7 @@ describe('ens', function () {
             });
             provider.injectResult('0x0000000000000000000000000000000000000000000000000000000000000000');
 
-            web3.eth.ens.setContenthash(
+            xdc3.eth.ens.setContenthash(
                 'foobar.eth',
                 'ipfs://QmUNLLsPACCz1vLxQVkXqqLX5R1X345qqfHbsf67hvA3Nn',
                 {
@@ -2378,7 +2378,7 @@ describe('ens', function () {
     describe('checkNetwork', function () {
         it("won't resolve on an unknown network", async function () {
             provider = new FakeHttpProvider();
-            web3 = new Web3(provider);
+            xdc3 = new Web3(provider);
 
             provider.injectResult({
                 timestamp: Math.floor(new Date() / 1000) - 60,
@@ -2407,7 +2407,7 @@ describe('ens', function () {
             });
 
             try {
-                await web3.eth.ens.getAddress('foobar.eth');
+                await xdc3.eth.ens.getAddress('foobar.eth');
                 assert.fail();
             } catch (err) {
                 assert.isTrue(err instanceof Error, 'Should throw error');
@@ -2416,7 +2416,7 @@ describe('ens', function () {
 
         it("won't resolve when out of date", async function () {
             provider = new FakeHttpProvider();
-            web3 = new Web3(provider);
+            xdc3 = new Web3(provider);
 
             provider.injectResult({
                 timestamp: Math.floor(new Date() / 1000) - 3660,
@@ -2428,7 +2428,7 @@ describe('ens', function () {
             });
 
             try {
-                await web3.eth.ens.getAddress('foobar.eth');
+                await xdc3.eth.ens.getAddress('foobar.eth');
                 assert.fail();
             } catch (err) {
                 assert.isTrue(err instanceof Error, 'Should throw error');
@@ -2437,11 +2437,11 @@ describe('ens', function () {
 
         it('should only check if the connected node is synced if at least a hour is gone', async function () {
             provider = new FakeHttpProvider();
-            web3 = new Web3(provider);
-            web3.eth.ens._lastSyncCheck = new Date() / 1000;
+            xdc3 = new Web3(provider);
+            xdc3.eth.ens._lastSyncCheck = new Date() / 1000;
 
             try {
-                await web3.eth.ens.checkNetwork();
+                await xdc3.eth.ens.checkNetwork();
 
                 assert.fail();
             } catch (error) {
@@ -2451,7 +2451,7 @@ describe('ens', function () {
     });
 
     describe('custom registry address', function () {
-        let web3;
+        let xdc3;
         let provider;
         const address = '0x00000000000c2e074ec69a0dfb2997ba6c7d2e1e';
 
@@ -2468,23 +2468,23 @@ describe('ens', function () {
                 assert.deepEqual(payload.params, ['latest', false]);
             });
 
-            web3 = new Web3(provider);
-            web3.eth.ens.registryAddress = address;
+            xdc3 = new Web3(provider);
+            xdc3.eth.ens.registryAddress = address;
         });
 
         it('should use the custom defined registry address in checkNetwork', async function () {
-            const currentRegistry = await web3.eth.ens.checkNetwork();
+            const currentRegistry = await xdc3.eth.ens.checkNetwork();
 
             assert.equal(currentRegistry, formatters.inputAddressFormatter(address));
-            assert.equal(web3.eth.ens.registryAddress, formatters.inputAddressFormatter(address));
+            assert.equal(xdc3.eth.ens.registryAddress, formatters.inputAddressFormatter(address));
         });
 
         it('should keep the custom defined registry address if the provider changes', async function () {
-            web3.eth.setProvider(provider);
-            const currentRegistry = await web3.eth.ens.checkNetwork();
+            xdc3.eth.setProvider(provider);
+            const currentRegistry = await xdc3.eth.ens.checkNetwork();
 
             assert.equal(currentRegistry, formatters.inputAddressFormatter(address));
-            assert.equal(web3.eth.ens.registryAddress, formatters.inputAddressFormatter(address));
+            assert.equal(xdc3.eth.ens.registryAddress, formatters.inputAddressFormatter(address));
         });
     });
 });

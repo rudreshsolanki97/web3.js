@@ -1,11 +1,11 @@
 var chai = require('chai');
 var assert = chai.assert;
-var sha3 = require('../packages/web3-utils').sha3;
+var sha3 = require('../packages/xdc3-utils').sha3;
 var CryptoJS = require('crypto-js');
 var cjsSha3 = require('crypto-js/sha3');
 
 
-describe('web3.sha3', function () {
+describe('xdc3.sha3', function () {
     it('should return sha3 with hex prefix', function() {
         test1 = sha3('test123');
         test2 = sha3('test(int)');

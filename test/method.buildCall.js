@@ -1,15 +1,15 @@
 var chai = require('chai');
 var assert = chai.assert;
-var formatters = require('../packages/web3-core-helpers/src/formatters.js');
+var formatters = require('../packages/xdc3-core-helpers/src/formatters.js');
 var FakeHttpProvider = require('./helpers/FakeHttpProvider');
 var FakeIpcProvider = require('./helpers/FakeIpcProvider');
-var Eth = require('../packages/web3-eth');
-var Method = require('../packages/web3-core-method');
+var Eth = require('../packages/xdc3-eth');
+var Method = require('../packages/xdc3-core-method');
 
 var address = '0x1234567890123456789012345678901234567891';
 
 
-describe('lib/web3/method', function () {
+describe('lib/xdc3/method', function () {
     describe('buildCall', function () {
         it('should return a promise and resolve it', function (done) {
             var provider = new FakeHttpProvider();

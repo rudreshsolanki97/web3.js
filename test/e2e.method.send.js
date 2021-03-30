@@ -4,7 +4,7 @@ var utils = require('./helpers/test.utils');
 var Web3 = utils.getWeb3();
 
 describe('method.send [ @E2E ]', function () {
-    var web3;
+    var xdc3;
     var accounts;
     var basic;
     var instance;
@@ -18,10 +18,10 @@ describe('method.send [ @E2E ]', function () {
 
     describe('http', function () {
         before(async function () {
-            web3 = new Web3('http://localhost:8545');
-            accounts = await web3.eth.getAccounts();
+            xdc3 = new Web3('http://localhost:8545');
+            accounts = await xdc3.eth.getAccounts();
 
-            basic = new web3.eth.Contract(Basic.abi, basicOptions);
+            basic = new xdc3.eth.Contract(Basic.abi, basicOptions);
             instance = await basic.deploy().send({from: accounts[0]});
         });
 
@@ -32,7 +32,7 @@ describe('method.send [ @E2E ]', function () {
                 .send({from: accounts[0]});
 
             assert(receipt.status === true);
-            assert(web3.utils.isHexStrict(receipt.transactionHash));
+            assert(xdc3.utils.isHexStrict(receipt.transactionHash));
         });
 
         it('errors on OOG', async function () {
@@ -72,14 +72,14 @@ describe('method.send [ @E2E ]', function () {
 
             // Geth interval is 2s so these txs w/ .25s polling timeouts
             // should error before a single block resolves.
-            it('is configurable for web3.eth methods', async function(){
-                web3.eth.transactionPollingTimeout = .25;
+            it('is configurable for xdc3.eth methods', async function(){
+                xdc3.eth.transactionPollingTimeout = .25;
 
                 try {
-                    await web3.eth.sendTransaction({
+                    await xdc3.eth.sendTransaction({
                         from: accounts[0],
                         to: accounts[1],
-                        value: web3.utils.toWei('1', 'ether'),
+                        value: xdc3.utils.toWei('1', 'ether'),
                         gas: 21000,
                         gasPrice: 1
                     });
@@ -90,7 +90,7 @@ describe('method.send [ @E2E ]', function () {
             });
 
             it('is configurable for contract methods', async function(){
-                web3.eth.transactionPollingTimeout = .25;
+                xdc3.eth.transactionPollingTimeout = .25;
 
                 try {
                     await instance
@@ -112,10 +112,10 @@ describe('method.send [ @E2E ]', function () {
         before(async function () {
             var port = utils.getWebsocketPort();
 
-            web3 = new Web3('ws://localhost:' + port);
-            accounts = await web3.eth.getAccounts();
+            xdc3 = new Web3('ws://localhost:' + port);
+            accounts = await xdc3.eth.getAccounts();
 
-            basic = new web3.eth.Contract(Basic.abi, basicOptions);
+            basic = new xdc3.eth.Contract(Basic.abi, basicOptions);
             instance = await basic.deploy().send({from: accounts[0]});
         })
 
@@ -126,7 +126,7 @@ describe('method.send [ @E2E ]', function () {
                 .send({from: accounts[0]});
 
             assert(receipt.status === true);
-            assert(web3.utils.isHexStrict(receipt.transactionHash));
+            assert(xdc3.utils.isHexStrict(receipt.transactionHash));
         });
 
         it('errors on OOG', async function () {
@@ -166,7 +166,7 @@ describe('method.send [ @E2E ]', function () {
                 .setValue('1')
                 .send({from: accounts[0]})
                 .on('transactionHash', hash => {
-                    assert(web3.utils.isHex(hash));
+                    assert(xdc3.utils.isHex(hash));
                     done();
                 });
         });
@@ -185,7 +185,7 @@ describe('method.send [ @E2E ]', function () {
         it('fires the confirmation handler', function () {
             return new Promise(async (resolve, reject) => {
 
-                var startBlock = await web3.eth.getBlockNumber();
+                var startBlock = await xdc3.eth.getBlockNumber();
 
                 await instance
                     .methods
@@ -193,14 +193,14 @@ describe('method.send [ @E2E ]', function () {
                     .send({from: accounts[0]})
                     .on('confirmation', async (number, receipt) => {
                         if (number === 1) { // Confirmation numbers are zero indexed
-                            var endBlock = await web3.eth.getBlockNumber();
+                            var endBlock = await xdc3.eth.getBlockNumber();
                             assert(endBlock >= (startBlock + 2));
                             resolve();
                         }
                     });
 
                 // Necessary for instamine, should not interfere with automine.
-                await utils.mine(web3, accounts[0]);
+                await utils.mine(xdc3, accounts[0]);
             });
         });
 
@@ -229,11 +229,11 @@ describe('method.send [ @E2E ]', function () {
 
     describe('with revert handling activated', function () {
         before(async function () {
-            web3 = new Web3('http://localhost:8545');
-            accounts = await web3.eth.getAccounts();
+            xdc3 = new Web3('http://localhost:8545');
+            accounts = await xdc3.eth.getAccounts();
 
-            web3.eth.handleRevert = true;
-            basic = new web3.eth.Contract(Basic.abi, basicOptions);
+            xdc3.eth.handleRevert = true;
+            basic = new xdc3.eth.Contract(Basic.abi, basicOptions);
 
             instance = await basic.deploy().send({from: accounts[0]});
         });

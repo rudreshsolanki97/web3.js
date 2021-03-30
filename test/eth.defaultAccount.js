@@ -1,13 +1,13 @@
 var chai = require('chai');
 var assert = chai.assert;
-var Eth = require('../packages/web3-eth');
-var Web3 = require('../packages/web3');
+var Eth = require('../packages/xdc3-eth');
+var Web3 = require('../packages/xdc3');
 
 var eth = new Eth();
 
 var setValue = '0x47D33b27Bb249a2DBab4C0612BF9CaF4C1950855';
 
-describe('web3.eth', function () {
+describe('xdc3.eth', function () {
     describe('defaultAccount', function () {
         it('should check if defaultAccount is set to proper value', function () {
             assert.equal(eth.defaultAccount, null);

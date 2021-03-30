@@ -1,6 +1,6 @@
 var chai = require('chai');
 var assert = chai.assert;
-var Iban = require('../packages/web3-eth-iban');
+var Iban = require('../packages/xdc3-eth-iban');
 
 var tests = [
     { obj: function () {}, is: false},
@@ -23,7 +23,7 @@ var tests = [
     { obj: 'XE1222Q908LN1QBBU6XUQSO1OHWJIOS46OO', is: true}
 ];
 
-describe('lib/web3/iban', function () {
+describe('lib/xdc3/iban', function () {
     describe('isValid', function () {
         tests.forEach(function (test) {
             it('shoud test if value ' + test.obj + ' is iban: ' + test.is, function () {

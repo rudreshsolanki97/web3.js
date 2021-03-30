@@ -1,27 +1,27 @@
 .. _shh:
 
 ========
-web3.shh
+xdc3.shh
 ========
 
 
-The ``web3-shh`` package allows you to interact with the whisper protocol for broadcasting. For more see `Whisper Overview <https://github.com/ethereum/go-ethereum/wiki/Whisper>`_.
+The ``xdc3-shh`` package allows you to interact with the whisper protocol for broadcasting. For more see `Whisper Overview <https://github.com/ethereum/go-ethereum/wiki/Whisper>`_.
 
 
 .. code-block:: javascript
 
-    var Shh = require('web3-shh');
+    var Shh = require('xdc3-shh');
 
     // "Shh.providers.givenProvider" will be set if in an Ethereum supported browser.
     var shh = new Shh(Shh.givenProvider || 'ws://some.local-or-remote.node:8546');
 
 
-    // or using the web3 umbrella package
+    // or using the xdc3 umbrella package
 
-    var Web3 = require('web3');
-    var web3 = new Web3(Web3.givenProvider || 'ws://some.local-or-remote.node:8546');
+    var Web3 = require('xdc3');
+    var xdc3 = new Web3(Web3.givenProvider || 'ws://some.local-or-remote.node:8546');
 
-    // -> web3.shh
+    // -> xdc3.shh
 
 
 ------------------------------------------------------------------------------
@@ -44,7 +44,7 @@ getVersion
 
 .. code-block:: javascript
 
-    web3.shh.getVersion([callback])
+    xdc3.shh.getVersion([callback])
 
 Returns the version of the running whisper.
 
@@ -70,7 +70,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.shh.getVersion()
+    xdc3.shh.getVersion()
     .then(console.log);
     > "5.0"
 
@@ -84,7 +84,7 @@ getInfo
 
 .. code-block:: javascript
 
-    web3.shh.getInfo([callback])
+    xdc3.shh.getInfo([callback])
 
 Gets information about the current whisper node.
 
@@ -115,7 +115,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.shh.getInfo()
+    xdc3.shh.getInfo()
     .then(console.log);
     > {
         "minPow": 0.8,
@@ -132,7 +132,7 @@ setMaxMessageSize
 
 .. code-block:: javascript
 
-    web3.shh.setMaxMessageSize(size, [callback])
+    xdc3.shh.setMaxMessageSize(size, [callback])
 
 Sets the maximal message size allowed by this node. Incoming and outgoing messages with a larger size will be rejected.
 Whisper message size can never exceed the limit imposed by the underlying P2P protocol (10 Mb).
@@ -160,7 +160,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.shh.setMaxMessageSize(1234565)
+    xdc3.shh.setMaxMessageSize(1234565)
     .then(console.log);
     > true
 
@@ -172,13 +172,13 @@ setMinPoW
 
 .. code-block:: javascript
 
-    web3.shh.setMinPoW(pow, [callback])
+    xdc3.shh.setMinPoW(pow, [callback])
 
 Sets the minimal PoW required by this node.
 
 This experimental function was introduced for the future dynamic adjustment of PoW requirement.
 If the node is overwhelmed with messages, it should raise the PoW requirement and notify the peers.
-The new value should be set relative to the old value (e.g. double). The old value can be obtained via :ref:`web3.shh.getInfo() <shh-getinfo>`.
+The new value should be set relative to the old value (e.g. double). The old value can be obtained via :ref:`xdc3.shh.getInfo() <shh-getinfo>`.
 
 ----------
 Parameters
@@ -203,7 +203,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.shh.setMinPoW(0.9)
+    xdc3.shh.setMinPoW(0.9)
     .then(console.log);
     > true
 
@@ -215,7 +215,7 @@ markTrustedPeer
 
 .. code-block:: javascript
 
-    web3.shh.markTrustedPeer(enode, [callback])
+    xdc3.shh.markTrustedPeer(enode, [callback])
 
 Marks specific peer trusted, which will allow it to send historic (expired) messages.
 
@@ -244,7 +244,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.shh.markTrustedPeer()
+    xdc3.shh.markTrustedPeer()
     .then(console.log);
     > true
 
@@ -256,7 +256,7 @@ newKeyPair
 
 .. code-block:: javascript
 
-    web3.shh.newKeyPair([callback])
+    xdc3.shh.newKeyPair([callback])
 
 Generates a new public and private key pair for message decryption and encryption.
 
@@ -282,7 +282,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.shh.newKeyPair()
+    xdc3.shh.newKeyPair()
     .then(console.log);
     > "5e57b9ffc2387e18636e0a3d0c56b023264c16e78a2adcba1303cefc685e610f"
 
@@ -294,7 +294,7 @@ addPrivateKey
 
 .. code-block:: javascript
 
-    web3.shh.addPrivateKey(privateKey, [callback])
+    xdc3.shh.addPrivateKey(privateKey, [callback])
 
 Stores a key pair derived from a private key, and returns its ID.
 
@@ -321,7 +321,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.shh.addPrivateKey('0x8bda3abeb454847b515fa9b404cede50b1cc63cfdeddd4999d074284b4c21e15')
+    xdc3.shh.addPrivateKey('0x8bda3abeb454847b515fa9b404cede50b1cc63cfdeddd4999d074284b4c21e15')
     .then(console.log);
     > "3e22b9ffc2387e18636e0a3d0c56b023264c16e78a2adcba1303cefc685e610f"
 
@@ -333,7 +333,7 @@ deleteKeyPair
 
 .. code-block:: javascript
 
-    web3.shh.deleteKeyPair(id, [callback])
+    xdc3.shh.deleteKeyPair(id, [callback])
 
 Deletes the specifies key if it exists.
 
@@ -360,7 +360,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.shh.deleteKeyPair('3e22b9ffc2387e18636e0a3d0c56b023264c16e78a2adcba1303cefc685e610f')
+    xdc3.shh.deleteKeyPair('3e22b9ffc2387e18636e0a3d0c56b023264c16e78a2adcba1303cefc685e610f')
     .then(console.log);
     > true
 
@@ -372,7 +372,7 @@ hasKeyPair
 
 .. code-block:: javascript
 
-    web3.shh.hasKeyPair(id, [callback])
+    xdc3.shh.hasKeyPair(id, [callback])
 
 Checks if the whisper node has a private key of a key pair matching the given ID.
 
@@ -399,7 +399,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.shh.hasKeyPair('fe22b9ffc2387e18636e0a3d0c56b023264c16e78a2adcba1303cefc685e610f')
+    xdc3.shh.hasKeyPair('fe22b9ffc2387e18636e0a3d0c56b023264c16e78a2adcba1303cefc685e610f')
     .then(console.log);
     > true
 
@@ -411,7 +411,7 @@ getPublicKey
 
 .. code-block:: javascript
 
-    web3.shh.getPublicKey(id, [callback])
+    xdc3.shh.getPublicKey(id, [callback])
 
 Returns the public key for a key pair ID.
 
@@ -438,7 +438,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.shh.getPublicKey('3e22b9ffc2387e18636e0a3d0c56b023264c16e78a2adcba1303cefc685e610f')
+    xdc3.shh.getPublicKey('3e22b9ffc2387e18636e0a3d0c56b023264c16e78a2adcba1303cefc685e610f')
     .then(console.log);
     > "0x04d1574d4eab8f3dde4d2dc7ed2c4d699d77cbbdd09167b8fffa099652ce4df00c4c6e0263eafe05007a46fdf0c8d32b11aeabcd3abbc7b2bc2bb967368a68e9c6"
 
@@ -450,7 +450,7 @@ getPrivateKey
 
 .. code-block:: javascript
 
-    web3.shh.getPrivateKey(id, [callback])
+    xdc3.shh.getPrivateKey(id, [callback])
 
 Returns the private key for a key pair ID.
 
@@ -477,7 +477,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.shh.getPrivateKey('3e22b9ffc2387e18636e0a3d0c56b023264c16e78a2adcba1303cefc685e610f')
+    xdc3.shh.getPrivateKey('3e22b9ffc2387e18636e0a3d0c56b023264c16e78a2adcba1303cefc685e610f')
     .then(console.log);
     > "0x234234e22b9ffc2387e18636e0534534a3d0c56b0243567432453264c16e78a2adc"
 
@@ -489,7 +489,7 @@ newSymKey
 
 .. code-block:: javascript
 
-    web3.shh.newSymKey([callback])
+    xdc3.shh.newSymKey([callback])
 
 Generates a random symmetric key and stores it under an ID, which is then returned.
 Will be used for encrypting and decrypting of messages where the sym key is known to both parties.
@@ -516,7 +516,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.shh.newSymKey()
+    xdc3.shh.newSymKey()
     .then(console.log);
     > "cec94d139ff51d7df1d228812b90c23ec1f909afa0840ed80f1e04030bb681e4"
 
@@ -528,7 +528,7 @@ addSymKey
 
 .. code-block:: javascript
 
-    web3.shh.addSymKey(symKey, [callback])
+    xdc3.shh.addSymKey(symKey, [callback])
 
 Stores the key, and returns its ID.
 
@@ -555,7 +555,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.shh.addSymKey('0x5e11b9ffc2387e18636e0a3d0c56b023264c16e78a2adcba1303cefc685e610f')
+    xdc3.shh.addSymKey('0x5e11b9ffc2387e18636e0a3d0c56b023264c16e78a2adcba1303cefc685e610f')
     .then(console.log);
     > "fea94d139ff51d7df1d228812b90c23ec1f909afa0840ed80f1e04030bb681e4"
 
@@ -567,7 +567,7 @@ generateSymKeyFromPassword
 
 .. code-block:: javascript
 
-    web3.shh.generateSymKeyFromPassword(password, [callback])
+    xdc3.shh.generateSymKeyFromPassword(password, [callback])
 
 Generates the key from password, stores it, and returns its ID.
 
@@ -594,7 +594,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.shh.generateSymKeyFromPassword('Never use this password - password!')
+    xdc3.shh.generateSymKeyFromPassword('Never use this password - password!')
     .then(console.log);
     > "2e57b9ffc2387e18636e0a3d0c56b023264c16e78a2adcba1303cefc685e610f"
 
@@ -606,7 +606,7 @@ hasSymKey
 
 .. code-block:: javascript
 
-    web3.shh.hasSymKey(id, [callback])
+    xdc3.shh.hasSymKey(id, [callback])
 
 Checks if there is a symmetric key stored with the given ID.
 
@@ -633,7 +633,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.shh.hasSymKey('f6dcf21ed6a17bd78d8c4c63195ab997b3b65ea683705501eae82d32667adc92')
+    xdc3.shh.hasSymKey('f6dcf21ed6a17bd78d8c4c63195ab997b3b65ea683705501eae82d32667adc92')
     .then(console.log);
     > true
 
@@ -645,7 +645,7 @@ getSymKey
 
 .. code-block:: javascript
 
-    web3.shh.getSymKey(id, [callback])
+    xdc3.shh.getSymKey(id, [callback])
 
 Returns the symmetric key associated with the given ID.
 
@@ -672,7 +672,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.shh.getSymKey('af33b9ffc2387e18636e0a3d0c56b023264c16e78a2adcba1303cefc685e610f')
+    xdc3.shh.getSymKey('af33b9ffc2387e18636e0a3d0c56b023264c16e78a2adcba1303cefc685e610f')
     .then(console.log);
     > "0xa82a520aff70f7a989098376e48ec128f25f767085e84d7fb995a9815eebff0a"
 
@@ -684,7 +684,7 @@ deleteSymKey
 
 .. code-block:: javascript
 
-    web3.shh.deleteSymKey(id, [callback])
+    xdc3.shh.deleteSymKey(id, [callback])
 
 Deletes the symmetric key associated with the given ID.
 
@@ -711,7 +711,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.shh.deleteSymKey('bf31b9ffc2387e18636e0a3d0c56b023264c16e78a2adcba1303cefc685e610f')
+    xdc3.shh.deleteSymKey('bf31b9ffc2387e18636e0a3d0c56b023264c16e78a2adcba1303cefc685e610f')
     .then(console.log);
     > true
 
@@ -724,7 +724,7 @@ post
 
 .. code-block:: javascript
 
-   web3.shh.post(object [, callback])
+   xdc3.shh.post(object [, callback])
 
 This method should be called, when we want to post whisper a message to the network.
 
@@ -763,19 +763,19 @@ Example
     var subscription = null;
 
     Promise.all([
-        web3.shh.newSymKey().then((id) => {identities.symKey = id;}),
-        web3.shh.newKeyPair().then((id) => {identities.keyPair = id;})
+        xdc3.shh.newSymKey().then((id) => {identities.symKey = id;}),
+        xdc3.shh.newKeyPair().then((id) => {identities.keyPair = id;})
 
     ]).then(() => {
 
         // will receive also its own message send, below
-        subscription = web3.shh.subscribe("messages", {
+        subscription = xdc3.shh.subscribe("messages", {
             symKeyID: identities.symKey,
             topics: ['0xffaadd11']
         }).on('data', console.log);
 
     }).then(() => {
-       web3.shh.post({
+       xdc3.shh.post({
             symKeyID: identities.symKey, // encrypts using the sym key ID
             sig: identities.keyPair, // signs the message using the keyPair ID
             ttl: 10,
@@ -797,7 +797,7 @@ subscribe
 
 .. code-block:: javascript
 
-    web3.shh.subscribe('messages', options [, callback])
+    xdc3.shh.subscribe('messages', options [, callback])
 
 Subscribe for incoming whisper messages.
 
@@ -844,7 +844,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.shh.subscribe('messages', {
+    xdc3.shh.subscribe('messages', {
         symKeyID: 'bf31b9ffc2387e18636e0a3d0c56b023264c16e78a2adcba1303cefc685e610f',
         sig: '0x04d1574d4eab8f3dde4d2dc7ed2c4d699d77cbbdd09167b8fffa099652ce4df00c4c6e0263eafe05007a46fdf0c8d32b11aeabcd3abbc7b2bc2bb967368a68e9c6',
         ttl: 20,
@@ -877,11 +877,11 @@ clearSubscriptions
 
 .. code-block:: javascript
 
-    web3.shh.clearSubscriptions()
+    xdc3.shh.clearSubscriptions()
 
 Resets subscriptions.
 
-.. note:: This will not reset subscriptions from other packages like ``web3-eth``, as they use their own requestManager.
+.. note:: This will not reset subscriptions from other packages like ``xdc3-eth``, as they use their own requestManager.
 
 ----------
 Parameters
@@ -901,11 +901,11 @@ Example
 
 .. code-block:: javascript
 
-    web3.shh.subscribe('messages', {...} ,function(){ ... });
+    xdc3.shh.subscribe('messages', {...} ,function(){ ... });
 
     ...
 
-    web3.shh.clearSubscriptions();
+    xdc3.shh.clearSubscriptions();
 
 
 ------------------------------------------------------------------------------
@@ -916,7 +916,7 @@ newMessageFilter
 
 .. code-block:: javascript
 
-    web3.shh.newMessageFilter(options)
+    xdc3.shh.newMessageFilter(options)
 
 Create a new filter within the node. This filter can be used to poll for new messages that match the set of criteria.
 
@@ -925,7 +925,7 @@ Create a new filter within the node. This filter can be used to poll for new mes
 Parameters
 ----------
 
-1. ``Object``: See :ref:`web3.shh.subscribe() options <shh-subscribeoptions>` for details.
+1. ``Object``: See :ref:`xdc3.shh.subscribe() options <shh-subscribeoptions>` for details.
 
 -------
 Returns
@@ -939,7 +939,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.shh.newMessageFilter()
+    xdc3.shh.newMessageFilter()
     .then(console.log);
     > "2b47fbafb3cce24570812a82e6e93cd9e2551bbc4823f6548ff0d82d2206b326"
 
@@ -951,7 +951,7 @@ deleteMessageFilter
 
 .. code-block:: javascript
 
-    web3.shh.deleteMessageFilter(id)
+    xdc3.shh.deleteMessageFilter(id)
 
 Deletes a message filter in the node.
 
@@ -973,7 +973,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.shh.deleteMessageFilter('2b47fbafb3cce24570812a82e6e93cd9e2551bbc4823f6548ff0d82d2206b326')
+    xdc3.shh.deleteMessageFilter('2b47fbafb3cce24570812a82e6e93cd9e2551bbc4823f6548ff0d82d2206b326')
     .then(console.log);
     > true
 
@@ -986,7 +986,7 @@ getFilterMessages
 
 .. code-block:: javascript
 
-    web3.shh.getFilterMessages(id)
+    xdc3.shh.getFilterMessages(id)
 
 Retrieve messages that match the filter criteria and are received between the last time this function was called and now.
 
@@ -1000,7 +1000,7 @@ Parameters
 Returns
 -------
 
-``Array``: Returns an array of message objects like :ref:`web3.shh.subscribe() notification returns <shh-subscribenotificationreturns>`
+``Array``: Returns an array of message objects like :ref:`xdc3.shh.subscribe() notification returns <shh-subscribenotificationreturns>`
 
 -------
 Example
@@ -1008,7 +1008,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.shh.getFilterMessages('2b47fbafb3cce24570812a82e6e93cd9e2551bbc4823f6548ff0d82d2206b326')
+    xdc3.shh.getFilterMessages('2b47fbafb3cce24570812a82e6e93cd9e2551bbc4823f6548ff0d82d2206b326')
     .then(console.log);
     > [{
         "hash": "0x4158eb81ad8e30cfcee67f20b1372983d388f1243a96e39f94fd2797b1e9c78e",

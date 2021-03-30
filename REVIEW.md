@@ -17,7 +17,7 @@ Only published PRs will be considered for review. Draft PRs will be considered i
     *   [ ] Test cases are grouped for clarity.
 *   [ ] A PR may only be merged if the following conditions are fulfilled:
     *   [ ] The correct base branch is selected.
-    *   [ ] Any new files contain the web3.js file header.
+    *   [ ] Any new files contain the xdc3.js file header.
     *   [ ] The documentation was updated (if applicable).
     *   [ ] The CHANGELOG was updated accordingly.
     *   [ ] The CI with QA passes succesfully.

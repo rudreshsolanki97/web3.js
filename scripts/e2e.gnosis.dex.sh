@@ -1,8 +1,8 @@
 # -------------------------------------------------------------------------------------------
-# Run gnosis/dex-react using a candidate branch of web3 which has been published to a
+# Run gnosis/dex-react using a candidate branch of xdc3 which has been published to a
 # proxy npm registry in `e2e.npm.publish.sh`
 #
-# The test's purpose is to verify web3 latest state runs successfully on an actively
+# The test's purpose is to verify xdc3 latest state runs successfully on an actively
 # developed production project which uses.
 # + react
 # + webpack production build
@@ -13,9 +13,9 @@
 # Exit immediately on error
 set -o errexit
 
-# To mimic `npm install web3` correctly, this test does not install Web3's dev deps.
+# To mimic `npm install xdc3` correctly, this test does not install Web3's dev deps.
 # However, we need the npm package `semver` to coerce yarn resolutions correctly.
-# It must be installed as a dev dep or Node complains. We also need web3's package.json
+# It must be installed as a dev dep or Node complains. We also need xdc3's package.json
 # to resolve the current version + patch increment. So some file renaming is necessary here...
 cp package.json original.package.json
 rm package.json
@@ -30,15 +30,15 @@ cd dex-react
 
 # Install via registry and verify
 echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
-echo "Installing updated web3 via virtual registry "
+echo "Installing updated xdc3 via virtual registry "
 echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
 
 yarn --registry http://localhost:4873
 
-yarn list web3
-yarn list web3-utils
-yarn list web3-core
-yarn list web3-core-promievent
+yarn list xdc3
+yarn list xdc3-utils
+yarn list xdc3-core
+yarn list xdc3-core-promievent
 
 cat ./package.json
 

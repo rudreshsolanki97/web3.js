@@ -6,7 +6,7 @@ var utils = require('./helpers/test.utils');
 var Web3 = utils.getWeb3();
 
 describe('transaction and message signing [ @E2E ]', function() {
-    let web3;
+    let xdc3;
     let accounts;
     let wallet;
     let basic;
@@ -19,19 +19,19 @@ describe('transaction and message signing [ @E2E ]', function() {
     };
 
     before(async function(){
-        web3 = new Web3('http://localhost:8545');
-        accounts = await web3.eth.getAccounts();
+        xdc3 = new Web3('http://localhost:8545');
+        accounts = await xdc3.eth.getAccounts();
 
         // Create a funded account w/ a private key
-        wallet = web3.eth.accounts.wallet.create(10);
+        wallet = xdc3.eth.accounts.wallet.create(10);
 
-        await web3.eth.sendTransaction({
+        await xdc3.eth.sendTransaction({
             from: accounts[0],
             to: wallet[0].address,
-            value: web3.utils.toWei('50', 'ether'),
+            value: xdc3.utils.toWei('50', 'ether'),
         });
 
-        basic = new web3.eth.Contract(Basic.abi, basicOptions);
+        basic = new xdc3.eth.Contract(Basic.abi, basicOptions);
         instance = await basic.deploy().send({from: accounts[0]});
     });
 
@@ -42,19 +42,19 @@ describe('transaction and message signing [ @E2E ]', function() {
         const destination = wallet[1].address;
         const source = accounts[0]; // Unlocked geth-dev account
 
-        const txCount = await web3.eth.getTransactionCount(source);
+        const txCount = await xdc3.eth.getTransactionCount(source);
 
         const rawTx = {
-            nonce:    web3.utils.toHex(txCount),
+            nonce:    xdc3.utils.toHex(txCount),
             to:       destination,
             from:     source,
-            value:    web3.utils.toHex(web3.utils.toWei('0.1', 'ether')),
-            gasLimit: web3.utils.toHex(21000),
-            gasPrice: web3.utils.toHex(web3.utils.toWei('10', 'gwei'))
+            value:    xdc3.utils.toHex(xdc3.utils.toWei('0.1', 'ether')),
+            gasLimit: xdc3.utils.toHex(21000),
+            gasPrice: xdc3.utils.toHex(xdc3.utils.toWei('10', 'gwei'))
         };
 
-        const signed = await web3.eth.signTransaction(rawTx);
-        const receipt = await web3.eth.sendSignedTransaction(signed.raw);
+        const signed = await xdc3.eth.signTransaction(rawTx);
+        const receipt = await xdc3.eth.sendSignedTransaction(signed.raw);
 
         assert(receipt.status === true);
     });
@@ -63,9 +63,9 @@ describe('transaction and message signing [ @E2E ]', function() {
         const source = wallet[0].address;
         const destination = wallet[1].address;
 
-        const txCount = await web3.eth.getTransactionCount(source);
-        const networkId = await web3.eth.net.getId();
-        const chainId = await web3.eth.getChainId();
+        const txCount = await xdc3.eth.getTransactionCount(source);
+        const networkId = await xdc3.eth.net.getId();
+        const chainId = await xdc3.eth.getChainId();
 
 
         const customCommon = {
@@ -79,16 +79,16 @@ describe('transaction and message signing [ @E2E ]', function() {
         };
 
         const txObject = {
-            nonce:    web3.utils.toHex(txCount),
+            nonce:    xdc3.utils.toHex(txCount),
             to:       destination,
-            value:    web3.utils.toHex(web3.utils.toWei('0.1', 'ether')),
-            gasLimit: web3.utils.toHex(21000),
-            gasPrice: web3.utils.toHex(web3.utils.toWei('10', 'gwei')),
+            value:    xdc3.utils.toHex(xdc3.utils.toWei('0.1', 'ether')),
+            gasLimit: xdc3.utils.toHex(21000),
+            gasPrice: xdc3.utils.toHex(xdc3.utils.toWei('10', 'gwei')),
             common: customCommon
         };
 
-        const signed = await web3.eth.accounts.signTransaction(txObject, wallet[0].privateKey);
-        const receipt = await web3.eth.sendSignedTransaction(signed.rawTransaction);
+        const signed = await xdc3.eth.accounts.signTransaction(txObject, wallet[0].privateKey);
+        const receipt = await xdc3.eth.sendSignedTransaction(signed.rawTransaction);
 
         assert(receipt.status === true);
     });
@@ -97,18 +97,18 @@ describe('transaction and message signing [ @E2E ]', function() {
         const source = wallet[0].address;
         const destination = wallet[1].address;
 
-        const txCount = await web3.eth.getTransactionCount(source);
+        const txCount = await xdc3.eth.getTransactionCount(source);
 
         const txObject = {
-            nonce:    web3.utils.toHex(txCount),
+            nonce:    xdc3.utils.toHex(txCount),
             to:       destination,
-            value:    web3.utils.toHex(web3.utils.toWei('0.1', 'ether')),
-            gasLimit: web3.utils.toHex(21000),
-            gasPrice: web3.utils.toHex(web3.utils.toWei('10', 'gwei')),
+            value:    xdc3.utils.toHex(xdc3.utils.toWei('0.1', 'ether')),
+            gasLimit: xdc3.utils.toHex(21000),
+            gasPrice: xdc3.utils.toHex(xdc3.utils.toWei('10', 'gwei')),
         };
 
-        const signed = await web3.eth.accounts.signTransaction(txObject, wallet[0].privateKey);
-        const receipt = await web3.eth.sendSignedTransaction(signed.rawTransaction);
+        const signed = await xdc3.eth.accounts.signTransaction(txObject, wallet[0].privateKey);
+        const receipt = await xdc3.eth.sendSignedTransaction(signed.rawTransaction);
 
         assert(receipt.status === true);
     });
@@ -119,13 +119,13 @@ describe('transaction and message signing [ @E2E ]', function() {
 
         const txObject = {
             to:       destination,
-            value:    web3.utils.toHex(web3.utils.toWei('0.1', 'ether')),
-            gasLimit: web3.utils.toHex(21000),
-            gasPrice: web3.utils.toHex(web3.utils.toWei('10', 'gwei')),
+            value:    xdc3.utils.toHex(xdc3.utils.toWei('0.1', 'ether')),
+            gasLimit: xdc3.utils.toHex(21000),
+            gasPrice: xdc3.utils.toHex(xdc3.utils.toWei('10', 'gwei')),
         };
 
-        web3.eth.accounts.signTransaction(txObject, wallet[0].privateKey, async function(err, signed){
-            const receipt = await web3.eth.sendSignedTransaction(signed.rawTransaction);
+        xdc3.eth.accounts.signTransaction(txObject, wallet[0].privateKey, async function(err, signed){
+            const receipt = await xdc3.eth.sendSignedTransaction(signed.rawTransaction);
             assert(receipt.status === true);
             done();
         });
@@ -135,21 +135,21 @@ describe('transaction and message signing [ @E2E ]', function() {
         const source = wallet[0].address;
         const destination = wallet[1].address;
 
-        const txCount = await web3.eth.getTransactionCount(source);
+        const txCount = await xdc3.eth.getTransactionCount(source);
 
         const txObject = {
-            nonce:    web3.utils.toHex(txCount),
+            nonce:    xdc3.utils.toHex(txCount),
             to:       destination,
-            value:    web3.utils.toHex(web3.utils.toWei('0.1', 'ether')),
-            gasLimit: web3.utils.toHex(21000),
-            gasPrice: web3.utils.toHex(web3.utils.toWei('10', 'gwei')),
+            value:    xdc3.utils.toHex(xdc3.utils.toWei('0.1', 'ether')),
+            gasLimit: xdc3.utils.toHex(21000),
+            gasPrice: xdc3.utils.toHex(xdc3.utils.toWei('10', 'gwei')),
             chain: "ropsten",
             common: {},
             hardfork: "istanbul"
         };
 
         try {
-            await web3.eth.accounts.signTransaction(txObject, wallet[0].privateKey);
+            await xdc3.eth.accounts.signTransaction(txObject, wallet[0].privateKey);
             assert.fail()
         } catch (err) {
             assert(err.message.includes('common object or the chain and hardfork'));
@@ -160,19 +160,19 @@ describe('transaction and message signing [ @E2E ]', function() {
         const source = wallet[0].address;
         const destination = wallet[1].address;
 
-        const txCount = await web3.eth.getTransactionCount(source);
+        const txCount = await xdc3.eth.getTransactionCount(source);
 
         const txObject = {
-            nonce:    web3.utils.toHex(txCount),
+            nonce:    xdc3.utils.toHex(txCount),
             to:       destination,
-            value:    web3.utils.toHex(web3.utils.toWei('0.1', 'ether')),
-            gasLimit: web3.utils.toHex(21000),
-            gasPrice: web3.utils.toHex(web3.utils.toWei('10', 'gwei')),
+            value:    xdc3.utils.toHex(xdc3.utils.toWei('0.1', 'ether')),
+            gasLimit: xdc3.utils.toHex(21000),
+            gasPrice: xdc3.utils.toHex(xdc3.utils.toWei('10', 'gwei')),
             chain: "ropsten"
         };
 
         try {
-            await web3.eth.accounts.signTransaction(txObject, wallet[0].privateKey);
+            await xdc3.eth.accounts.signTransaction(txObject, wallet[0].privateKey);
             assert.fail()
         } catch (err) {
             assert(err.message.includes('both values must be defined'));
@@ -183,19 +183,19 @@ describe('transaction and message signing [ @E2E ]', function() {
         const source = wallet[0].address;
         const destination = wallet[1].address;
 
-        const txCount = await web3.eth.getTransactionCount(source);
+        const txCount = await xdc3.eth.getTransactionCount(source);
 
         const txObject = {
-            nonce:    web3.utils.toHex(txCount),
+            nonce:    xdc3.utils.toHex(txCount),
             to:       destination,
-            value:    web3.utils.toHex(web3.utils.toWei('0.1', 'ether')),
-            gasLimit: web3.utils.toHex(21000),
-            gasPrice: web3.utils.toHex(web3.utils.toWei('10', 'gwei')),
+            value:    xdc3.utils.toHex(xdc3.utils.toWei('0.1', 'ether')),
+            gasLimit: xdc3.utils.toHex(21000),
+            gasPrice: xdc3.utils.toHex(xdc3.utils.toWei('10', 'gwei')),
             hardfork: "istanbul"
         };
 
         try {
-            await web3.eth.accounts.signTransaction(txObject, wallet[0].privateKey);
+            await xdc3.eth.accounts.signTransaction(txObject, wallet[0].privateKey);
             assert.fail()
         } catch (err) {
             assert(err.message.includes('both values must be defined'));
@@ -206,21 +206,21 @@ describe('transaction and message signing [ @E2E ]', function() {
         const source = wallet[0].address;
         const destination = wallet[1].address;
 
-        const txCount = await web3.eth.getTransactionCount(source);
+        const txCount = await xdc3.eth.getTransactionCount(source);
 
         // Using gas === 0 / ethereumjs-tx checks this wrt common baseFee
         const txObject = {
-            nonce:    web3.utils.toHex(txCount),
+            nonce:    xdc3.utils.toHex(txCount),
             to:       destination,
-            value:    web3.utils.toHex(web3.utils.toWei('0.1', 'ether')),
-            gasLimit: web3.utils.toHex(0),
-            gasPrice: web3.utils.toHex(web3.utils.toWei('10', 'gwei')),
+            value:    xdc3.utils.toHex(xdc3.utils.toWei('0.1', 'ether')),
+            gasLimit: xdc3.utils.toHex(0),
+            gasPrice: xdc3.utils.toHex(xdc3.utils.toWei('10', 'gwei')),
             hardfork: "istanbul",
             chain:    "ropsten",
         };
 
         try {
-            await web3.eth.accounts.signTransaction(txObject, wallet[0].privateKey);
+            await xdc3.eth.accounts.signTransaction(txObject, wallet[0].privateKey);
             assert.fail()
         } catch (err) {
             assert(err.message.includes('gas limit is too low'));
@@ -229,7 +229,7 @@ describe('transaction and message signing [ @E2E ]', function() {
 
     it('accounts.signTransaction errors when no transaction is passed', async function(){
         try {
-            await web3.eth.accounts.signTransaction(undefined, wallet[0].privateKey);
+            await xdc3.eth.accounts.signTransaction(undefined, wallet[0].privateKey);
             assert.fail()
         } catch (err) {
             assert(err.message.includes('No transaction object'));
@@ -241,7 +241,7 @@ describe('transaction and message signing [ @E2E ]', function() {
         // Requires a custom common configuration (see next test). Ganache doesn't care
         if(!process.env.GANACHE) return;
 
-        basic = new web3.eth.Contract(Basic.abi, basicOptions);
+        basic = new xdc3.eth.Contract(Basic.abi, basicOptions);
         basic.defaultChain = 'mainnet';
         basic.defaultHardfork = 'istanbul';
 
@@ -255,12 +255,12 @@ describe('transaction and message signing [ @E2E ]', function() {
             .send({from: wallet[0].address});
 
         assert(receipt.status === true);
-        assert(web3.utils.isHexStrict(receipt.transactionHash));
+        assert(xdc3.utils.isHexStrict(receipt.transactionHash));
     });
 
     it('wallet executes method call using customCommon option', async function(){
-        const networkId = await web3.eth.net.getId();
-        const chainId = await web3.eth.getChainId();
+        const networkId = await xdc3.eth.net.getId();
+        const chainId = await xdc3.eth.getChainId();
 
         const customCommon = {
             baseChain: 'mainnet',
@@ -272,7 +272,7 @@ describe('transaction and message signing [ @E2E ]', function() {
             harfork: 'istanbul',
         };
 
-        basic = new web3.eth.Contract(Basic.abi, basicOptions);
+        basic = new xdc3.eth.Contract(Basic.abi, basicOptions);
         basic.defaultCommon = customCommon;
 
         instance = await basic
@@ -285,7 +285,7 @@ describe('transaction and message signing [ @E2E ]', function() {
             .send({from: wallet[0].address});
 
         assert(receipt.status === true);
-        assert(web3.utils.isHexStrict(receipt.transactionHash));
+        assert(xdc3.utils.isHexStrict(receipt.transactionHash));
     });
 
     it('transactions sent with wallet throws error correctly (with receipt)', async function(){
@@ -303,7 +303,7 @@ describe('transaction and message signing [ @E2E ]', function() {
         }
 
         try {
-            await web3.eth.sendTransaction(tx);
+            await xdc3.eth.sendTransaction(tx);
             assert.fail();
         } catch(err){
             var receipt = utils.extractReceipt(err.message);
@@ -320,21 +320,21 @@ describe('transaction and message signing [ @E2E ]', function() {
             .encodeABI();
 
         const source = wallet[0].address;
-        const txCount = await web3.eth.getTransactionCount(source);
+        const txCount = await xdc3.eth.getTransactionCount(source);
 
         const txObject = {
-            nonce:    web3.utils.toHex(txCount),
+            nonce:    xdc3.utils.toHex(txCount),
             to:       instance.options.address,
-            gasLimit: web3.utils.toHex(400000),
-            gasPrice: web3.utils.toHex(web3.utils.toWei('10', 'gwei')),
+            gasLimit: xdc3.utils.toHex(400000),
+            gasPrice: xdc3.utils.toHex(xdc3.utils.toWei('10', 'gwei')),
             data: data
         };
 
-        const signed = await web3.eth.accounts.signTransaction(txObject, wallet[0].privateKey);
+        const signed = await xdc3.eth.accounts.signTransaction(txObject, wallet[0].privateKey);
 
-        web3.eth.handleRevert = true;
+        xdc3.eth.handleRevert = true;
         try {
-            await web3.eth.sendSignedTransaction(signed.rawTransaction);
+            await xdc3.eth.sendSignedTransaction(signed.rawTransaction);
             assert.fail();
         } catch(err){
             assert.equal(err.receipt.status, false);
@@ -356,7 +356,7 @@ describe('transaction and message signing [ @E2E ]', function() {
             gas: 10
         }
 
-        web3
+        xdc3
             .eth
             .sendTransaction(tx)
             .on('error', function(err){
@@ -371,13 +371,13 @@ describe('transaction and message signing [ @E2E ]', function() {
 
         const message = 'hello';
 
-        const signature = await web3.eth.personal.sign(
+        const signature = await xdc3.eth.personal.sign(
             message,
             accounts[1],            // Unlocked geth-dev acct
             "left-hand-of-darkness" // Default password at geth-dev
         );
 
-        const recovered = await web3.eth.personal.ecRecover(message, signature);
+        const recovered = await xdc3.eth.personal.ecRecover(message, signature);
         assert.equal(accounts[1].toLowerCase(), recovered.toLowerCase());
     });
 
@@ -386,8 +386,8 @@ describe('transaction and message signing [ @E2E ]', function() {
 
         const message = 'hello';
 
-        const signed = web3.eth.accounts.sign(message, wallet[0].privateKey);
-        const recovered = await web3.eth.personal.ecRecover(message, signed.signature);
+        const signed = xdc3.eth.accounts.sign(message, wallet[0].privateKey);
+        const recovered = await xdc3.eth.personal.ecRecover(message, signed.signature);
         assert.equal(wallet[0].address.toLowerCase(), recovered.toLowerCase());
     })
 

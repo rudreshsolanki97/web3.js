@@ -3,7 +3,7 @@ var BN = require('bn.js');
 var BigNumber = require('bignumber.js');
 var chai = require('chai');
 var assert = chai.assert;
-var utils = require('../packages/web3-utils');
+var utils = require('../packages/xdc3-utils');
 
 // each "values" is one kind of parameter of the same type
 var tests = [{
@@ -178,7 +178,7 @@ var tests = [{
 }];
 
 
-describe('web3.encodePacked', function () {
+describe('xdc3.encodePacked', function () {
     tests.forEach(function (test) {
         test.values.forEach(function (value) {
             it('should hash "'+ JSON.stringify(value) +'" into "'+ test.expected +'"', function() {

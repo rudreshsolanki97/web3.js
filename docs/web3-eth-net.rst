@@ -1,7 +1,7 @@
 .. _eth-net:
 
 =========
-web3.eth.net
+xdc3.eth.net
 =========
 
 
@@ -21,11 +21,11 @@ getNetworkType
 
 .. code-block:: javascript
 
-    web3.eth.net.getNetworkType([callback])
+    xdc3.eth.net.getNetworkType([callback])
 
 Guesses the chain the node is connected by comparing the genesis hashes.
 
-.. note:: It's recommended to use the :ref:`web3.eth.getChainId <eth-chainId>` method to detect the currently connected chain.
+.. note:: It's recommended to use the :ref:`xdc3.eth.getChainId <eth-chainId>` method to detect the currently connected chain.
 
 -------
 Returns
@@ -44,7 +44,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.eth.net.getNetworkType()
+    xdc3.eth.net.getNetworkType()
     .then(console.log);
     > "main"
 

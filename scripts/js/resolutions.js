@@ -4,7 +4,7 @@
  * This script is a helper for running a buidler based e2e unit test target and is
  * used in combination with the npm virtual publishing script.
  *
- * It discovers the current web3 package version, gets its minor increment
+ * It discovers the current xdc3 package version, gets its minor increment
  * (also the value of the virtually published version) and attaches a yarn resolutions field
  * to the target's package.json to coerce any Web3 packages up when target is
  * installed.
@@ -29,40 +29,40 @@ const targetPackage = require(targetPackagePath);
 const version = semver.inc(web3Package.version, 'minor');
 
 const web3Modules = [
-  "web3",
-  "web3-bzz",
-  "web3-core-helpers",
-  "web3-core-method",
-  "web3-core-promievent",
-  "web3-core-requestmanager",
-  "web3-core-subscriptions",
-  "web3-core",
-  "web3-eth-abi",
-  "web3-eth-accounts",
-  "web3-eth-contract",
-  "web3-eth-ens",
-  "web3-eth-iban",
-  "web3-eth-personal",
-  "web3-eth",
-  "web3-net",
-  "web3-providers-http",
-  "web3-providers-ipc",
-  "web3-providers-ws",
-  "web3-shh",
-  "web3-utils"
+  "xdc3",
+  "xdc3-bzz",
+  "xdc3-core-helpers",
+  "xdc3-core-method",
+  "xdc3-core-promievent",
+  "xdc3-core-requestmanager",
+  "xdc3-core-subscriptions",
+  "xdc3-core",
+  "xdc3-eth-abi",
+  "xdc3-eth-accounts",
+  "xdc3-eth-contract",
+  "xdc3-eth-ens",
+  "xdc3-eth-iban",
+  "xdc3-eth-personal",
+  "xdc3-eth",
+  "xdc3-net",
+  "xdc3-providers-http",
+  "xdc3-providers-ipc",
+  "xdc3-providers-ws",
+  "xdc3-shh",
+  "xdc3-utils"
 ];
 
 
 targetPackage.resolutions = {};
 
-// Coerce every version of web3 in the sub-dependency tree to
+// Coerce every version of xdc3 in the sub-dependency tree to
 // the virtually published version
 for ( const mod of web3Modules ){
   targetPackage.resolutions[`*/**/${mod}`] = version;
 }
 
-// Remove any outer-level web3 modules so yarn flat-packs a single
-// set of web3 modules at the outerlevel
+// Remove any outer-level xdc3 modules so yarn flat-packs a single
+// set of xdc3 modules at the outerlevel
 if (targetPackage.devDependencies){
   for ( const mod of web3Modules ){
     delete targetPackage.devDependencies[mod];

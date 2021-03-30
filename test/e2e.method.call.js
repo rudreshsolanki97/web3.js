@@ -5,7 +5,7 @@ var utils = require('./helpers/test.utils');
 var Web3 = utils.getWeb3();
 
 describe('method.call [ @E2E ]', function () {
-    var web3;
+    var xdc3;
     var accounts;
     var basic;
     var instance;
@@ -25,10 +25,10 @@ describe('method.call [ @E2E ]', function () {
 
     describe('http', function () {
         before(async function () {
-            web3 = new Web3('http://localhost:8545');
-            accounts = await web3.eth.getAccounts();
+            xdc3 = new Web3('http://localhost:8545');
+            accounts = await xdc3.eth.getAccounts();
 
-            basic = new web3.eth.Contract(Basic.abi, basicOptions);
+            basic = new xdc3.eth.Contract(Basic.abi, basicOptions);
             instance = await basic.deploy().send({from: accounts[0]});
         })
 
@@ -50,7 +50,7 @@ describe('method.call [ @E2E ]', function () {
 
         it('errors correctly when abi and bytecode do not match', async function () {
             // Misc n.eq Basic
-            var wrong = new web3.eth.Contract(Basic.abi, miscOptions);
+            var wrong = new xdc3.eth.Contract(Basic.abi, miscOptions);
             var wrongInstance = await wrong.deploy().send({from: accounts[0]});
 
             try {
@@ -76,11 +76,11 @@ describe('method.call [ @E2E ]', function () {
 
     describe('revert handling', function () {
         before(async function () {
-            web3 = new Web3('http://localhost:8545');
-            accounts = await web3.eth.getAccounts();
+            xdc3 = new Web3('http://localhost:8545');
+            accounts = await xdc3.eth.getAccounts();
 
-            web3.eth.handleRevert = true;
-            basic = new web3.eth.Contract(Basic.abi, basicOptions);
+            xdc3.eth.handleRevert = true;
+            basic = new xdc3.eth.Contract(Basic.abi, basicOptions);
             instance = await basic.deploy().send({from: accounts[0]});
         });
 

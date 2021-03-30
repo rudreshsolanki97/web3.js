@@ -4,12 +4,12 @@
 Callbacks Promises Events
 =========================
 
-To help web3 integrate into all kinds of projects with different standards we provide multiple ways to act on asynchronous functions.
+To help xdc3 integrate into all kinds of projects with different standards we provide multiple ways to act on asynchronous functions.
 
-Most web3.js objects allow a callback as the last parameter, as well as returning promises to chain functions.
+Most xdc3.js objects allow a callback as the last parameter, as well as returning promises to chain functions.
 
 Ethereum as a blockchain has different levels of finality and therefore needs to return multiple "stages" of an action.
-To cope with requirement we return a "promiEvent" for functions like ``web3.eth.sendTransaction`` or contract methods.
+To cope with requirement we return a "promiEvent" for functions like ``xdc3.eth.sendTransaction`` or contract methods.
 This "promiEvent" is a promise combined with an event emitter to allow acting on different stages of action on the blockchain, like a transaction.
 
 PromiEvents work like a normal promises with added ``on``, ``once`` and ``off`` functions.
@@ -17,7 +17,7 @@ This way developers can watch for additional events like on "receipt" or "transa
 
 .. code-block:: javascript
 
-    web3.eth.sendTransaction({from: '0x123...', data: '0x432...'})
+    xdc3.eth.sendTransaction({from: '0x123...', data: '0x432...'})
     .once('sending', function(payload){ ... })
     .once('sent', function(payload){ ... })
     .once('transactionHash', function(hash){ ... })

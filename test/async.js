@@ -1,9 +1,9 @@
 var chai = require('chai');
 var assert = chai.assert;
-var Web3 = require('../packages/web3');
+var Web3 = require('../packages/xdc3');
 var FakeHttpProvider = require('./helpers/FakeIpcProvider');
 
-var web3 = new Web3();
+var xdc3 = new Web3();
 
 // use sendTransaction as dummy
 var method = 'call';
@@ -28,7 +28,7 @@ describe('async', function () {
 
             // given
             var provider = new FakeHttpProvider();
-            web3.setProvider(provider);
+            xdc3.setProvider(provider);
             provider.injectResult(test.result);
             provider.injectValidation(function (payload) {
                 assert.equal(payload.jsonrpc, '2.0');
@@ -37,7 +37,7 @@ describe('async', function () {
             });
 
             // when
-            web3.eth[method](test.input, function(error, result){
+            xdc3.eth[method](test.input, function(error, result){
 
                 // then
                 assert.isNull(error);
@@ -52,7 +52,7 @@ describe('async', function () {
 
             // given
             var provider = new FakeHttpProvider();
-            web3.setProvider(provider);
+            xdc3.setProvider(provider);
             provider.injectResult(test.result);
             provider.injectValidation(function (payload) {
                 assert.equal(payload.jsonrpc, '2.0');
@@ -61,7 +61,7 @@ describe('async', function () {
             });
 
             // when
-            web3.eth[method](test.input)
+            xdc3.eth[method](test.input)
             .then(function(result){
 
                 // then
@@ -76,7 +76,7 @@ describe('async', function () {
 
             // given
             var provider = new FakeHttpProvider();
-            web3.setProvider(provider);
+            xdc3.setProvider(provider);
             provider.injectError({
                     message: test.result,
                     code: -32603
@@ -88,7 +88,7 @@ describe('async', function () {
             });
 
             // when
-            web3.eth[method](test.input, function(error, result){
+            xdc3.eth[method](test.input, function(error, result){
 
                 // then
                 assert.isUndefined(result);
@@ -105,7 +105,7 @@ describe('async', function () {
 
             // given
             var provider = new FakeHttpProvider();
-            web3.setProvider(provider);
+            xdc3.setProvider(provider);
             provider.injectError({
                 message: test.result,
                 code: -32603
@@ -117,7 +117,7 @@ describe('async', function () {
             });
 
             // when
-            web3.eth[method](test.input)
+            xdc3.eth[method](test.input)
             .catch(function(error){
 
                 // then

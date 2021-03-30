@@ -1,12 +1,12 @@
 var chai = require('chai');
 var assert = chai.assert;
-//var web3 = require('../../index');
+//var xdc3 = require('../../index');
 
 var FakeHttpProvider = require('./FakeIpcProvider');
 
 var methodExists = function (object, method) {
     it('should have method ' + method + ' implemented', function() {
-        //web3.setProvider(null);
+        //xdc3.setProvider(null);
         assert.equal('function', typeof object[method], 'method ' + method + ' is not implemented');
     });
 };
@@ -14,20 +14,20 @@ var methodExists = function (object, method) {
 var propertyExists = function (object, property) {
     it('should have property ' + property + ' implemented', function() {
         // set dummy providor, to prevent error
-        // web3.setProvider(new FakeHttpProvider());
+        // xdc3.setProvider(new FakeHttpProvider());
         assert.notEqual('undefined', typeof object[property], 'property ' + property + ' is not implemented');
     });
 };
 
 // Runs a noop transaction to move instamine forward
 // Useful for confirmation handler testing.
-var mine = async function(web3, account) {
-    await web3.eth.sendTransaction({
+var mine = async function(xdc3, account) {
+    await xdc3.eth.sendTransaction({
         from: account,
         to: account,
         gasPrice: '1',
         gas: 4000000,
-        value: web3.utils.toWei('0', 'ether'),
+        value: xdc3.utils.toWei('0', 'ether'),
     });
 }
 
@@ -37,12 +37,12 @@ var extractReceipt = function(message){
     return JSON.parse(receiptString);
 }
 
-// Conditionally requires web3:
-// loads web3.min when running headless browser tests, the unbuilt web3 otherwise.
+// Conditionally requires xdc3:
+// loads xdc3.min when running headless browser tests, the unbuilt xdc3 otherwise.
 var getWeb3 = function(){
     return (global.window)
-        ? require('../../packages/web3/dist/web3.min')
-        : require('../../packages/web3');
+        ? require('../../packages/xdc3/dist/xdc3.min')
+        : require('../../packages/xdc3');
 }
 
 // Gets correct websocket port for client. Ganache uses 8545 for both

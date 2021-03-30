@@ -1,12 +1,12 @@
 var chai = require('chai');
 var assert = chai.assert;
-var Eth = require('../packages/web3-eth');
+var Eth = require('../packages/xdc3-eth');
 
 var eth = new Eth();
 
 var setValue = 123;
 
-describe('web3.eth', function () {
+describe('xdc3.eth', function () {
     describe('transactionConfirmationBlocks', function () {
         it('should check if transactionConfirmationBlocks is set to proper value', function () {
             assert.equal(eth.transactionConfirmationBlocks, 24);

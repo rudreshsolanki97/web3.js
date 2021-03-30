@@ -1,15 +1,15 @@
 var assert = require('chai').assert;
 var FakeHttpProvider = require('./helpers/FakeHttpProvider');
-var Web3 = require('../packages/web3');
+var Web3 = require('../packages/xdc3');
 
 describe('sendTransaction revert:', function () {
     var provider;
-    var web3;
+    var xdc3;
 
     beforeEach(function () {
         provider = new FakeHttpProvider();
-        web3 = new Web3(provider);
-        web3.eth.handleRevert = true;
+        xdc3 = new Web3(provider);
+        xdc3.eth.handleRevert = true;
     });
 
     it('Errors without revert reason string', function (done) {
@@ -53,7 +53,7 @@ describe('sendTransaction revert:', function () {
             gasPrice: '324234234234'
         };
 
-        web3.eth.sendTransaction(options).catch(function (error) {
+        xdc3.eth.sendTransaction(options).catch(function (error) {
             assert.equal(error.receipt.status, false);
             assert.equal(error.reason, undefined);
             assert.equal(error.signature, undefined);
@@ -111,7 +111,7 @@ describe('sendTransaction revert:', function () {
             gasPrice: '324234234234'
         };
 
-        web3.eth.sendTransaction(options).catch(function (error) {
+        xdc3.eth.sendTransaction(options).catch(function (error) {
             assert.equal(error.receipt.status, false);
             assert.equal(error.reason, 'Not enough Ether provided.');
             assert.equal(error.signature, 'Error(String)');

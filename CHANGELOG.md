@@ -54,12 +54,12 @@ Released with 1.0.0-beta.37 code base.
 - getNetworkType method extended with Görli testnet (#3095)
 - supportsSubscriptions method added to providers (#3116)
 - Add `eth.getChainId` method (#3113)
-- Minified file added to web3 package (#3131)
+- Minified file added to xdc3 package (#3131)
 - The transaction confirmation workflow can now be configured (#3130)
-- Additional parameters for accounts.signTransaction added [(docs)](https://web3js.readthedocs.io/en/v1.2.2/web3-eth-accounts.html#signtransaction) (#3141)
+- Additional parameters for accounts.signTransaction added [(docs)](https://web3js.readthedocs.io/en/v1.2.2/xdc3-eth-accounts.html#signtransaction) (#3141)
 - Emit `connected` event on subscription creation (#3028)
 - TypeScript type definitions added for all modules (#3132)
-- Bloom filters added to web3.utils (#3137)
+- Bloom filters added to xdc3.utils (#3137)
 
 ### Fixed
 
@@ -86,9 +86,9 @@ Released with 1.0.0-beta.37 code base.
 ### Fixed
 
 - Fix perfect gas usage causes tx to error (#3175)
-- Fix regenerator runtime error in web3.min.js (#3155)
+- Fix regenerator runtime error in xdc3.min.js (#3155)
 - Fix TS types for eth.subscribe syncing, newBlockHeaders, pendingTransactions (#3159)
-- Improve web3-eth-abi decodeParameters error message (#3134)
+- Improve xdc3-eth-abi decodeParameters error message (#3134)
 
 ## [1.2.4]
 
@@ -100,14 +100,14 @@ Released with 1.0.0-beta.37 code base.
 
 ### Added
 
-- ``eth_requestAccounts`` as ``requestAccounts`` added to web3-eth package (#3219)
-- ``sha3Raw`` and ``soliditySha3Raw`` added to web3-utils package (#3226)
-- ``eth_getProof`` as ``getProof`` added to web3-eth package (#3220)
+- ``eth_requestAccounts`` as ``requestAccounts`` added to xdc3-eth package (#3219)
+- ``sha3Raw`` and ``soliditySha3Raw`` added to xdc3-utils package (#3226)
+- ``eth_getProof`` as ``getProof`` added to xdc3-eth package (#3220)
 - ``BN`` and ``BigNumber`` objects are now supported by the ``abi.encodeParameter(s)`` method (#3238)
-- ``getPendingTransactions`` added to web3-eth package (#3239)
+- ``getPendingTransactions`` added to xdc3-eth package (#3239)
 - Revert instruction handling added which can get activated with the ``handleRevert`` module property (#3248)
 - The ``receipt`` does now exist as property on the error object for transaction related errors (#3259)
-- ``internalType`` added to ``AbiInput`` TS interface in ``web3-utils`` (#3279)
+- ``internalType`` added to ``AbiInput`` TS interface in ``xdc3-utils`` (#3279)
 - Agent option added to the ``HttpProvider`` options (#2980)
 
 ### Changed
@@ -158,7 +158,7 @@ Released with 1.0.0-beta.37 code base.
 - *Please note*: Geth [v1.9.12](https://github.com/ethereum/go-ethereum/releases/tag/v1.9.12) contains a breaking change for `eth_call` that will not default to your first account anymore if `from` is not set. If a sender is not explicitly defined, the `eth_call` will be executed from `address(0)`. (#3467)
   - This was done to avoid the same input behaving differently in different environments. You should never do `eth_call` without explicitly setting a sender.
   - This means that if you're calling `view` methods that refer to a `msg.sender` without explicitly setting a `from` address in your request options, you may see unexpected behavior.
-  - In `web3.js`, the `from` address can be specified on a per-call basis or by setting the `defaultAccount` property.
+  - In `xdc3.js`, the `from` address can be specified on a per-call basis or by setting the `defaultAccount` property.
 
 ### Fixed
 
@@ -185,18 +185,18 @@ Released with 1.0.0-beta.37 code base.
 ### Changed
 
 - Change CI provider from Travis to Github Actions. (#3468)
-- Update `web3-eth-abi` ABICoder dependency. (#3490)
+- Update `xdc3-eth-abi` ABICoder dependency. (#3490)
 - Update AbiCoder param formatting (#3522)
 - Improve code clarity of HttpProvider keepAlive option setting. (#3463)
 - Updated type definitions for Web3 HTTP Provider. (#3482)
-- Fix indentation of web3-eth documentation. (#3478)
+- Fix indentation of xdc3-eth documentation. (#3478)
 
 ### Fixed
 
 - Fix intermittent CI build issues with `dtslint`. (#3479)
 - Fix WSS credentials Base64 encoding (for browser) (#3508)
 - Fire provider "error" and/or "end" events when Websocket provider disconnects. (#3485)
-- Remove web3-eth revert error return types to squash TS compilation errors. (#3496)
+- Remove xdc3-eth revert error return types to squash TS compilation errors. (#3496)
 - Backfill event subscriptions when WS connection dropped across multiple blocks. (#3491)
 - Stop swallowing errors when WS connection has died after exhausting reconnection attempts. (#3492)
 - Fix setContenthash docs formatting (#3511)
@@ -214,14 +214,14 @@ Released with 1.0.0-beta.37 code base.
 
 ### Changed
 
-- Websocket package from @web3-js/websocket@1.0.29 to websocket@1.0.31 (#3371)
-- Upgrade `@web3-js/scrypt-shim@0.1.0` to `scrypt-js@3.0.1`
+- Websocket package from @xdc3-js/websocket@1.0.29 to websocket@1.0.31 (#3371)
+- Upgrade `@xdc3-js/scrypt-shim@0.1.0` to `scrypt-js@3.0.1`
 - sendSignedTransaction revert handling synthesizes tx without network call (#3457)
 - Make docs grammar more idiomatic, normalize punctuation (#3543)
 
 ### Fixed
 
-- Size property de-referencing crash when calling web3.eth.clearSubscriptions (#3527)
+- Size property de-referencing crash when calling xdc3.eth.clearSubscriptions (#3527)
 - Abi param encoding for tuple arrays (#3538)
 - `account.hashMessage` with non-ASCII characters (#3523)
 - Subscription support check in method confirmations loop (#3432)
@@ -247,7 +247,7 @@ Released with 1.0.0-beta.37 code base.
 - Extend `_txInputFormatter` with hex prefix check (#3317)
 - Extract revert reason string for geth >= 1.9.15 (#3520)
 - Fix Incorrect param encoding of BN object in arrayed inputs (#3592)
-- Remove mis-encoded whitespace characters from web3-utils files (#3601)
+- Remove mis-encoded whitespace characters from xdc3-utils files (#3601)
 - Fix incompatibilities with webpack Buffer polyfill for wallet.encrypt/decrypt (#3580)
 - Fix misformatted `fromBlock` value when re-subscribing to events over WS (#3596)
 - Support `Function` type log parameter decoding (#2826)
@@ -275,10 +275,10 @@ Released with 1.0.0-beta.37 code base.
 
 - Improve RequestManager send method (#3649)
 - `npm run build` now uses TSC to compile (.js allowed) and the build folder is now located under `lib` (#3652)
-- Modernized web3-core to use newer es syntax (#3652)
-- Bumped `web3-providers-ipc` `oboe` version to 2.1.5 (#3661)
+- Modernized xdc3-core to use newer es syntax (#3652)
+- Bumped `xdc3-providers-ipc` `oboe` version to 2.1.5 (#3661)
 - Bump lodash from 4.17.15 to 4.17.19 (#3641)
-- Bump websocket version which removes node-gyp from web3.js (#3685)
+- Bump websocket version which removes node-gyp from xdc3.js (#3685)
 
 ### Fixed
 
@@ -290,9 +290,9 @@ Released with 1.0.0-beta.37 code base.
 
 ### Added
 
-- Add `web3-eth2-core` package (#3743) (renamed to `web3-eth2-base`)
-- Add `web3-eth2-beaconchain` package (#3743) (renamed to `web3-eth2-beacon`)
-- Add `stripHexPrefix` method to `web3-utils` package (#3776)
+- Add `xdc3-eth2-core` package (#3743) (renamed to `xdc3-eth2-base`)
+- Add `xdc3-eth2-beaconchain` package (#3743) (renamed to `xdc3-eth2-beacon`)
+- Add `stripHexPrefix` method to `xdc3-utils` package (#3776)
 
 ### Changed
 
@@ -300,7 +300,7 @@ Released with 1.0.0-beta.37 code base.
 
 ### Removed
 
-- Removed post-install script in `packages/web3`. Added documentation to root README (#3717)
+- Removed post-install script in `packages/xdc3`. Added documentation to root README (#3717)
 
 ### Fixed
 
@@ -328,24 +328,24 @@ Released with 1.0.0-beta.37 code base.
 - Fixed mutation of inputs to encoding and decoding functions (#3748)
 - Fix default value for `fromBlock` option for `logs` subscriptions (defaults to `latest`) (#3883)
 - ethjs-signer test (#3876)
-- Rename `web3-eth2-base` to `web3-eth2-core` and `web3-eth2-beacon` to `web3-eth2-beaconchain` (#3833)
+- Rename `xdc3-eth2-base` to `xdc3-eth2-core` and `xdc3-eth2-beacon` to `xdc3-eth2-beaconchain` (#3833)
 - Bump `ts-node` from version `^8.10.2` to `^9.0.0` (#3856)
 - Ran `npm audit fix` which fixed 4 vulnerabilities (#3856)
-- Correct `web3-eth2-beaconchain` type declarations (#3859) and (#3865)
-- Move interfaces `IBaseAPISchema` and `IBaseAPIMethodSchema` to `index.d.ts` for `web3-eth2-core` (#3878)
-- Update dependencies for `web3-eth2-core` (#3878)
+- Correct `xdc3-eth2-beaconchain` type declarations (#3859) and (#3865)
+- Move interfaces `IBaseAPISchema` and `IBaseAPIMethodSchema` to `index.d.ts` for `xdc3-eth2-core` (#3878)
+- Update dependencies for `xdc3-eth2-core` (#3878)
 
 ### Removed
 
 - Remove `notImplemented` flag from ETH2 Beacon Chain package methods schema (#3861)
 - Removes `IETH2BeaconChain` interface in favor of exporting a class type: `ETH2BeaconChain` (#3878)
-- Remove `index.d.ts` files in favor of `types.ts` for `web3-eth2-core` and `web3-eth2-beaconchain` (#3878)
-- `schema.ts` from `web3-eth2-core` (#3878)
-- `dtslint` npm command from `web3-eth2-core` and `web3-eth2-beaconchain` as `index.d.ts` files were removed (#3878)
+- Remove `index.d.ts` files in favor of `types.ts` for `xdc3-eth2-core` and `xdc3-eth2-beaconchain` (#3878)
+- `schema.ts` from `xdc3-eth2-core` (#3878)
+- `dtslint` npm command from `xdc3-eth2-core` and `xdc3-eth2-beaconchain` as `index.d.ts` files were removed (#3878)
 
 ### Added
 
-- Add `ETH2Core` class export to `index.d.ts` for `web3-eth2-core` (#3878)
+- Add `ETH2Core` class export to `index.d.ts` for `xdc3-eth2-core` (#3878)
 - Deprecation of bzz warning (#3872)
 - Deprecation of shh warning (#3888)
 
@@ -355,19 +355,19 @@ Released with 1.0.0-beta.37 code base.
 
 ### Added
 
-- Github action for running tests for `web3-eth2-core` and `web3-eth2-beaconchain` packages (#3892)
+- Github action for running tests for `xdc3-eth2-core` and `xdc3-eth2-beaconchain` packages (#3892)
 - Added description to documentation on how to connect using a remote node provider (#3884)
-- Added Security risk warning to docs for `web3.utils.soliditySha3` (#3908)
+- Added Security risk warning to docs for `xdc3.utils.soliditySha3` (#3908)
 - `.nvmrc` file using Node.js version `v.14.15.1` (#3817)
 
 ### Changed
 
-- Unified babel compiler for `web3-eth2-core` and `web3-eth2-beaconchain` (#3892)
+- Unified babel compiler for `xdc3-eth2-core` and `xdc3-eth2-beaconchain` (#3892)
 - Renamed the `tsc` script in all packages to `compile`; updates the corresponding `lerna run` usage in the main `package.json` (#3894)
 - moved deprecation warnings to postinstall scripts (#3917)
 - Upgrade `@chainsafe/geth-dev-assistant` from `0.1.5` to `0.1.9` (#3950)
 - Replaced hardcoded infura link with Github Secret for some tests (#3943)
-- Bump `elliptic` from `6.5.3` to `6.5.4` for `web3-eth-accounts` (#3941)
-- Bump `elliptic` from `6.5.3` to `6.5.4` for `web3-bzz` (#3940)
-- Bump `elliptic` from `6.5.3` to `6.5.4` for `web3-core-requestmanager` (#3945)
-- Rewrite `web3-eth-iban` in ES6 (#3955)
+- Bump `elliptic` from `6.5.3` to `6.5.4` for `xdc3-eth-accounts` (#3941)
+- Bump `elliptic` from `6.5.3` to `6.5.4` for `xdc3-bzz` (#3940)
+- Bump `elliptic` from `6.5.3` to `6.5.4` for `xdc3-core-requestmanager` (#3945)
+- Rewrite `xdc3-eth-iban` in ES6 (#3955)

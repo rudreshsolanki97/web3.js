@@ -2,7 +2,7 @@
 
 // This script runs some simple Web3 calls.
 // Useful for validating the published version in different OS environments.
-const Web3 = require('web3');
+const Web3 = require('xdc3');
 const util = require('util');
 const log = console.log;
 
@@ -12,7 +12,7 @@ async function delay(secs=0){
 
 // A workaround for how flaky the infura connection can be...
 // Tries to fetch data 10x w/ 1 sec delays. Exits on first success.
-async function getBlockWithRetry(web3){
+async function getBlockWithRetry(xdc3){
   let i = 0;
   let block;
 
@@ -21,7 +21,7 @@ async function getBlockWithRetry(web3){
 
     try {
 
-      block = await web3.eth.getBlock('latest');
+      block = await xdc3.eth.getBlock('latest');
       break;
 
     } catch(err){
@@ -37,7 +37,7 @@ async function getBlockWithRetry(web3){
 }
 
 async function main(){
-  let web3;
+  let xdc3;
   let block;
 
   // Providers
@@ -47,8 +47,8 @@ async function main(){
   log('>>>>>>');
 
   // Http
-  web3 = new Web3(process.env.INFURA_HTTP);
-  block = await getBlockWithRetry(web3);
+  xdc3 = new Web3(process.env.INFURA_HTTP);
+  block = await getBlockWithRetry(xdc3);
   log(util.inspect(block));
 
   log();
@@ -57,21 +57,21 @@ async function main(){
   log('>>>>>>');
 
   // WebSockets
-  web3 = new Web3(process.env.INFURA_WSS);
-  block = await getBlockWithRetry(web3);
-  web3.currentProvider.disconnect();
+  xdc3 = new Web3(process.env.INFURA_WSS);
+  block = await getBlockWithRetry(xdc3);
+  xdc3.currentProvider.disconnect();
   log(util.inspect(block));
 
 
   // Accounts
-  web3 = new Web3();
+  xdc3 = new Web3();
 
   log();
   log('>>>>>>');
   log('eth.accounts.createAccount');
   log('>>>>>>');
 
-  const account = web3.eth.accounts.create();
+  const account = xdc3.eth.accounts.create();
   log(util.inspect(account));
 
   log();
@@ -79,7 +79,7 @@ async function main(){
   log('eth.accounts.hashMessage');
   log('>>>>>>');
 
-  const hash = web3.eth.accounts.hashMessage('Hello World');
+  const hash = xdc3.eth.accounts.hashMessage('Hello World');
   log(util.inspect(hash));
 }
 

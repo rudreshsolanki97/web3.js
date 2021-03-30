@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # --------------------------------------------------------------------
-# Publishes web3 to a local npm proxy registry in CI so the package
+# Publishes xdc3 to a local npm proxy registry in CI so the package
 # can be E2E tested by installing it in another project
 # --------------------------------------------------------------------
 
@@ -11,7 +11,7 @@ set -o errexit
 if [ -z "$CI" ]; then
 
   echo "======================================================================"
-  echo "This script publishes web3 to an npm proxy registry. Only run in CI."
+  echo "This script publishes xdc3 to an npm proxy registry. Only run in CI."
   echo "======================================================================"
 
   exit 1
@@ -19,7 +19,7 @@ if [ -z "$CI" ]; then
 fi
 
 # To model publication correctly, this script needs to run
-# without web3's dev deps being installed. It installs
+# without xdc3's dev deps being installed. It installs
 # what it needs here.
 npm install -g verdaccio@4.4.4
 npm install -g npm-auth-to-token@1.0.0

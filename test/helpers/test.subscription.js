@@ -1,19 +1,19 @@
 var chai = require('chai');
 var assert = chai.assert;
 var FakeHttpProvider = require('./FakeIpcProvider');
-var Web3 = require('../../packages/web3');
+var Web3 = require('../../packages/xdc3');
 
 
 var runTests = function (protocol, tests) {
 
-    describe('web3.shh.subscribe', function () {
+    describe('xdc3.shh.subscribe', function () {
         tests.forEach(function (test, index) {
             it('should create a subscription for "'+ test.args[0] +'"', function (done) {
 
                 // given
                 var sub;
                 var provider = new FakeHttpProvider();
-                var web3 = new Web3(provider);
+                var xdc3 = new Web3(provider);
                 var dataCount = 0;
                 var changedCount = 0;
 
@@ -57,7 +57,7 @@ var runTests = function (protocol, tests) {
                 });
 
                 // when
-                sub = web3[test.protocol].subscribe.apply(web3[test.protocol], test.args)
+                sub = xdc3[test.protocol].subscribe.apply(xdc3[test.protocol], test.args)
                 .on('data', function () {
                     dataCount++;
                 })

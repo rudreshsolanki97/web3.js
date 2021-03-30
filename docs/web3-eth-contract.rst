@@ -1,12 +1,12 @@
 .. _eth-contract:
 
 ========
-web3.eth.Contract
+xdc3.eth.Contract
 ========
 
-The ``web3.eth.Contract`` object makes it easy to interact with smart contracts on the ethereum blockchain.
+The ``xdc3.eth.Contract`` object makes it easy to interact with smart contracts on the ethereum blockchain.
 When you create a new contract object you give it the json interface of the respective smart contract
-and web3 will auto convert all calls into low level ABI calls over RPC for you.
+and xdc3 will auto convert all calls into low level ABI calls over RPC for you.
 
 This allows you to interact with smart contracts as if they were JavaScript objects.
 
@@ -14,7 +14,7 @@ To use it standalone:
 
 .. code-block:: javascript
 
-    var Contract = require('web3-eth-contract');
+    var Contract = require('xdc3-eth-contract');
 
     // set provider for all later instances to use
     Contract.setProvider('ws://localhost:8546');
@@ -37,7 +37,7 @@ new contract
 
 .. code-block:: javascript
 
-    new web3.eth.Contract(jsonInterface[, address][, options])
+    new xdc3.eth.Contract(jsonInterface[, address][, options])
 
 Creates a new contract instance with all its methods and events defined in its :ref:`json interface <glossary-json-interface>` object.
 
@@ -66,7 +66,7 @@ Example
 
 .. code-block:: javascript
 
-    var myContract = new web3.eth.Contract([...], '0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe', {
+    var myContract = new xdc3.eth.Contract([...], '0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe', {
         from: '0x1234567890123456789012345678901234567891', // default from address
         gasPrice: '20000000000' // default gas price in wei, 20 gwei in this case
     });
@@ -87,15 +87,15 @@ defaultAccount
 
 .. code-block:: javascript
 
-    web3.eth.Contract.defaultAccount
+    xdc3.eth.Contract.defaultAccount
     contract.defaultAccount // on contract instance
 
 This default address is used as the default ``"from"`` property, if no ``"from"`` property is specified in for the following methods:
 
-- :ref:`web3.eth.sendTransaction() <eth-sendtransaction>`
-- :ref:`web3.eth.call() <eth-call>`
-- :ref:`new web3.eth.Contract() -> myContract.methods.myMethod().call() <eth-contract-call>`
-- :ref:`new web3.eth.Contract() -> myContract.methods.myMethod().send() <eth-contract-send>`
+- :ref:`xdc3.eth.sendTransaction() <eth-sendtransaction>`
+- :ref:`xdc3.eth.call() <eth-call>`
+- :ref:`new xdc3.eth.Contract() -> myContract.methods.myMethod().call() <eth-contract-call>`
+- :ref:`new xdc3.eth.Contract() -> myContract.methods.myMethod().send() <eth-contract-send>`
 
 --------
 Property
@@ -112,11 +112,11 @@ Example
 
 .. code-block:: javascript
 
-    web3.eth.defaultAccount;
+    xdc3.eth.defaultAccount;
     > undefined
 
     // set the default account
-    web3.eth.defaultAccount = '0x11f4d0A3c12e86B4b5F39B213F7E19D048276DAe';
+    xdc3.eth.defaultAccount = '0x11f4d0A3c12e86B4b5F39B213F7E19D048276DAe';
 
 
 ------------------------------------------------------------------------------
@@ -128,7 +128,7 @@ defaultBlock
 
 .. code-block:: javascript
 
-    web3.eth.Contract.defaultBlock
+    xdc3.eth.Contract.defaultBlock
     contract.defaultBlock // on contract instance
 
 The default block is used for certain methods. You can override it by passing in the defaultBlock as last parameter. The default value is ``"latest"``.
@@ -303,7 +303,7 @@ transactionBlockTimeout
 
 .. code-block:: javascript
 
-    web3.eth.Contract.transcationBlockTimeout
+    xdc3.eth.Contract.transcationBlockTimeout
     contract.transactionBlockTimeout // on contract instance
 
 The ``transactionBlockTimeout`` is used over socket-based connections. This option defines the amount of new blocks it should wait until the first confirmation happens, otherwise the PromiEvent rejects with a timeout error.
@@ -324,7 +324,7 @@ transactionConfirmationBlocks
 
 .. code-block:: javascript
 
-    web3.eth.Contract.transactionConfirmationBlocks
+    xdc3.eth.Contract.transactionConfirmationBlocks
     contract.transactionConfirmationBlocks // on contract instance
 
 This defines the number of blocks it requires until a transaction is considered confirmed.
@@ -345,7 +345,7 @@ transactionPollingTimeout
 
 .. code-block:: javascript
 
-    web3.eth.Contract.transactionPollingTimeout
+    xdc3.eth.Contract.transactionPollingTimeout
     contract.transactionPollingTimeout // on contract instance
 
 The ``transactionPollingTimeout`` is used over HTTP connections. This option defines the number of seconds Web3 will wait for a receipt which confirms that a transaction was mined by the network. Note: If this method times out, the transaction may still be pending.
@@ -366,7 +366,7 @@ handleRevert
 
 .. code-block:: javascript
 
-    web3.eth.Contract.handleRevert
+    xdc3.eth.Contract.handleRevert
     contract.handleRevert // on contract instance
 
 The ``handleRevert`` options property defaults to ``false`` and returns the revert reason string if enabled on :ref:`send <contract-send>` or :ref:`call <contract-call>` of a contract method.
@@ -443,7 +443,7 @@ options.address
     myContract.options.address
 
 The address used for this contract instance.
-All transactions generated by web3.js from this contract will contain this address as the ``"to"``.
+All transactions generated by xdc3.js from this contract will contain this address as the ``"to"``.
 
 The address will be stored in lowercase.
 
@@ -785,8 +785,8 @@ Example
         }
     }
 
-    // web3.js
-    var MyContract = new web3.eth.Contract(abi, address);
+    // xdc3.js
+    var MyContract = new xdc3.eth.Contract(abi, address);
     MyContract.methods.myFunction().call()
     .then(console.log);
     > Result {
@@ -806,8 +806,8 @@ Example
         }
     }
 
-    // web3.js
-    var MyContract = new web3.eth.Contract(abi, address);
+    // xdc3.js
+    var MyContract = new xdc3.eth.Contract(abi, address);
     MyContract.methods.myFunction().call()
     .then(console.log);
     > "Hello!%"
@@ -989,7 +989,7 @@ methods.myMethod.encodeABI
 
     myContract.methods.myMethod([param1[, param2[, ...]]]).encodeABI()
 
-Encodes the ABI for this method. The resulting hex string is 32-bit function signature hash plus the passed parameters in  Solidity tightly packed format. This can be used to send a transaction, call a method, or pass it into another smart contract's method as arguments. Set the `data` field on `web3.eth.sendTransaction` options as the `encodeABI()` result and it is the same as calling the contract method with `contract.myMethod.send()`.
+Encodes the ABI for this method. The resulting hex string is 32-bit function signature hash plus the passed parameters in  Solidity tightly packed format. This can be used to send a transaction, call a method, or pass it into another smart contract's method as arguments. Set the `data` field on `xdc3.eth.sendTransaction` options as the `encodeABI()` result and it is the same as calling the contract method with `contract.myMethod.send()`.
 
 Some use cases for `encodeABI()` include: preparing a smart contract transaction for a multisignature wallet, working with offline wallets and cold storage and creating transaction payload for complex smart contract proxy calls.
 

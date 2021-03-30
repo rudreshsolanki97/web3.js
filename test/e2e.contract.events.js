@@ -9,7 +9,7 @@ describe('contract.events [ @E2E ]', function() {
     // `getPastEvents` not working with Geth instamine over websockets.
     if (process.env.GETH_INSTAMINE) return;
 
-    var web3;
+    var xdc3;
     var accounts;
     var basic;
     var instance;
@@ -24,10 +24,10 @@ describe('contract.events [ @E2E ]', function() {
     beforeEach(async function(){
         port = utils.getWebsocketPort();
 
-        web3 = new Web3('ws://localhost:' + port);
-        accounts = await web3.eth.getAccounts();
+        xdc3 = new Web3('ws://localhost:' + port);
+        accounts = await xdc3.eth.getAccounts();
 
-        basic = new web3.eth.Contract(Basic.abi, basicOptions);
+        basic = new xdc3.eth.Contract(Basic.abi, basicOptions);
         instance = await basic.deploy().send({from: accounts[0]});
     });
 
@@ -149,7 +149,7 @@ describe('contract.events [ @E2E ]', function() {
                 .firesEvent(accounts[0], 1)
                 .send({from: accounts[0]});
 
-            web3.currentProvider.connection.close();
+            xdc3.currentProvider.connection.close();
 
             // Resolve only if we haven't already rejected
             setTimeout(() => { if(!failed) resolve() }, 2500)
@@ -178,14 +178,14 @@ describe('contract.events [ @E2E ]', function() {
                 .firesEvent(accounts[0], 1)
                 .send({from: accounts[0]});
 
-            web3.currentProvider.disconnect();
+            xdc3.currentProvider.disconnect();
 
             // Resolve only if we haven't already rejected
             setTimeout(() => { if(!failed) resolve() }, 2500)
         });
     });
 
-    // Regression test for a race-condition where a fresh web3 instance
+    // Regression test for a race-condition where a fresh xdc3 instance
     // subscribing to past events would have its call parameters deleted while it
     // made initial Websocket handshake and return an incorrect response.
     it('can immediately listen for events in the past', async function(){
@@ -202,16 +202,16 @@ describe('contract.events [ @E2E ]', function() {
             .send({from: accounts[0]});
 
         // Go forward one block...
-        await utils.mine(web3, accounts[0]);
-        const latestBlock = await web3.eth.getBlockNumber();
+        await utils.mine(xdc3, accounts[0]);
+        const latestBlock = await xdc3.eth.getBlockNumber();
 
         assert(first.blockNumber < latestBlock);
         assert(second.blockNumber < latestBlock);
 
-        // Re-instantiate web3 & instance to simulate
+        // Re-instantiate xdc3 & instance to simulate
         // subscribing to past events as first request
-        web3 = new Web3('ws://localhost:' + port);
-        const newInstance = new web3.eth.Contract(Basic.abi, instance.options.address);
+        xdc3 = new Web3('ws://localhost:' + port);
+        const newInstance = new xdc3.eth.Contract(Basic.abi, instance.options.address);
 
         let counter = 0;
         await new Promise(async resolve => {
@@ -238,7 +238,7 @@ describe('contract.events [ @E2E ]', function() {
             assert(typeof instance.options.address === 'string');
             assert(instance.options.address.length > 0);
 
-            const subscription = web3.eth.subscribe(
+            const subscription = xdc3.eth.subscribe(
                 "logs",
                 {
                     address: instance.options.address
@@ -262,7 +262,7 @@ describe('contract.events [ @E2E ]', function() {
             assert(typeof instance.options.address === 'string');
             assert(instance.options.address.length > 0);
 
-            const subscription = web3.eth.subscribe(
+            const subscription = xdc3.eth.subscribe(
                 "logs",
                 {
                     address: instance.options.address
@@ -294,11 +294,11 @@ describe('contract.events [ @E2E ]', function() {
         };
 
         options.data = Child.bytecode;
-        contract = new web3.eth.Contract(Child.abi, options);
+        contract = new xdc3.eth.Contract(Child.abi, options);
         const child = await contract.deploy().send({from: accounts[0]});
 
         options.data = Parent.bytecode;
-        contract = new web3.eth.Contract(Parent.abi, options);
+        contract = new xdc3.eth.Contract(Parent.abi, options);
         const parent = await contract.deploy().send({from: accounts[0]});
 
         await parent
@@ -358,7 +358,7 @@ describe('contract.events [ @E2E ]', function() {
             }
         );
 
-        web3.setProvider(provider);
+        xdc3.setProvider(provider);
 
         return new Promise(async function (resolve) {
             instance

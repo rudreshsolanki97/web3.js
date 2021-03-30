@@ -2,13 +2,13 @@ var _ = require('underscore');
 var chai = require('chai');
 var assert = chai.assert;
 var FakeIpcProvider = require('./FakeIpcProvider');
-var Web3 = require('../../packages/web3');
+var Web3 = require('../../packages/xdc3');
 
 var clone = function (object) { return object ? JSON.parse(JSON.stringify(object)) : []; };
 
-var useLocalWallet = function (test, provider, web3) {
+var useLocalWallet = function (test, provider, xdc3) {
 
-    test.useLocalWallet(web3);
+    test.useLocalWallet(xdc3);
 
     provider.injectResult("0x1");
     provider.injectValidation(function (payload) {
@@ -36,7 +36,7 @@ var runTests = function (obj, method, tests) {
         objName = obj;
     }
 
-    var testName = objName ? 'web3.' + objName : 'web3';
+    var testName = objName ? 'xdc3.' + objName : 'xdc3';
 
     describe(testName, function () {
         describe(method, function () {
@@ -47,11 +47,11 @@ var runTests = function (obj, method, tests) {
                     var w3;
                     var result;
                     var provider = new FakeIpcProvider();
-                    var web3 = new Web3(provider);
+                    var xdc3 = new Web3(provider);
 
                     // add a wallet
                     if(test.useLocalWallet) {
-                        useLocalWallet(test, provider, web3);
+                        useLocalWallet(test, provider, xdc3);
                     }
 
 
@@ -99,9 +99,9 @@ var runTests = function (obj, method, tests) {
                     if(test.error) {
                         if (obj) {
                             if(_.isArray(obj)) {
-                                w3 = web3[obj[0]][obj[1]];
+                                w3 = xdc3[obj[0]][obj[1]];
                             } else {
-                                w3 = web3[obj];
+                                w3 = xdc3[obj];
                             }
 
                             if (test.defaultOptions) {
@@ -118,7 +118,7 @@ var runTests = function (obj, method, tests) {
                                 });
                             }
 
-                            assert.throws(function(){ web3[method].apply(web3, args); });
+                            assert.throws(function(){ xdc3[method].apply(xdc3, args); });
                         }
 
                         done();
@@ -127,9 +127,9 @@ var runTests = function (obj, method, tests) {
 
                         if (obj) {
                             if(_.isArray(obj)) {
-                                w3 = web3[obj[0]][obj[1]];
+                                w3 = xdc3[obj[0]][obj[1]];
                             } else {
-                                w3 = web3[obj];
+                                w3 = xdc3[obj];
                             }
 
                             if (test.defaultOptions) {
@@ -146,7 +146,7 @@ var runTests = function (obj, method, tests) {
                                 });
                             }
 
-                            result = web3[method].apply(web3, args);
+                            result = xdc3[method].apply(xdc3, args);
                         }
 
                         result.then(function(result){
@@ -176,11 +176,11 @@ var runTests = function (obj, method, tests) {
                     // given
                     var w3;
                     var provider = new FakeIpcProvider();
-                    var web3 = new Web3(provider);
+                    var xdc3 = new Web3(provider);
 
                     // add a wallet
                     if(test.useLocalWallet) {
-                        useLocalWallet(test, provider, web3);
+                        useLocalWallet(test, provider, xdc3);
                     }
 
                     provider.injectResult(clone(test.result));
@@ -205,9 +205,9 @@ var runTests = function (obj, method, tests) {
                     if(test.error) {
                         if (obj) {
                             if(_.isArray(obj)) {
-                                w3 = web3[obj[0]][obj[1]];
+                                w3 = xdc3[obj[0]][obj[1]];
                             } else {
-                                w3 = web3[obj];
+                                w3 = xdc3[obj];
                             }
 
                             if (test.defaultOptions) {
@@ -218,7 +218,7 @@ var runTests = function (obj, method, tests) {
 
                             assert.throws(function(){ w3[method].apply(w3, args); });
                         } else {
-                            assert.throws(function(){ web3[method].apply(web3, args); });
+                            assert.throws(function(){ xdc3[method].apply(xdc3, args); });
                         }
 
                         done();
@@ -234,9 +234,9 @@ var runTests = function (obj, method, tests) {
                         // when
                         if (obj) {
                             if(_.isArray(obj)) {
-                                w3 = web3[obj[0]][obj[1]];
+                                w3 = xdc3[obj[0]][obj[1]];
                             } else {
-                                w3 = web3[obj];
+                                w3 = xdc3[obj];
                             }
 
                             if (test.defaultOptions) {
@@ -253,7 +253,7 @@ var runTests = function (obj, method, tests) {
                                 });
                             }
 
-                            web3[method].apply(web3, args);
+                            xdc3[method].apply(xdc3, args);
                         }
                     }
                 });

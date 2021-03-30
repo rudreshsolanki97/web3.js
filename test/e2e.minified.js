@@ -1,4 +1,4 @@
-// Simple check to make sure window.web3 is defined for the karma min loading tests
+// Simple check to make sure window.xdc3 is defined for the karma min loading tests
 describe('window.Web3 is defined', function () {
 
   // Referencing `process` throws w/out browserify.

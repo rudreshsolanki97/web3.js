@@ -13,11 +13,11 @@ These should pass for PRs to merge:
 | --------- | --------------- | ------ | ----------- | ----- |
 | unit | test | [eth.accounts.sign.js][1] | For discrete pieces of logic |
 | integration | test:e2e:clients | [e2e.contract.events.js][2] | Tests using geth and ganache-cli, (insta-mining and interval mining.) Easy to write and good for modeling complex use-cases |
-| browser | test:e2e:browsers | | The integration tests run in a headless browser using web3.min.js (browserified, vs. ganache-cli) |
+| browser | test:e2e:browsers | | The integration tests run in a headless browser using xdc3.min.js (browserified, vs. ganache-cli) |
 | typescript | dtslint | -- | TS type definitions tests |
 | dependencies  | depcheck | -- | Verifies every dependency is listed correctly in the module package |
 | bundle | test:e2e:min | [e2e.minified.js][3] | Verifies minified bundle loads in a headless browser *without* being webpacked / browserified | :white_check_mark: |
-| cdn | test:e2e:cdn | [e2e.cdn.sh][4]| Visual inspection check: publishes an (un-webpacked) site that uses web3.min.js at https://web3-staging.netlify.app/ | :white_check_mark: |
+| cdn | test:e2e:cdn | [e2e.cdn.sh][4]| Visual inspection check: publishes an (un-webpacked) site that uses xdc3.min.js at https://xdc3-staging.netlify.app/ | :white_check_mark: |
 | windows | -- | [e2e.windows.sh][5] | Verifies Web3 installs on Windows OS / Node 12 and can connect to Infura over wss and https | :white_check_mark: |
 
 
@@ -73,17 +73,17 @@ This can be done with [scripts/js/resolutions.js][18] which modifies the target'
 An example of its use can be seen at [scripts/e2e.mosaic.sh][8].
 
 [14]: https://verdaccio.org/docs/en/installation
-[15]: https://github.com/ethereum/web3.js/blob/1.x/scripts/e2e.npm.publish.sh
+[15]: https://github.com/ethereum/xdc3.js/blob/1.x/scripts/e2e.npm.publish.sh
 [17]: https://classic.yarnpkg.com/en/docs/selective-version-resolutions/
-[18]: https://github.com/ethereum/web3.js/blob/1.x/scripts/js/resolutions.js
+[18]: https://github.com/ethereum/xdc3.js/blob/1.x/scripts/js/resolutions.js
 
-[8]: https://github.com/ethereum/web3.js/blob/1.x/scripts/e2e.mosaic.sh
+[8]: https://github.com/ethereum/xdc3.js/blob/1.x/scripts/e2e.mosaic.sh
 [9]: https://github.com/cgewecke/mosaic-1
-[10]: https://github.com/ethereum/web3.js/blob/1.x/scripts/e2e.ganache.core.sh
+[10]: https://github.com/ethereum/xdc3.js/blob/1.x/scripts/e2e.ganache.core.sh
 [11]: https://github.com/trufflesuite/ganache-core
 
-[1]: https://github.com/ethereum/web3.js/blob/1.x/test/eth.accounts.sign.js
-[2]: https://github.com/ethereum/web3.js/blob/1.x/test/e2e.contract.events.js
-[3]: https://github.com/ethereum/web3.js/blob/1.x/test/e2e.minified.js
-[4]: https://github.com/ethereum/web3.js/blob/1.x/scripts/e2e.cdn.sh
-[5]: https://github.com/ethereum/web3.js/blob/1.x/scripts/e2e.windows.sh
+[1]: https://github.com/ethereum/xdc3.js/blob/1.x/test/eth.accounts.sign.js
+[2]: https://github.com/ethereum/xdc3.js/blob/1.x/test/e2e.contract.events.js
+[3]: https://github.com/ethereum/xdc3.js/blob/1.x/test/e2e.minified.js
+[4]: https://github.com/ethereum/xdc3.js/blob/1.x/scripts/e2e.cdn.sh
+[5]: https://github.com/ethereum/xdc3.js/blob/1.x/scripts/e2e.windows.sh

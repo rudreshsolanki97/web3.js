@@ -1,9 +1,9 @@
-var Accounts = require("./../packages/web3-eth-accounts");
+var Accounts = require("./../packages/xdc3-eth-accounts");
 var ethers = require('ethers');
 var chai = require('chai');
 var assert = chai.assert;
-var Web3 = require('../packages/web3');
-var web3 = new Web3();
+var Web3 = require('../packages/xdc3');
+var xdc3 = new Web3();
 
 var tests = [];
 for (var i = 0; i < 1000; i++) {

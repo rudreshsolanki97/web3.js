@@ -5,7 +5,7 @@ const { getWeb3, waitSeconds } = require('./helpers/test.utils');
 
 describe('subscription connect/reconnect', function () {
     let server;
-    let web3;
+    let xdc3;
     let accounts;
     let subscription;
     const port = 8545;
@@ -14,8 +14,8 @@ describe('subscription connect/reconnect', function () {
     beforeEach(async function () {
         server = ganache.server({port: port, blockTime: 1});
         await pify(server.listen)(port);
-        web3 = new Web3('ws://localhost:' + port);
-        accounts = await web3.eth.getAccounts();
+        xdc3 = new Web3('ws://localhost:' + port);
+        accounts = await xdc3.eth.getAccounts();
     });
 
     afterEach(async function () {
@@ -27,7 +27,7 @@ describe('subscription connect/reconnect', function () {
     });
 
     it('subscribes (baseline)', function (done) {
-        web3.eth
+        xdc3.eth
             .subscribe('newBlockHeaders')
             .once('data', function (result) {
                 assert(result.parentHash);
@@ -36,7 +36,7 @@ describe('subscription connect/reconnect', function () {
     });
 
     it('subscribes with a callback', function (done) {
-        subscription = web3.eth
+        subscription = xdc3.eth
             .subscribe('newBlockHeaders', function (err, result) {
                 assert(result.parentHash);
                 subscription.unsubscribe(); // Stop listening..
@@ -45,7 +45,7 @@ describe('subscription connect/reconnect', function () {
     });
 
     it('subscription emits a connected event', function (done) {
-        subscription = web3.eth
+        subscription = xdc3.eth
             .subscribe('newBlockHeaders')
             .on('connected', function (result) {
                 assert(result);             // First subscription
@@ -55,12 +55,12 @@ describe('subscription connect/reconnect', function () {
     });
 
     it('clearSubscriptions', async function() {
-        web3.eth.subscribe('newBlockHeaders');
+        xdc3.eth.subscribe('newBlockHeaders');
         await waitSeconds(1); // Sub need a little time to set up
 
-        assert.equal(1, web3.eth._requestManager.subscriptions.size);
-        assert.ok(web3.eth.clearSubscriptions())
-        assert.equal(0, web3.eth._requestManager.subscriptions.size);
+        assert.equal(1, xdc3.eth._requestManager.subscriptions.size);
+        assert.ok(xdc3.eth.clearSubscriptions())
+        assert.equal(0, xdc3.eth._requestManager.subscriptions.size);
     });
 
     it('resubscribes to an existing subscription', function (done) {
@@ -68,7 +68,7 @@ describe('subscription connect/reconnect', function () {
 
         let stage = 0;
 
-        subscription = web3.eth.subscribe('newBlockHeaders');
+        subscription = xdc3.eth.subscribe('newBlockHeaders');
 
         subscription.on('data', function (result) {
             if (stage === 0) {
@@ -88,7 +88,7 @@ describe('subscription connect/reconnect', function () {
 
         let stage = 0;
 
-        subscription = web3.eth
+        subscription = xdc3.eth
             .subscribe('newBlockHeaders')
             .on('data', function (result) {
                 assert(result.parentHash);
@@ -115,7 +115,7 @@ describe('subscription connect/reconnect', function () {
         this.timeout(7000);
 
         return new Promise(async function(resolve, reject) {
-            web3.eth
+            xdc3.eth
                 .subscribe('newBlockHeaders')
                 .once("error", function (err) {
                     reject(new Error('Should not hear an error '));
@@ -123,7 +123,7 @@ describe('subscription connect/reconnect', function () {
 
             // Let a couple blocks mine..
             await waitSeconds(2)
-            web3.currentProvider.disconnect();
+            xdc3.currentProvider.disconnect();
 
             // This delay seems to be required (on Travis).
             await waitSeconds(1);
@@ -141,7 +141,7 @@ describe('subscription connect/reconnect', function () {
         let counter = 0;
 
         return new Promise(async function(resolve, reject) {
-            web3.eth
+            xdc3.eth
                 .subscribe('newBlockHeaders')
                 .on("data", function (_) {
                     counter++;
@@ -156,7 +156,7 @@ describe('subscription connect/reconnect', function () {
             await pify(newServer.listen)(8777);
 
             const finalCount = counter;
-            web3.setProvider(new Web3.providers.WebsocketProvider('ws://localhost:8777'));
+            xdc3.setProvider(new Web3.providers.WebsocketProvider('ws://localhost:8777'));
 
             await waitSeconds(2);
             assert.equal(counter, finalCount);
@@ -166,12 +166,12 @@ describe('subscription connect/reconnect', function () {
     })
 
     it('allows a subscription which does not exist', function () {
-        web3.eth.subscribe('subscription-does-not-exists');
+        xdc3.eth.subscribe('subscription-does-not-exists');
     });
 
     it('errors when zero params subscrip. is called with the wrong arguments', function () {
         try {
-            web3.eth.subscribe('newBlockHeaders', 5);
+            xdc3.eth.subscribe('newBlockHeaders', 5);
             assert.fail();
         } catch (err) {
             assert(err.message.includes('Invalid number of parameters for "newHeads"'));
@@ -180,18 +180,18 @@ describe('subscription connect/reconnect', function () {
     });
 
     it('errors when the provider is not set (callback)', function (done) {
-        web3 = new Web3();
+        xdc3 = new Web3();
 
-        web3.eth.subscribe('newBlockHeaders', function (err, result) {
+        xdc3.eth.subscribe('newBlockHeaders', function (err, result) {
             assert(err.message.includes('No provider set'));
             done();
         });
     });
 
     it('errors when the provider is not set (.on("error"))', function (done) {
-        web3 = new Web3();
+        xdc3 = new Web3();
 
-        web3.eth
+        xdc3.eth
             .subscribe('newBlockHeaders')
             .once("error", function (err) {
                 assert(err.message.includes('No provider set'));
@@ -200,18 +200,18 @@ describe('subscription connect/reconnect', function () {
     });
 
     it('errors when the provider does not support subscriptions (callback)', function (done) {
-        web3 = new Web3('http://localhost:' + port);
+        xdc3 = new Web3('http://localhost:' + port);
 
-        web3.eth.subscribe('newBlockHeaders', function (err, result) {
+        xdc3.eth.subscribe('newBlockHeaders', function (err, result) {
             assert(err.message.includes("provider doesn't support subscriptions: HttpProvider"));
             done();
         });
     });
 
     it('errors when the provider does not support subscriptions (.on("error"))', function (done) {
-        web3 = new Web3('http://localhost:' + port);
+        xdc3 = new Web3('http://localhost:' + port);
 
-        web3.eth
+        xdc3.eth
             .subscribe('newBlockHeaders')
             .once("error", function (err) {
                 assert(err.message.includes("provider doesn't support subscriptions: HttpProvider"));
@@ -223,7 +223,7 @@ describe('subscription connect/reconnect', function () {
         await pify(server.close)();
 
         return new Promise(async function (resolve) {
-            web3.eth
+            xdc3.eth
                 .subscribe('newBlockHeaders')
                 .once('error', function (err) {
                     assert(err.message.includes('CONNECTION ERROR: Couldn\'t connect to node on WS'));
@@ -237,13 +237,13 @@ describe('subscription connect/reconnect', function () {
         let counter = 0;
 
         return new Promise(async function (resolve) {
-            web3.eth
+            xdc3.eth
                 .subscribe('newBlockHeaders')
                 .once('data', async function () {
                     await pify(server.close)();
                 })
 
-            web3.eth.currentProvider.on('close', function (err) {
+            xdc3.eth.currentProvider.on('close', function (err) {
                 counter++;
                 assert(err.reason.includes('Connection dropped by remote peer.'));
                 assert(err.code === 1006);
@@ -252,7 +252,7 @@ describe('subscription connect/reconnect', function () {
             // Make sure error handler doesn't fire twice
             await waitSeconds(2);
             assert.equal(counter, 1);
-            web3.eth.currentProvider.removeAllListeners();
+            xdc3.eth.currentProvider.removeAllListeners();
             resolve();
         });
     });
@@ -260,20 +260,20 @@ describe('subscription connect/reconnect', function () {
     it('auto reconnects and keeps the subscription running', function () {
         this.timeout(6000);
 
-        web3.setProvider(new Web3.providers.WebsocketProvider('ws://localhost:' + port, {reconnect: {auto: true}}));
+        xdc3.setProvider(new Web3.providers.WebsocketProvider('ws://localhost:' + port, {reconnect: {auto: true}}));
 
         return new Promise(async function (resolve) {
             // Stage 0:
             let stage = 0;
 
-            web3.eth
+            xdc3.eth
                 .subscribe('newBlockHeaders')
                 .on('data', function (result) {
                     assert(result.parentHash);
 
                     // Exit point, flag set below
                     if (stage === 1) {
-                        web3.currentProvider.disconnect();
+                        xdc3.currentProvider.disconnect();
                         this.removeAllListeners();
                         resolve();
                     }
@@ -290,20 +290,20 @@ describe('subscription connect/reconnect', function () {
     it('auto reconnects, keeps the subscription running and triggers the `connected` event listener twice', function () {
         this.timeout(6000);
 
-        web3.setProvider(new Web3.providers.WebsocketProvider('ws://localhost:' + port, {reconnect: {auto: true}}));
+        xdc3.setProvider(new Web3.providers.WebsocketProvider('ws://localhost:' + port, {reconnect: {auto: true}}));
 
         return new Promise(async function (resolve) {
             // Stage 0:
             let stage = 0;
 
-            web3.eth
+            xdc3.eth
                 .subscribe('newBlockHeaders')
                 .on('connected', function (result) {
                     assert(result);
 
                     // Exit point, flag set below
                     if (stage === 1) {
-                        web3.currentProvider.disconnect();
+                        xdc3.currentProvider.disconnect();
                         this.removeAllListeners();
                         resolve();
                     }

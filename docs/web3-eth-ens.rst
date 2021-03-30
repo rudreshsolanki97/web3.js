@@ -1,10 +1,10 @@
 .. _eth-ens:
 
 ============
-web3.eth.ens
+xdc3.eth.ens
 ============
 
-The ``web3.eth.ens`` functions let you interact with ENS.
+The ``xdc3.eth.ens`` functions let you interact with ENS.
 We recommend reading the `ENS documentation <https://docs.ens.domains/>`_ to get deeper insights about the internals of the name service.
 
 ------------------------------------------------------------------------------
@@ -14,7 +14,7 @@ registryAddress
 
 .. code-block:: javascript
 
-    web3.eth.ens.registryAddress;
+    xdc3.eth.ens.registryAddress;
 
 The ``registryAddress`` property can be used to define a custom registry address when you are connected to an unknown chain.
 
@@ -33,7 +33,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.eth.ens.registryAddress;
+    xdc3.eth.ens.registryAddress;
     > "0x314159265dD8dbb310642f98f50C066173C1259b"
 
 ------------------------------------------------------------------------------
@@ -43,7 +43,7 @@ registry
 
 .. code-block:: javascript
 
-    web3.eth.ens.registry;
+    xdc3.eth.ens.registry;
 
 Returns the network specific ENS registry.
 
@@ -75,7 +75,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.eth.ens.registry;
+    xdc3.eth.ens.registry;
     > {
         contract: Contract,
         owner: Function(name, callback), // Deprecated
@@ -101,7 +101,7 @@ resolver
 
 .. code-block:: javascript
 
-    web3.eth.ens.resolver(name [, callback]);
+    xdc3.eth.ens.resolver(name [, callback]);
 
 Returns the resolver contract to an Ethereum address.
 
@@ -127,7 +127,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.eth.ens.resolver('ethereum.eth').then(function (contract) {
+    xdc3.eth.ens.resolver('ethereum.eth').then(function (contract) {
         console.log(contract);
     });
     > Contract<Resolver>
@@ -139,7 +139,7 @@ getResolver
 
 .. code-block:: javascript
 
-    web3.eth.ens.getResolver(name [, callback]);
+    xdc3.eth.ens.getResolver(name [, callback]);
 
 Returns the resolver contract to an Ethereum address.
 
@@ -162,7 +162,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.eth.ens.getResolver('ethereum.eth').then(function (contract) {
+    xdc3.eth.ens.getResolver('ethereum.eth').then(function (contract) {
         console.log(contract);
     });
     > Contract<Resolver>
@@ -174,7 +174,7 @@ setResolver
 
 .. code-block:: javascript
 
-    web3.eth.ens.setResolver(name, address [, txConfig ] [, callback]);
+    xdc3.eth.ens.setResolver(name, address [, txConfig ] [, callback]);
 
 Sets the resolver contract address of a name.
 
@@ -199,7 +199,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.eth.ens.setResolver('ethereum.eth', '0x...', {...}).then(function (receipt) {
+    xdc3.eth.ens.setResolver('ethereum.eth', '0x...', {...}).then(function (receipt) {
         console.log(receipt);
     });
     > {...}
@@ -211,7 +211,7 @@ getOwner
 
 .. code-block:: javascript
 
-    web3.eth.ens.getOwner(name [, callback]);
+    xdc3.eth.ens.getOwner(name [, callback]);
 
 Returns the owner of a name.
 
@@ -234,7 +234,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.eth.ens.getOwner('ethereum.eth').then(function (owner) {
+    xdc3.eth.ens.getOwner('ethereum.eth').then(function (owner) {
         console.log(owner);
     });
     > '0x...'
@@ -247,7 +247,7 @@ setOwner
 
 .. code-block:: javascript
 
-    web3.eth.ens.setOwner(name [, txConfig ] [, callback]);
+    xdc3.eth.ens.setOwner(name [, txConfig ] [, callback]);
 
 Sets the owner of the given name.
 
@@ -271,7 +271,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.eth.ens.setOwner('ethereum.eth', {...}).then(function (receipt) {
+    xdc3.eth.ens.setOwner('ethereum.eth', {...}).then(function (receipt) {
         console.log(receipt);
     });
     > {...}
@@ -283,7 +283,7 @@ getTTL
 
 .. code-block:: javascript
 
-    web3.eth.ens.getTTL(name [, callback]);
+    xdc3.eth.ens.getTTL(name [, callback]);
 
 Returns the caching TTL (time-to-live) of a name.
 
@@ -306,7 +306,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.eth.ens.getTTL('ethereum.eth').then(function (ttl) {
+    xdc3.eth.ens.getTTL('ethereum.eth').then(function (ttl) {
         console.log(ttl);
     });
     > 100000
@@ -318,7 +318,7 @@ setTTL
 
 .. code-block:: javascript
 
-    web3.eth.ens.setTTL(name, ttl [, txConfig ] [, callback]);
+    xdc3.eth.ens.setTTL(name, ttl [, txConfig ] [, callback]);
 
 Sets the caching TTL (time-to-live) of a name.
 
@@ -343,7 +343,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.eth.ens.setTTL('ethereum.eth', 10000, {...}).then(function (receipt) {
+    xdc3.eth.ens.setTTL('ethereum.eth', 10000, {...}).then(function (receipt) {
         console.log(receipt);
     });
     > {...}
@@ -355,7 +355,7 @@ setSubnodeOwner
 
 .. code-block:: javascript
 
-    web3.eth.ens.setSubnodeOwner(name, label, address [, txConfig ] [, callback]);
+    xdc3.eth.ens.setSubnodeOwner(name, label, address [, txConfig ] [, callback]);
 
 Creates a new subdomain of the given node, assigning ownership of it to the specified owner.
 
@@ -381,8 +381,8 @@ Example
 
 .. code-block:: javascript
 
-    web3.eth.ens.setSubnodeOwner('ethereum.eth', 'web3', '0x...', {...}).then(function (receipt) {
-        console.log(receipt); // successfully defined the owner of web3.ethereum.eth
+    xdc3.eth.ens.setSubnodeOwner('ethereum.eth', 'xdc3', '0x...', {...}).then(function (receipt) {
+        console.log(receipt); // successfully defined the owner of xdc3.ethereum.eth
     });
     > {...}
 
@@ -393,7 +393,7 @@ setRecord
 
 .. code-block:: javascript
 
-    web3.eth.ens.setRecord(name, owner, resolver, ttl, [, txConfig ] [, callback]);
+    xdc3.eth.ens.setRecord(name, owner, resolver, ttl, [, txConfig ] [, callback]);
 
 Sets the owner, resolver, and TTL for an ENS record in a single operation.
 
@@ -420,7 +420,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.eth.ens.setRecord('ethereum.eth', '0x...', '0x...', 1000000, {...}).then(function (receipt) {
+    xdc3.eth.ens.setRecord('ethereum.eth', '0x...', '0x...', 1000000, {...}).then(function (receipt) {
         console.log(receipt); // successfully registered ethereum.eth
     });
     > {...}
@@ -432,7 +432,7 @@ setSubnodeRecord
 
 .. code-block:: javascript
 
-    web3.eth.ens.setSubnodeRecord(name, label, owner, resolver, ttl, [, txConfig ] [, callback]);
+    xdc3.eth.ens.setSubnodeRecord(name, label, owner, resolver, ttl, [, txConfig ] [, callback]);
 
 Sets the owner, resolver and TTL for a subdomain, creating it if necessary.
 
@@ -460,8 +460,8 @@ Example
 
 .. code-block:: javascript
 
-    web3.eth.ens.setSubnodeRecord('ethereum.eth', 'web3', '0x...', '0x...', 1000000, {...}).then(function (receipt) {
-        console.log(receipt); // successfully registered web3.ethereum.eth
+    xdc3.eth.ens.setSubnodeRecord('ethereum.eth', 'xdc3', '0x...', '0x...', 1000000, {...}).then(function (receipt) {
+        console.log(receipt); // successfully registered xdc3.ethereum.eth
     });
     > {...}
 
@@ -472,7 +472,7 @@ setApprovalForAll
 
 .. code-block:: javascript
 
-    web3.eth.ens.setApprovalForAll(operator, approved, [, txConfig ] [, callback]);
+    xdc3.eth.ens.setApprovalForAll(operator, approved, [, txConfig ] [, callback]);
 
 Sets or clears an approval. Approved accounts can execute all ENS registry operations on behalf of the caller.
 
@@ -497,7 +497,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.eth.ens.setApprovalForAll('0x...', true, {...}).then(function (receipt) {
+    xdc3.eth.ens.setApprovalForAll('0x...', true, {...}).then(function (receipt) {
         console.log(receipt);
     });
     > {...}
@@ -509,7 +509,7 @@ isApprovedForAll
 
 .. code-block:: javascript
 
-    web3.eth.ens.isApprovedForAll(owner, operator [, callback]);
+    xdc3.eth.ens.isApprovedForAll(owner, operator [, callback]);
 
 Returns ``true`` if the operator is approved to make ENS registry operations on behalf of the owner.
 
@@ -533,7 +533,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.eth.ens.isApprovedForAll('0x0...', '0x0...').then(function (isApproved) {
+    xdc3.eth.ens.isApprovedForAll('0x0...', '0x0...').then(function (isApproved) {
         console.log(isApproved);
     })
     > true
@@ -545,7 +545,7 @@ recordExists
 
 .. code-block:: javascript
 
-    web3.eth.ens.recordExists(name [, callback]);
+    xdc3.eth.ens.recordExists(name [, callback]);
 
 Returns ``true`` if node exists in this ENS registry.
 This will return ``false`` for records that are in the legacy ENS registry but have not yet been migrated to the new one.
@@ -569,7 +569,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.eth.ens.recordExists('0x0...', '0x0...').then(function (isExisting) {
+    xdc3.eth.ens.recordExists('0x0...', '0x0...').then(function (isExisting) {
         console.log(isExisting);
     })
     > true
@@ -581,7 +581,7 @@ getAddress
 
 .. code-block:: javascript
 
-    web3.eth.ens.getAddress(ENSName [, callback]);
+    xdc3.eth.ens.getAddress(ENSName [, callback]);
 
 Resolves an ENS name to an Ethereum address.
 
@@ -604,7 +604,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.eth.ens.getAddress('ethereum.eth').then(function (address) {
+    xdc3.eth.ens.getAddress('ethereum.eth').then(function (address) {
         console.log(address);
     })
     > 0xfB6916095ca1df60bB79Ce92cE3Ea74c37c5d359
@@ -616,7 +616,7 @@ setAddress
 
 .. code-block:: javascript
 
-    web3.eth.ens.setAddress(ENSName, address [, txConfig ] [, callback]);
+    xdc3.eth.ens.setAddress(ENSName, address [, txConfig ] [, callback]);
 
 Sets the address of an ENS name in this resolver.
 
@@ -643,7 +643,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.eth.ens.setAddress(
+    xdc3.eth.ens.setAddress(
         'ethereum.eth',
         '0xfB6916095ca1df60bB79Ce92cE3Ea74c37c5d359',
         {
@@ -656,7 +656,7 @@ Example
 
     // Or using the event emitter
 
-    web3.eth.ens.setAddress(
+    xdc3.eth.ens.setAddress(
         'ethereum.eth',
         '0xfB6916095ca1df60bB79Ce92cE3Ea74c37c5d359',
         {
@@ -676,7 +676,7 @@ Example
 
     // Or listen to the AddrChanged event on the resolver
 
-    web3.eth.ens.resolver('ethereum.eth').then(function (resolver) {
+    xdc3.eth.ens.resolver('ethereum.eth').then(function (resolver) {
         resolver.events.AddrChanged({fromBlock: 0}, function(error, event) {
             console.log(event);
         })
@@ -699,7 +699,7 @@ getPubkey
 
 .. code-block:: javascript
 
-    web3.eth.ens.getPubkey(ENSName [, callback]);
+    xdc3.eth.ens.getPubkey(ENSName [, callback]);
 
 Returns the X and Y coordinates of the curve point for the public key.
 
@@ -722,7 +722,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.eth.ens.getPubkey('ethereum.eth').then(function (result) {
+    xdc3.eth.ens.getPubkey('ethereum.eth').then(function (result) {
         console.log(result)
     });
     > {
@@ -739,7 +739,7 @@ setPubkey
 
 .. code-block:: javascript
 
-    web3.eth.ens.setPubkey(ENSName, x, y [, txConfig ] [, callback]);
+    xdc3.eth.ens.setPubkey(ENSName, x, y [, txConfig ] [, callback]);
 
 Sets the SECP256k1 public key associated with an ENS node.
 
@@ -767,7 +767,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.eth.ens.setPubkey(
+    xdc3.eth.ens.setPubkey(
         'ethereum.eth',
         '0x0000000000000000000000000000000000000000000000000000000000000000',
         '0x0000000000000000000000000000000000000000000000000000000000000000',
@@ -781,7 +781,7 @@ Example
 
     // Or using the event emitter
 
-    web3.eth.ens.setPubkey(
+    xdc3.eth.ens.setPubkey(
         'ethereum.eth',
         '0x0000000000000000000000000000000000000000000000000000000000000000',
         '0x0000000000000000000000000000000000000000000000000000000000000000',
@@ -802,7 +802,7 @@ Example
 
     // Or listen to the PubkeyChanged event on the resolver
 
-    web3.eth.ens.resolver('ethereum.eth').then(function (resolver) {
+    xdc3.eth.ens.resolver('ethereum.eth').then(function (resolver) {
         resolver.events.PubkeyChanged({fromBlock: 0}, function(error, event) {
             console.log(event);
         })
@@ -825,7 +825,7 @@ getContent
 
 .. code-block:: javascript
 
-    web3.eth.ens.getContent(ENSName [, callback]);
+    xdc3.eth.ens.getContent(ENSName [, callback]);
 
 Returns the content hash associated with an ENS node.
 
@@ -848,7 +848,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.eth.ens.getContent('ethereum.eth').then(function (result) {
+    xdc3.eth.ens.getContent('ethereum.eth').then(function (result) {
         console.log(result);
     });
     > "0x0000000000000000000000000000000000000000000000000000000000000000"
@@ -860,7 +860,7 @@ setContent
 
 .. code-block:: javascript
 
-    web3.eth.ens.setContent(ENSName, hash [, txConfig ] [, callback]);
+    xdc3.eth.ens.setContent(ENSName, hash [, txConfig ] [, callback]);
 
 Sets the content hash associated with an ENS node.
 
@@ -887,7 +887,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.eth.ens.setContent(
+    xdc3.eth.ens.setContent(
         'ethereum.eth',
         '0x0000000000000000000000000000000000000000000000000000000000000000',
         {
@@ -900,7 +900,7 @@ Example
 
     // Or using the event emitter
 
-    web3.eth.ens.setContent(
+    xdc3.eth.ens.setContent(
         'ethereum.eth',
         '0x0000000000000000000000000000000000000000000000000000000000000000',
         {
@@ -920,7 +920,7 @@ Example
 
     // Or listen to the ContentChanged event on the resolver
 
-    web3.eth.ens.resolver('ethereum.eth').then(function (resolver) {
+    xdc3.eth.ens.resolver('ethereum.eth').then(function (resolver) {
         resolver.events.ContentChanged({fromBlock: 0}, function(error, event) {
             console.log(event);
         })
@@ -943,7 +943,7 @@ getContenthash
 
 .. code-block:: javascript
 
-    web3.eth.ens.getContenthash(ENSName [, callback]);
+    xdc3.eth.ens.getContenthash(ENSName [, callback]);
 
 Returns the content hash object associated with an ENS node.
 
@@ -966,7 +966,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.eth.ens.getContenthash('ethereum.eth').then(function (result) {
+    xdc3.eth.ens.getContenthash('ethereum.eth').then(function (result) {
         console.log(result);
     });
     > {
@@ -981,7 +981,7 @@ setContenthash
 
 .. code-block:: javascript
 
-    web3.eth.ens.setContenthash(ENSName, hash [, txConfig ] [, callback]);
+    xdc3.eth.ens.setContenthash(ENSName, hash [, txConfig ] [, callback]);
 
 Sets the content hash associated with an ENS node.
 
@@ -1016,7 +1016,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.eth.ens.setContenthash(
+    xdc3.eth.ens.setContenthash(
         'ethereum.eth',
         'ipfs://QmaEBknbGT4bTQiQoe2VNgBJbRfygQGktnaW5TbuKixjYL',
         {
@@ -1029,7 +1029,7 @@ Example
 
     // Or using the event emitter
 
-    web3.eth.ens.setContenthash(
+    xdc3.eth.ens.setContenthash(
         'ethereum.eth',
         'ipfs://QmaEBknbGT4bTQiQoe2VNgBJbRfygQGktnaW5TbuKixjYL',
         {
@@ -1049,7 +1049,7 @@ Example
 
     // Or listen to the ContenthashChanged event on the resolver
 
-    web3.eth.ens.resolver('ethereum.eth').then(function (resolver) {
+    xdc3.eth.ens.resolver('ethereum.eth').then(function (resolver) {
         resolver.events.ContenthashChanged({fromBlock: 0}, function(error, event) {
             console.log(event);
         })
@@ -1071,7 +1071,7 @@ getMultihash
 
 .. code-block:: javascript
 
-    web3.eth.ens.getMultihash(ENSName [, callback]);
+    xdc3.eth.ens.getMultihash(ENSName [, callback]);
 
 Returns the multihash associated with an ENS node.
 
@@ -1094,7 +1094,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.eth.ens.getMultihash('ethereum.eth').then(function (result) {
+    xdc3.eth.ens.getMultihash('ethereum.eth').then(function (result) {
         console.log(result);
     });
     > 'QmXpSwxdmgWaYrgMUzuDWCnjsZo5RxphE3oW7VhTMSCoKK'
@@ -1106,7 +1106,7 @@ supportsInterface
 
 .. code-block:: javascript
 
-    web3.eth.ens.supportsInterface(name, interfaceId [, callback]);
+    xdc3.eth.ens.supportsInterface(name, interfaceId [, callback]);
 
 Returns ``true`` if the related ``Resolver`` does support the given signature or interfaceId.
 
@@ -1130,7 +1130,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.eth.ens.supportsInterface('ethereum.eth', 'addr(bytes32').then(function (result) {
+    xdc3.eth.ens.supportsInterface('ethereum.eth', 'addr(bytes32').then(function (result) {
         console.log(result);
     });
     > true
@@ -1142,7 +1142,7 @@ setMultihash
 
 .. code-block:: javascript
 
-    web3.eth.ens.setMultihash(ENSName, hash [, txConfig ] [, callback]);
+    xdc3.eth.ens.setMultihash(ENSName, hash [, txConfig ] [, callback]);
 
 Sets the multihash associated with an ENS node.
 
@@ -1169,7 +1169,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.eth.ens.setMultihash(
+    xdc3.eth.ens.setMultihash(
         'ethereum.eth',
         'QmXpSwxdmgWaYrgMUzuDWCnjsZo5RxphE3oW7VhTMSCoKK',
         {
@@ -1182,7 +1182,7 @@ Example
 
     // Or using the event emitter
 
-    web3.eth.ens.setMultihash(
+    xdc3.eth.ens.setMultihash(
         'ethereum.eth',
         'QmXpSwxdmgWaYrgMUzuDWCnjsZo5RxphE3oW7VhTMSCoKK',
         {
@@ -1232,7 +1232,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.eth.ens.resolver('ethereum.eth').then(function (resolver) {
+    xdc3.eth.ens.resolver('ethereum.eth').then(function (resolver) {
         resolver.events.AddrChanged({fromBlock: 0}, function(error, event) {
             console.log(event);
         })
@@ -1281,7 +1281,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.eth.ens.resistry.then(function (registry) {
+    xdc3.eth.ens.resistry.then(function (registry) {
         registry.events.Transfer({fromBlock: 0}, , function(error, event) {
               console.log(event);
           })

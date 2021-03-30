@@ -8,7 +8,7 @@ const addressZero = "0x0000000000000000000000000000000000000000";
 const addressOne = "0x0000000000000000000000000000000000000001";
 const tld = "test";
 
-async function setupENS(web3) {
+async function setupENS(xdc3) {
 
     const options = {
         bytecode: undefined,
@@ -16,12 +16,12 @@ async function setupENS(web3) {
         gas: 5500000
     }
 
-    const accounts = await web3.eth.getAccounts();
+    const accounts = await xdc3.eth.getAccounts();
     const from = { from: accounts[0] };
 
     // ENS
     options.data = ENSArtifact.bytecode;
-    const ENS = new web3.eth.Contract(ENSArtifact.abi, options)
+    const ENS = new xdc3.eth.Contract(ENSArtifact.abi, options)
 
     const ens = await ENS
         .deploy()
@@ -29,33 +29,33 @@ async function setupENS(web3) {
 
     // PublicResolver
     options.data = PublicResolverArtifact.bytecode;
-    const PublicResolver = new web3.eth.Contract(PublicResolverArtifact.abi, options)
+    const PublicResolver = new xdc3.eth.Contract(PublicResolverArtifact.abi, options)
 
     const resolver = await PublicResolver
         .deploy({ arguments: [ens.options.address] })
         .send(from);
 
-    await setupResolver(ens, resolver, accounts[0], web3);
+    await setupResolver(ens, resolver, accounts[0], xdc3);
 
     // Registrar
     options.data = FIFSRegistrarArtifact.bytecode;
-    const FIFSRegistrar = new web3.eth.Contract(FIFSRegistrarArtifact.abi, options)
+    const FIFSRegistrar = new xdc3.eth.Contract(FIFSRegistrarArtifact.abi, options)
 
     const registrar = await FIFSRegistrar
         .deploy({ arguments: [ens.options.address, namehash.hash(tld)] })
         .send(from);
 
-    await setupRegistrar(ens, registrar.options.address, accounts[0], web3);
+    await setupRegistrar(ens, registrar.options.address, accounts[0], xdc3);
 
     // Reverse Registrar
     options.data = ReverseRegistrarArtifact.bytecode;
-    const ReverseRegistrar = new web3.eth.Contract(ReverseRegistrarArtifact.abi, options)
+    const ReverseRegistrar = new xdc3.eth.Contract(ReverseRegistrarArtifact.abi, options)
 
     const reverse = await ReverseRegistrar
         .deploy({ arguments: [ens.options.address, resolver.options.address] })
         .send(from);
 
-    await setupReverseRegistrar(ens, reverse.options.address, accounts[0], web3);
+    await setupReverseRegistrar(ens, reverse.options.address, accounts[0], xdc3);
 
     return {
         registry: ens.options.address,
@@ -65,9 +65,9 @@ async function setupENS(web3) {
     }
 };
 
-async function setupResolver(ens, resolver, account, web3) {
+async function setupResolver(ens, resolver, account, xdc3) {
     const node = namehash.hash("resolver");
-    const label = web3.utils.sha3("resolver");
+    const label = xdc3.utils.sha3("resolver");
 
     await ens
         .methods
@@ -85,22 +85,22 @@ async function setupResolver(ens, resolver, account, web3) {
         .send({from: account});
 }
 
-async function setupRegistrar(ens, address, account, web3) {
+async function setupRegistrar(ens, address, account, xdc3) {
     await ens
         .methods
-        .setSubnodeOwner(addressZero, web3.utils.sha3(tld), address)
+        .setSubnodeOwner(addressZero, xdc3.utils.sha3(tld), address)
         .send({from: account});
 }
 
-async function setupReverseRegistrar(ens, address, account, web3) {
+async function setupReverseRegistrar(ens, address, account, xdc3) {
     await ens
         .methods
-        .setSubnodeOwner(addressZero, web3.utils.sha3("reverse"), account)
+        .setSubnodeOwner(addressZero, xdc3.utils.sha3("reverse"), account)
         .send({from: account});
 
     await ens
         .methods
-        .setSubnodeOwner(namehash.hash("reverse"), web3.utils.sha3("addr"), address)
+        .setSubnodeOwner(namehash.hash("reverse"), xdc3.utils.sha3("addr"), address)
         .send({from: account});
 }
 

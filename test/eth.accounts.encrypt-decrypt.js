@@ -1,9 +1,9 @@
-var Accounts = require("./../packages/web3-eth-accounts/src/index.js");
+var Accounts = require("./../packages/xdc3-eth-accounts/src/index.js");
 var ethers = require('ethers');
 var chai = require('chai');
 var assert = chai.assert;
-var Web3 = require('../packages/web3');
-var web3 = new Web3();
+var Web3 = require('../packages/xdc3');
+var xdc3 = new Web3();
 
 var tests = [];
 for (var i = 0; i < 50; i++) {
@@ -118,7 +118,7 @@ describe("eth", function () {
         runTests();
     });
 
-    // Verify that `Buffer` in web3-eth-accounts is backwards
+    // Verify that `Buffer` in xdc3-eth-accounts is backwards
     // compatible with a deprecated node Buffer substitute injected into
     // builds by webpack (and React).
     describe("with feross/buffer@4.9.1", function(){
@@ -222,8 +222,8 @@ function runTests(){
 
             // compare addresses
             assert.equal(acc.address, ethWall.address);
-            assert.equal(web3.utils.toChecksumAddress('0x143f8913e0417997304fc179b531ff4cb9cab582'), acc.address);
-            assert.equal(web3.utils.toChecksumAddress('0x143f8913e0417997304fc179b531ff4cb9cab582'), ethWall.address);
+            assert.equal(xdc3.utils.toChecksumAddress('0x143f8913e0417997304fc179b531ff4cb9cab582'), acc.address);
+            assert.equal(xdc3.utils.toChecksumAddress('0x143f8913e0417997304fc179b531ff4cb9cab582'), ethWall.address);
             assert.equal(ethers.utils.getAddress('0x143f8913e0417997304fc179b531ff4cb9cab582'), acc.address);
             assert.equal(ethers.utils.getAddress('0x143f8913e0417997304fc179b531ff4cb9cab582'), ethWall.address);
 

@@ -1,65 +1,65 @@
 var chai = require('chai');
 var assert = chai.assert;
 var FakeHttpProvider = require('./helpers/FakeIpcProvider');
-var Web3 = require('../packages/web3');
-var web3 = new Web3();
+var Web3 = require('../packages/xdc3');
+var xdc3 = new Web3();
 
 
 var tests = [{
     methods: [{
         name: 'getGasPrice2',
         call: 'eth_gasPrice',
-        outputFormatter: web3.extend.formatters.outputBigNumberFormatter
+        outputFormatter: xdc3.extend.formatters.outputBigNumberFormatter
     },{
         name: 'getBalance',
         call: 'eth_getBalance',
         params: 2,
-        inputFormatter: [web3.utils.toChecksumAddress, web3.extend.formatters.inputDefaultBlockNumberFormatter],
-        outputFormatter: web3.extend.formatters.outputBigNumberFormatter
+        inputFormatter: [xdc3.utils.toChecksumAddress, xdc3.extend.formatters.inputDefaultBlockNumberFormatter],
+        outputFormatter: xdc3.extend.formatters.outputBigNumberFormatter
     }]
 },{
     property: 'admin',
     methods: [{
         name: 'getGasPrice3',
         call: 'eth_gasPrice',
-        outputFormatter: web3.extend.formatters.outputBigNumberFormatter
+        outputFormatter: xdc3.extend.formatters.outputBigNumberFormatter
     },{
         name: 'getBalance',
         call: 'eth_getBalance',
         params: 2,
-        inputFormatter: [web3.utils.toChecksumAddress, web3.extend.formatters.inputDefaultBlockNumberFormatter],
-        outputFormatter: web3.extend.formatters.outputBigNumberFormatter
+        inputFormatter: [xdc3.utils.toChecksumAddress, xdc3.extend.formatters.inputDefaultBlockNumberFormatter],
+        outputFormatter: xdc3.extend.formatters.outputBigNumberFormatter
     }]
 },{
     error: true,
     methods: [{
         name: 'getGasPrice4',
-        outputFormatter: web3.extend.formatters.outputBigNumberFormatter
+        outputFormatter: xdc3.extend.formatters.outputBigNumberFormatter
     }]
 },{
     error: true,
     methods: [{
         call: 'eth_gasPrice',
-        outputFormatter: web3.extend.formatters.outputBigNumberFormatter
+        outputFormatter: xdc3.extend.formatters.outputBigNumberFormatter
     }]
 }];
 
-describe('web3', function () {
+describe('xdc3', function () {
     describe('extend', function () {
         tests.forEach(function (test, index) {
             it('test no: ' + index, function (done) {
                 var count = 1;
 
                 var provider = new FakeHttpProvider();
-                web3.setProvider(provider);
+                xdc3.setProvider(provider);
 
                 if(test.error) {
-                    assert.throws(web3.extend.bind(web3,test));
+                    assert.throws(xdc3.extend.bind(xdc3,test));
 
                     return done();
 
                 } else {
-                    web3.extend(test);
+                    xdc3.extend(test);
                 }
 
                 if(test.methods) {
@@ -78,11 +78,11 @@ describe('web3', function () {
                         });
 
                         if(test.property) {
-                            assert.isFunction(web3[test.property][property.name]);
-                            web3[test.property][property.name]();
+                            assert.isFunction(xdc3[test.property][property.name]);
+                            xdc3[test.property][property.name]();
                         } else {
-                            assert.isFunction(web3[property.name]);
-                            web3[property.name]();
+                            assert.isFunction(xdc3[property.name]);
+                            xdc3[property.name]();
                         }
                     });
                 }

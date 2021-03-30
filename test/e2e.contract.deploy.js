@@ -5,7 +5,7 @@ var utils = require('./helpers/test.utils');
 var Web3 = utils.getWeb3();
 
 describe('contract.deploy [ @E2E ]', function() {
-    var web3;
+    var xdc3;
     var accounts;
     var basic;
     var reverts;
@@ -37,12 +37,12 @@ describe('contract.deploy [ @E2E ]', function() {
 
     describe('http', function() {
         before(async function(){
-            web3 = new Web3('http://localhost:8545');
-            accounts = await web3.eth.getAccounts();
+            xdc3 = new Web3('http://localhost:8545');
+            accounts = await xdc3.eth.getAccounts();
 
-            basic = new web3.eth.Contract(Basic.abi, basicOptions);
-            reverts = new web3.eth.Contract(Reverts.abi, revertsOptions);
-            noBytecode = new web3.eth.Contract(Basic.abi, noBytecodeOptions);
+            basic = new xdc3.eth.Contract(Basic.abi, basicOptions);
+            reverts = new xdc3.eth.Contract(Reverts.abi, revertsOptions);
+            noBytecode = new xdc3.eth.Contract(Basic.abi, noBytecodeOptions);
         })
 
         it('returns an instance', async function(){
@@ -50,7 +50,7 @@ describe('contract.deploy [ @E2E ]', function() {
                 .deploy()
                 .send({from: accounts[0]});
 
-            assert(web3.utils.isAddress(instance.options.address));
+            assert(xdc3.utils.isAddress(instance.options.address));
         });
 
         // Clients reject this kind of OOG is early because
@@ -130,7 +130,7 @@ describe('contract.deploy [ @E2E ]', function() {
             if (!process.env.GETH_AUTOMINE) return;
 
             return new Promise(async (resolve, reject) => {
-                var startBlock = await web3.eth.getBlockNumber();
+                var startBlock = await xdc3.eth.getBlockNumber();
 
                 await basic
                     .deploy()
@@ -139,7 +139,7 @@ describe('contract.deploy [ @E2E ]', function() {
                         assert(receipt.contractAddress);
 
                         if (number === 1) { // Confirmation numbers are zero indexed
-                            var endBlock = await web3.eth.getBlock('latest');
+                            var endBlock = await xdc3.eth.getBlock('latest');
                             assert(endBlock.number >= (startBlock + 2));
                             assert(endBlock.hash === latestBlockHash);
                             resolve();
@@ -157,11 +157,11 @@ describe('contract.deploy [ @E2E ]', function() {
         before(async function(){
             port = utils.getWebsocketPort();
 
-            web3 = new Web3('ws://localhost:' + port);
-            accounts = await web3.eth.getAccounts();
+            xdc3 = new Web3('ws://localhost:' + port);
+            accounts = await xdc3.eth.getAccounts();
 
-            basic = new web3.eth.Contract(Basic.abi, basicOptions);
-            reverts = new web3.eth.Contract(Reverts.abi, revertsOptions);
+            basic = new xdc3.eth.Contract(Basic.abi, basicOptions);
+            reverts = new xdc3.eth.Contract(Reverts.abi, revertsOptions);
         })
 
         it('returns an instance', async function(){
@@ -169,7 +169,7 @@ describe('contract.deploy [ @E2E ]', function() {
                 .deploy()
                 .send({from: accounts[0]})
 
-            assert(web3.utils.isAddress(instance.options.address));
+            assert(xdc3.utils.isAddress(instance.options.address));
         });
 
         it('errors on OOG', async function(){
@@ -224,7 +224,7 @@ describe('contract.deploy [ @E2E ]', function() {
                 .deploy()
                 .send({from: accounts[0]})
                 .on('transactionHash', hash => {
-                    assert(web3.utils.isHex(hash))
+                    assert(xdc3.utils.isHex(hash))
                     done();
                 })
         });
@@ -234,21 +234,21 @@ describe('contract.deploy [ @E2E ]', function() {
                 .deploy()
                 .send({from: accounts[0]})
                 .on('receipt', receipt => {
-                    assert(web3.utils.isAddress(receipt.contractAddress))
+                    assert(xdc3.utils.isAddress(receipt.contractAddress))
                     done();
                 })
         })
 
         it('fires the confirmation handler', function(){
             return new Promise(async (resolve, reject) => {
-                var startBlock = await web3.eth.getBlockNumber();
+                var startBlock = await xdc3.eth.getBlockNumber();
 
                 await basic
                     .deploy()
                     .send({from: accounts[0]})
                     .on('confirmation', async (number, receipt, latestBlockHash) => {
                         if (number === 1) { // Confirmation numbers are zero indexed
-                            var endBlock = await web3.eth.getBlock('latest');
+                            var endBlock = await xdc3.eth.getBlock('latest');
                             assert(endBlock.number >= (startBlock + 2));
                             assert(endBlock.hash === latestBlockHash);
                             resolve();
@@ -256,7 +256,7 @@ describe('contract.deploy [ @E2E ]', function() {
                     })
 
                 // Necessary for instamine, should not interfere with automine.
-                await utils.mine(web3, accounts[0]);
+                await utils.mine(xdc3, accounts[0]);
             });
         });
 

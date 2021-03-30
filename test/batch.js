@@ -1,16 +1,16 @@
 var chai = require('chai');
 var assert = chai.assert;
-var Web3 = require('../packages/web3');
+var Web3 = require('../packages/xdc3');
 var FakeIpcProvider = require('./helpers/FakeIpcProvider');
 
 
 
-describe('lib/web3/batch', function () {
+describe('lib/xdc3/batch', function () {
     describe('execute', function () {
         it('should execute batch request', function (done) {
 
             var provider = new FakeIpcProvider();
-            var web3 = new Web3(provider);
+            var xdc3 = new Web3(provider);
 
             var result = '0x126';
             var resultVal = '294';
@@ -40,16 +40,16 @@ describe('lib/web3/batch', function () {
                 assert.deepEqual(second.params, ['0x0000000000000000000000000000000000000005', 'latest']);
             });
 
-            var batch = new web3.BatchRequest();
-            batch.add(web3.eth.getBalance.request('0x0000000000000000000000000000000000000000', 'latest', callback));
-            batch.add(web3.eth.getBalance.request('0x0000000000000000000000000000000000000005', 'latest', callback2));
+            var batch = new xdc3.BatchRequest();
+            batch.add(xdc3.eth.getBalance.request('0x0000000000000000000000000000000000000000', 'latest', callback));
+            batch.add(xdc3.eth.getBalance.request('0x0000000000000000000000000000000000000005', 'latest', callback2));
             batch.execute();
         });
 
         it('should execute batch request for async properties', function (done) {
 
             var provider = new FakeIpcProvider();
-            var web3 = new Web3(provider);
+            var xdc3 = new Web3(provider);
 
             var result = [];
             var result2 = '0xb';
@@ -77,16 +77,16 @@ describe('lib/web3/batch', function () {
                 assert.deepEqual(second.params, [{}]);
             });
 
-            var batch = new web3.BatchRequest();
-            batch.add(web3.eth.getAccounts.request(callback));
-            batch.add(web3.shh.post.request({}, callback2));
+            var batch = new xdc3.BatchRequest();
+            batch.add(xdc3.eth.getAccounts.request(callback));
+            batch.add(xdc3.shh.post.request({}, callback2));
             batch.execute();
         });
 
         it('should execute batch request with contract', function (done) {
 
             var provider = new FakeIpcProvider();
-            var web3 = new Web3(provider);
+            var xdc3 = new Web3(provider);
 
             var abi = [{
                 "name": "balance",
@@ -169,12 +169,12 @@ describe('lib/web3/batch', function () {
             });
 
 
-            var batch = new web3.BatchRequest();
-            batch.add(web3.eth.getBalance.request('0x0000000000000000000000000000000000000022', 'latest', callback));
-            batch.add(new web3.eth.Contract(abi, address).methods.balance(address).call.request(callback2));
-            batch.add(new web3.eth.Contract(abi, address).methods.balance(address).call.request({from: '0x1000000000000000000000000000000000000002'}, callback2));
-            batch.add(new web3.eth.Contract(abi, address).methods.balance(address).call.request({from: '0x1000000000000000000000000000000000000003'}, 10, callback2));
-            batch.add(new web3.eth.Contract(abi, address).methods.balance(address).call.request(10, callback3));
+            var batch = new xdc3.BatchRequest();
+            batch.add(xdc3.eth.getBalance.request('0x0000000000000000000000000000000000000022', 'latest', callback));
+            batch.add(new xdc3.eth.Contract(abi, address).methods.balance(address).call.request(callback2));
+            batch.add(new xdc3.eth.Contract(abi, address).methods.balance(address).call.request({from: '0x1000000000000000000000000000000000000002'}, callback2));
+            batch.add(new xdc3.eth.Contract(abi, address).methods.balance(address).call.request({from: '0x1000000000000000000000000000000000000003'}, 10, callback2));
+            batch.add(new xdc3.eth.Contract(abi, address).methods.balance(address).call.request(10, callback3));
             provider.injectBatchResults([result, result2, result2, result2, result2]);
             batch.execute();
         });
@@ -182,7 +182,7 @@ describe('lib/web3/batch', function () {
         it('should execute batch requests and receive errors', function (done) {
 
             var provider = new FakeIpcProvider();
-            var web3 = new Web3(provider);
+            var xdc3 = new Web3(provider);
 
             var abi = [{
                 "name": "balance",
@@ -231,16 +231,16 @@ describe('lib/web3/batch', function () {
                 '0xa']);
             });
 
-            var batch = new web3.BatchRequest();
-            batch.add(web3.eth.getBalance.request('0x0000000000000000000000000000000000000000', 'latest', callback));
-            batch.add(new web3.eth.Contract(abi, address).methods.balance(address).call.request({from: '0x0000000000000000000000000000000000000000'}, 10, callback2));
+            var batch = new xdc3.BatchRequest();
+            batch.add(xdc3.eth.getBalance.request('0x0000000000000000000000000000000000000000', 'latest', callback));
+            batch.add(new xdc3.eth.Contract(abi, address).methods.balance(address).call.request({from: '0x0000000000000000000000000000000000000000'}, 10, callback2));
             provider.injectBatchResults([result, result2], true); // injects error
             batch.execute();
         });
 
         it('should propagate output formatter error to callback', function(done) {
             const provider = new FakeIpcProvider();
-            const web3 = new Web3(provider);
+            const xdc3 = new Web3(provider);
 
             const abi = [{
                 name: 'symbol',
@@ -270,8 +270,8 @@ describe('lib/web3/batch', function () {
                 'latest']);
             });
 
-            const batch = new web3.BatchRequest();
-            batch.add(new web3.eth.Contract(abi, address)
+            const batch = new xdc3.BatchRequest();
+            batch.add(new xdc3.eth.Contract(abi, address)
                 .methods.symbol()
                 .call.request(callback));
             provider.injectBatchResults([result]); // no explicit error, it'll be thrown when formatting
@@ -281,7 +281,7 @@ describe('lib/web3/batch', function () {
         it('should execute batch request with provider that supports sendAsync', function (done) {
 
             var provider = new FakeIpcProvider();
-            var web3 = new Web3(provider);
+            var xdc3 = new Web3(provider);
 
             provider.sendAsync = provider.send
             provider.send = () => { throw new Error('send was called instead of sendAsync') }
@@ -313,9 +313,9 @@ describe('lib/web3/batch', function () {
                 assert.deepEqual(second.params, ['0x0000000000000000000000000000000000000005', 'latest']);
             });
 
-            var batch = new web3.BatchRequest();
-            batch.add(web3.eth.getBalance.request('0x0000000000000000000000000000000000000000', 'latest', callback));
-            batch.add(web3.eth.getBalance.request('0x0000000000000000000000000000000000000005', 'latest', callback2));
+            var batch = new xdc3.BatchRequest();
+            batch.add(xdc3.eth.getBalance.request('0x0000000000000000000000000000000000000000', 'latest', callback));
+            batch.add(xdc3.eth.getBalance.request('0x0000000000000000000000000000000000000005', 'latest', callback2));
             batch.execute();
         });
 

@@ -1,10 +1,10 @@
 .. _utils:
 
 ========
-web3.utils
+xdc3.utils
 ========
 
-This package provides utility functions for Ethereum dapps and other web3.js packages.
+This package provides utility functions for Ethereum dapps and other xdc3.js packages.
 
 ------------------------------------------------------------------------------
 
@@ -31,12 +31,12 @@ An ethereum real life example in where this is useful is if you want to update a
 Functions
 ---------
 
-- `web3.utils.isBloom <https://github.com/joshstevens19/ethereum-bloom-filters/blob/master/README.md#isbloom>`_
-- `web3.utils.isUserEthereumAddressInBloom <https://github.com/joshstevens19/ethereum-bloom-filters/blob/master/README.md#isuserethereumaddressinbloom>`_
-- `web3.utils.isContractAddressInBloom <https://github.com/joshstevens19/ethereum-bloom-filters/blob/master/README.md#iscontractaddressinbloom>`_
-- `web3.utils.isTopic <https://github.com/joshstevens19/ethereum-bloom-filters/blob/master/README.md#istopic>`_
-- `web3.utils.isTopicInBloom <https://github.com/joshstevens19/ethereum-bloom-filters/blob/master/README.md#istopicinbloom>`_
-- `web3.utils.isInBloom <https://github.com/joshstevens19/ethereum-bloom-filters/blob/master/README.md#isinbloom>`_
+- `xdc3.utils.isBloom <https://github.com/joshstevens19/ethereum-bloom-filters/blob/master/README.md#isbloom>`_
+- `xdc3.utils.isUserEthereumAddressInBloom <https://github.com/joshstevens19/ethereum-bloom-filters/blob/master/README.md#isuserethereumaddressinbloom>`_
+- `xdc3.utils.isContractAddressInBloom <https://github.com/joshstevens19/ethereum-bloom-filters/blob/master/README.md#iscontractaddressinbloom>`_
+- `xdc3.utils.isTopic <https://github.com/joshstevens19/ethereum-bloom-filters/blob/master/README.md#istopic>`_
+- `xdc3.utils.isTopicInBloom <https://github.com/joshstevens19/ethereum-bloom-filters/blob/master/README.md#istopicinbloom>`_
+- `xdc3.utils.isInBloom <https://github.com/joshstevens19/ethereum-bloom-filters/blob/master/README.md#isinbloom>`_
 
 
 .. note:: Please raise any issues `here <https://github.com/joshstevens19/ethereum-bloom-filters/issues>`_
@@ -49,7 +49,7 @@ randomHex
 
 .. code-block:: javascript
 
-    web3.utils.randomHex(size)
+    xdc3.utils.randomHex(size)
 
 The `randomHex <https://github.com/frozeman/randomHex>`_ library to generate cryptographically strong pseudo-random HEX strings from a given byte size.
 
@@ -71,19 +71,19 @@ Example
 
 .. code-block:: javascript
 
-    web3.utils.randomHex(32)
+    xdc3.utils.randomHex(32)
     > "0xa5b9d60f32436310afebcfda832817a68921beb782fabf7915cc0460b443116a"
 
-    web3.utils.randomHex(4)
+    xdc3.utils.randomHex(4)
     > "0x6892ffc6"
 
-    web3.utils.randomHex(2)
+    xdc3.utils.randomHex(2)
     > "0x99d6"
 
-    web3.utils.randomHex(1)
+    xdc3.utils.randomHex(1)
     > "0x9a"
 
-    web3.utils.randomHex(0)
+    xdc3.utils.randomHex(0)
     > "0x"
 
 
@@ -96,7 +96,7 @@ _
 
 .. code-block:: javascript
 
-    web3.utils._()
+    xdc3.utils._()
 
 The `underscore <http://underscorejs.org>`_ library for many convenience JavaScript functions.
 
@@ -108,7 +108,7 @@ Example
 
 .. code-block:: javascript
 
-    var _ = web3.utils._;
+    var _ = xdc3.utils._;
 
     _.union([1,2],[3]);
     > [1,2,3]
@@ -128,7 +128,7 @@ BN
 
 .. code-block:: javascript
 
-    web3.utils.BN(mixed)
+    xdc3.utils.BN(mixed)
 
 The `BN.js <https://github.com/indutny/bn.js/>`_ library for calculating with big numbers in JavaScript.
 See the `BN.js documentation <https://github.com/indutny/bn.js/>`_ for details.
@@ -153,7 +153,7 @@ Example
 
 .. code-block:: javascript
 
-    var BN = web3.utils.BN;
+    var BN = xdc3.utils.BN;
 
     new BN(1234).toString();
     > "1234"
@@ -172,7 +172,7 @@ isBN
 
 .. code-block:: javascript
 
-    web3.utils.isBN(bn)
+    xdc3.utils.isBN(bn)
 
 
 Checks if a given value is a `BN.js <https://github.com/indutny/bn.js/>`_ instance.
@@ -198,7 +198,7 @@ Example
 
     var number = new BN(10);
 
-    web3.utils.isBN(number);
+    xdc3.utils.isBN(number);
     > true
 
 
@@ -209,7 +209,7 @@ isBigNumber
 
 .. code-block:: javascript
 
-    web3.utils.isBigNumber(bignumber)
+    xdc3.utils.isBigNumber(bignumber)
 
 
 Checks if a given value is a `BigNumber.js <http://mikemcl.github.io/bignumber.js/>`_ instance.
@@ -235,7 +235,7 @@ Example
 
     var number = new BigNumber(10);
 
-    web3.utils.isBigNumber(number);
+    xdc3.utils.isBigNumber(number);
     > true
 
 
@@ -248,8 +248,8 @@ sha3
 
 .. code-block:: javascript
 
-    web3.utils.sha3(string)
-    web3.utils.keccak256(string) // ALIAS
+    xdc3.utils.sha3(string)
+    xdc3.utils.keccak256(string) // ALIAS
 
 Will calculate the sha3 of the input.
 
@@ -273,19 +273,19 @@ Example
 
 .. code-block:: javascript
 
-    web3.utils.sha3('234'); // taken as string
+    xdc3.utils.sha3('234'); // taken as string
     > "0xc1912fee45d61c87cc5ea59dae311904cd86b84fee17cc96966216f811ce6a79"
 
-    web3.utils.sha3(new BN('234'));
+    xdc3.utils.sha3(new BN('234'));
     > "0xbc36789e7a1e281436464229828f817d6612f7b477d66591ff96a9e064bcc98a"
 
-    web3.utils.sha3(234);
+    xdc3.utils.sha3(234);
     > null // can't calculate the hash of a number
 
-    web3.utils.sha3(0xea); // same as above, just the HEX representation of the number
+    xdc3.utils.sha3(0xea); // same as above, just the HEX representation of the number
     > null
 
-    web3.utils.sha3('0xea'); // will be converted to a byte array first, and then hashed
+    xdc3.utils.sha3('0xea'); // will be converted to a byte array first, and then hashed
     > "0x2f20677459120677484f7104c76deb6846a2c071f9b3152c103bb12cd54d1a4a"
 
 
@@ -297,7 +297,7 @@ sha3Raw
 
 .. code-block:: javascript
 
-    web3.utils.sha3Raw(string)
+    xdc3.utils.sha3Raw(string)
 
 Will calculate the sha3 of the input but does return the hash value instead of ``null`` if for example a empty string is passed.
 
@@ -314,7 +314,7 @@ soliditySha3
 
 .. code-block:: javascript
 
-    web3.utils.soliditySha3(param1 [, param2, ...])
+    xdc3.utils.soliditySha3(param1 [, param2, ...])
 
 Will calculate the sha3 of given input parameters in the same way solidity would.
 This means arguments will be ABI converted and tightly packed before being hashed.
@@ -351,56 +351,56 @@ Example
     // for many things from a security point of view), consider
     // the following examples are all equal, despite representing
     // very different values and layouts.
-    web3.utils.soliditySha3('hello','world01')
+    xdc3.utils.soliditySha3('hello','world01')
     // "0xfb0a9d38c4dc568cbd105866540986fabf3c08c1bfb78299ce21aa0e5c0c586b"
-    web3.utils.soliditySha3({type: 'string', value: 'helloworld'},{type: 'string', value: '01'})
+    xdc3.utils.soliditySha3({type: 'string', value: 'helloworld'},{type: 'string', value: '01'})
     // "0xfb0a9d38c4dc568cbd105866540986fabf3c08c1bfb78299ce21aa0e5c0c586b"
-    web3.utils.soliditySha3({type: 'string', value: 'hell'},{type: 'string', value: 'oworld'},{type: 'uint16', value: 0x3031})
+    xdc3.utils.soliditySha3({type: 'string', value: 'hell'},{type: 'string', value: 'oworld'},{type: 'uint16', value: 0x3031})
     // "0xfb0a9d38c4dc568cbd105866540986fabf3c08c1bfb78299ce21aa0e5c0c586b"
-    web3.utils.soliditySha3({type: 'uint96', value: '32309054545061485574011236401'})
+    xdc3.utils.soliditySha3({type: 'uint96', value: '32309054545061485574011236401'})
     // "0xfb0a9d38c4dc568cbd105866540986fabf3c08c1bfb78299ce21aa0e5c0c586b"
 
-    web3.utils.soliditySha3('234564535', '0xfff23243', true, -10);
+    xdc3.utils.soliditySha3('234564535', '0xfff23243', true, -10);
     // auto detects:        uint256,      bytes,     bool,   int256
     > "0x3e27a893dc40ef8a7f0841d96639de2f58a132be5ae466d40087a2cfa83b7179"
 
 
-    web3.utils.soliditySha3('Hello!%'); // auto detects: string
+    xdc3.utils.soliditySha3('Hello!%'); // auto detects: string
     > "0x661136a4267dba9ccdf6bfddb7c00e714de936674c4bdb065a531cf1cb15c7fc"
 
 
-    web3.utils.soliditySha3('234'); // auto detects: uint256
+    xdc3.utils.soliditySha3('234'); // auto detects: uint256
     > "0x61c831beab28d67d1bb40b5ae1a11e2757fa842f031a2d0bc94a7867bc5d26c2"
 
-    web3.utils.soliditySha3(0xea); // same as above
+    xdc3.utils.soliditySha3(0xea); // same as above
     > "0x61c831beab28d67d1bb40b5ae1a11e2757fa842f031a2d0bc94a7867bc5d26c2"
 
-    web3.utils.soliditySha3(new BN('234')); // same as above
+    xdc3.utils.soliditySha3(new BN('234')); // same as above
     > "0x61c831beab28d67d1bb40b5ae1a11e2757fa842f031a2d0bc94a7867bc5d26c2"
 
-    web3.utils.soliditySha3({type: 'uint256', value: '234'})); // same as above
+    xdc3.utils.soliditySha3({type: 'uint256', value: '234'})); // same as above
     > "0x61c831beab28d67d1bb40b5ae1a11e2757fa842f031a2d0bc94a7867bc5d26c2"
 
-    web3.utils.soliditySha3({t: 'uint', v: new BN('234')})); // same as above
+    xdc3.utils.soliditySha3({t: 'uint', v: new BN('234')})); // same as above
     > "0x61c831beab28d67d1bb40b5ae1a11e2757fa842f031a2d0bc94a7867bc5d26c2"
 
 
-    web3.utils.soliditySha3('0x407D73d8a49eeb85D32Cf465507dd71d507100c1');
+    xdc3.utils.soliditySha3('0x407D73d8a49eeb85D32Cf465507dd71d507100c1');
     > "0x4e8ebbefa452077428f93c9520d3edd60594ff452a29ac7d2ccc11d47f3ab95b"
 
-    web3.utils.soliditySha3({t: 'bytes', v: '0x407D73d8a49eeb85D32Cf465507dd71d507100c1'});
+    xdc3.utils.soliditySha3({t: 'bytes', v: '0x407D73d8a49eeb85D32Cf465507dd71d507100c1'});
     > "0x4e8ebbefa452077428f93c9520d3edd60594ff452a29ac7d2ccc11d47f3ab95b" // same result as above
 
 
-    web3.utils.soliditySha3({t: 'address', v: '0x407D73d8a49eeb85D32Cf465507dd71d507100c1'});
+    xdc3.utils.soliditySha3({t: 'address', v: '0x407D73d8a49eeb85D32Cf465507dd71d507100c1'});
     > "0x4e8ebbefa452077428f93c9520d3edd60594ff452a29ac7d2ccc11d47f3ab95b" // same as above, but will do a checksum check, if its multi case
 
 
-    web3.utils.soliditySha3({t: 'bytes32', v: '0x407D73d8a49eeb85D32Cf465507dd71d507100c1'});
+    xdc3.utils.soliditySha3({t: 'bytes32', v: '0x407D73d8a49eeb85D32Cf465507dd71d507100c1'});
     > "0x3c69a194aaf415ba5d6afca734660d0a3d45acdc05d54cd1ca89a8988e7625b4" // different result as above
 
 
-    web3.utils.soliditySha3({t: 'string', v: 'Hello!%'}, {t: 'int8', v:-23}, {t: 'address', v: '0x85F43D8a49eeB85d32Cf465507DD71d507100C1d'});
+    xdc3.utils.soliditySha3({t: 'string', v: 'Hello!%'}, {t: 'int8', v:-23}, {t: 'address', v: '0x85F43D8a49eeB85d32Cf465507DD71d507100C1d'});
     > "0xa13b31627c1ed7aaded5aecec71baf02fe123797fffd45e662eac8e06fbe4955"
 
 
@@ -415,7 +415,7 @@ soliditySha3Raw
 
 .. code-block:: javascript
 
-    web3.utils.soliditySha3Raw(param1 [, param2, ...])
+    xdc3.utils.soliditySha3Raw(param1 [, param2, ...])
 
 Will calculate the sha3 of given input parameters in the same way solidity would.
 This means arguments will be ABI converted and tightly packed before being hashed.
@@ -432,7 +432,7 @@ isHex
 
 .. code-block:: javascript
 
-    web3.utils.isHex(hex)
+    xdc3.utils.isHex(hex)
 
 Checks if a given string is a HEX string.
 
@@ -454,22 +454,22 @@ Example
 
 .. code-block:: javascript
 
-    web3.utils.isHex('0xc1912');
+    xdc3.utils.isHex('0xc1912');
     > true
 
-    web3.utils.isHex(0xc1912);
+    xdc3.utils.isHex(0xc1912);
     > true
 
-    web3.utils.isHex('c1912');
+    xdc3.utils.isHex('c1912');
     > true
 
-    web3.utils.isHex(345);
+    xdc3.utils.isHex(345);
     > true // this is tricky, as 345 can be a a HEX representation or a number, be careful when not having a 0x in front!
 
-    web3.utils.isHex('0xZ1912');
+    xdc3.utils.isHex('0xZ1912');
     > false
 
-    web3.utils.isHex('Hello');
+    xdc3.utils.isHex('Hello');
     > false
 
 ------------------------------------------------------------------------------
@@ -479,9 +479,9 @@ isHexStrict
 
 .. code-block:: javascript
 
-    web3.utils.isHexStrict(hex)
+    xdc3.utils.isHexStrict(hex)
 
-Checks if a given string is a HEX string. Difference to ``web3.utils.isHex()`` is that it expects HEX to be prefixed with ``0x``.
+Checks if a given string is a HEX string. Difference to ``xdc3.utils.isHex()`` is that it expects HEX to be prefixed with ``0x``.
 
 ----------
 Parameters
@@ -501,22 +501,22 @@ Example
 
 .. code-block:: javascript
 
-    web3.utils.isHexStrict('0xc1912');
+    xdc3.utils.isHexStrict('0xc1912');
     > true
 
-    web3.utils.isHexStrict(0xc1912);
+    xdc3.utils.isHexStrict(0xc1912);
     > false
 
-    web3.utils.isHexStrict('c1912');
+    xdc3.utils.isHexStrict('c1912');
     > false
 
-    web3.utils.isHexStrict(345);
+    xdc3.utils.isHexStrict(345);
     > false // this is tricky, as 345 can be a a HEX representation or a number, be careful when not having a 0x in front!
 
-    web3.utils.isHexStrict('0xZ1912');
+    xdc3.utils.isHexStrict('0xZ1912');
     > false
 
-    web3.utils.isHex('Hello');
+    xdc3.utils.isHex('Hello');
     > false
 
 ------------------------------------------------------------------------------
@@ -526,7 +526,7 @@ isAddress
 
 .. code-block:: javascript
 
-    web3.utils.isAddress(address)
+    xdc3.utils.isAddress(address)
 
 Checks if a given string is a valid Ethereum address.
 It will also check the checksum, if the address has upper and lowercase letters.
@@ -549,19 +549,19 @@ Example
 
 .. code-block:: javascript
 
-    web3.utils.isAddress('0xc1912fee45d61c87cc5ea59dae31190fffff232d');
+    xdc3.utils.isAddress('0xc1912fee45d61c87cc5ea59dae31190fffff232d');
     > true
 
-    web3.utils.isAddress('c1912fee45d61c87cc5ea59dae31190fffff232d');
+    xdc3.utils.isAddress('c1912fee45d61c87cc5ea59dae31190fffff232d');
     > true
 
-    web3.utils.isAddress('0XC1912FEE45D61C87CC5EA59DAE31190FFFFF232D');
+    xdc3.utils.isAddress('0XC1912FEE45D61C87CC5EA59DAE31190FFFFF232D');
     > true // as all is uppercase, no checksum will be checked
 
-    web3.utils.isAddress('0xc1912fEE45d61C87Cc5EA59DaE31190FFFFf232d');
+    xdc3.utils.isAddress('0xc1912fEE45d61C87Cc5EA59DaE31190FFFFf232d');
     > true
 
-    web3.utils.isAddress('0xC1912fEE45d61C87Cc5EA59DaE31190FFFFf232d');
+    xdc3.utils.isAddress('0xC1912fEE45d61C87Cc5EA59DaE31190FFFFf232d');
     > false // wrong checksum
 
 ------------------------------------------------------------------------------
@@ -572,7 +572,7 @@ toChecksumAddress
 
 .. code-block:: javascript
 
-    web3.utils.toChecksumAddress(address)
+    xdc3.utils.toChecksumAddress(address)
 
 Will convert an upper or lowercase Ethereum address to a checksum address.
 
@@ -594,10 +594,10 @@ Example
 
 .. code-block:: javascript
 
-    web3.utils.toChecksumAddress('0xc1912fee45d61c87cc5ea59dae31190fffff232d');
+    xdc3.utils.toChecksumAddress('0xc1912fee45d61c87cc5ea59dae31190fffff232d');
     > "0xc1912fEE45d61C87Cc5EA59DaE31190FFFFf232d"
 
-    web3.utils.toChecksumAddress('0XC1912FEE45D61C87CC5EA59DAE31190FFFFF232D');
+    xdc3.utils.toChecksumAddress('0XC1912FEE45D61C87CC5EA59DAE31190FFFFF232D');
     > "0xc1912fEE45d61C87Cc5EA59DaE31190FFFFf232d" // same as above
 
 
@@ -609,7 +609,7 @@ checkAddressChecksum
 
 .. code-block:: javascript
 
-    web3.utils.checkAddressChecksum(address)
+    xdc3.utils.checkAddressChecksum(address)
 
 Checks the checksum of a given address. Will also return false on non-checksum addresses.
 
@@ -631,7 +631,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.utils.checkAddressChecksum('0xc1912fEE45d61C87Cc5EA59DaE31190FFFFf232d');
+    xdc3.utils.checkAddressChecksum('0xc1912fEE45d61C87Cc5EA59DaE31190FFFFf232d');
     > true
 
 
@@ -643,7 +643,7 @@ toHex
 
 .. code-block:: javascript
 
-    web3.utils.toHex(mixed)
+    xdc3.utils.toHex(mixed)
 
 Will auto convert any given value to HEX.
 Number strings will interpreted as numbers.
@@ -667,19 +667,19 @@ Example
 
 .. code-block:: javascript
 
-    web3.utils.toHex('234');
+    xdc3.utils.toHex('234');
     > "0xea"
 
-    web3.utils.toHex(234);
+    xdc3.utils.toHex(234);
     > "0xea"
 
-    web3.utils.toHex(new BN('234'));
+    xdc3.utils.toHex(new BN('234'));
     > "0xea"
 
-    web3.utils.toHex(new BigNumber('234'));
+    xdc3.utils.toHex(new BigNumber('234'));
     > "0xea"
 
-    web3.utils.toHex('I have 100€');
+    xdc3.utils.toHex('I have 100€');
     > "0x49206861766520313030e282ac"
 
 ------------------------------------------------------------------------------
@@ -688,7 +688,7 @@ stripHexPrefix
 =====================
 
 .. code-block:: javascript
-    web3.utils.stripHexPrefix(str)
+    xdc3.utils.stripHexPrefix(str)
 Returns provided string without 0x prefix.
 
 ----------
@@ -709,13 +709,13 @@ Example
 
 .. code-block:: javascript
 
-    web3.utils.stripHexPrefix('234');
+    xdc3.utils.stripHexPrefix('234');
     > "234"
 
-    web3.utils.stripHexPrefix('0x234');
+    xdc3.utils.stripHexPrefix('0x234');
     > "234"
 
-    web3.utils.stripHexPrefix(42);
+    xdc3.utils.stripHexPrefix(42);
     > 42
 
 ------------------------------------------------------------------------------
@@ -727,7 +727,7 @@ toBN
 
 .. code-block:: javascript
 
-    web3.utils.toBN(number)
+    xdc3.utils.toBN(number)
 
 Will safely convert any given value (including `BigNumber.js <http://mikemcl.github.io/bignumber.js/>`_ instances) into a `BN.js <https://github.com/indutny/bn.js/>`_ instance, for handling big numbers in JavaScript.
 
@@ -751,13 +751,13 @@ Example
 
 .. code-block:: javascript
 
-    web3.utils.toBN(1234).toString();
+    xdc3.utils.toBN(1234).toString();
     > "1234"
 
-    web3.utils.toBN('1234').add(web3.utils.toBN('1')).toString();
+    xdc3.utils.toBN('1234').add(xdc3.utils.toBN('1')).toString();
     > "1235"
 
-    web3.utils.toBN('0xea').toString();
+    xdc3.utils.toBN('0xea').toString();
     > "234"
 
 
@@ -769,7 +769,7 @@ hexToNumberString
 
 .. code-block:: javascript
 
-    web3.utils.hexToNumberString(hex)
+    xdc3.utils.hexToNumberString(hex)
 
 Returns the number representation of a given HEX value as a string.
 
@@ -791,7 +791,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.utils.hexToNumberString('0xea');
+    xdc3.utils.hexToNumberString('0xea');
     > "234"
 
 
@@ -802,8 +802,8 @@ hexToNumber
 
 .. code-block:: javascript
 
-    web3.utils.hexToNumber(hex)
-    web3.utils.toDecimal(hex) // ALIAS, deprecated
+    xdc3.utils.hexToNumber(hex)
+    xdc3.utils.toDecimal(hex) // ALIAS, deprecated
 
 Returns the number representation of a given HEX value.
 
@@ -827,7 +827,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.utils.hexToNumber('0xea');
+    xdc3.utils.hexToNumber('0xea');
     > 234
 
 
@@ -838,8 +838,8 @@ numberToHex
 
 .. code-block:: javascript
 
-    web3.utils.numberToHex(number)
-    web3.utils.fromDecimal(number) // ALIAS, deprecated
+    xdc3.utils.numberToHex(number)
+    xdc3.utils.fromDecimal(number) // ALIAS, deprecated
 
 Returns the HEX representation of a given number value.
 
@@ -861,7 +861,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.utils.numberToHex('234');
+    xdc3.utils.numberToHex('234');
     > '0xea'
 
 
@@ -873,9 +873,9 @@ hexToUtf8
 
 .. code-block:: javascript
 
-    web3.utils.hexToUtf8(hex)
-    web3.utils.hexToString(hex) // ALIAS
-    web3.utils.toUtf8(hex) // ALIAS, deprecated
+    xdc3.utils.hexToUtf8(hex)
+    xdc3.utils.hexToString(hex) // ALIAS
+    xdc3.utils.toUtf8(hex) // ALIAS, deprecated
 
 Returns the UTF-8 string representation of a given HEX value.
 
@@ -898,7 +898,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.utils.hexToUtf8('0x49206861766520313030e282ac');
+    xdc3.utils.hexToUtf8('0x49206861766520313030e282ac');
     > "I have 100€"
 
 
@@ -909,8 +909,8 @@ hexToAscii
 
 .. code-block:: javascript
 
-    web3.utils.hexToAscii(hex)
-    web3.utils.toAscii(hex) // ALIAS, deprecated
+    xdc3.utils.hexToAscii(hex)
+    xdc3.utils.toAscii(hex) // ALIAS, deprecated
 
 Returns the ASCII string representation of a given HEX value.
 
@@ -933,7 +933,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.utils.hexToAscii('0x4920686176652031303021');
+    xdc3.utils.hexToAscii('0x4920686176652031303021');
     > "I have 100!"
 
 
@@ -946,9 +946,9 @@ utf8ToHex
 
 .. code-block:: javascript
 
-    web3.utils.utf8ToHex(string)
-    web3.utils.stringToHex(string) // ALIAS
-    web3.utils.fromUtf8(string) // ALIAS, deprecated
+    xdc3.utils.utf8ToHex(string)
+    xdc3.utils.stringToHex(string) // ALIAS
+    xdc3.utils.fromUtf8(string) // ALIAS, deprecated
 
 Returns the HEX representation of a given UTF-8 string.
 
@@ -971,7 +971,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.utils.utf8ToHex('I have 100€');
+    xdc3.utils.utf8ToHex('I have 100€');
     > "0x49206861766520313030e282ac"
 
 
@@ -982,8 +982,8 @@ asciiToHex
 
 .. code-block:: javascript
 
-    web3.utils.asciiToHex(string)
-    web3.utils.fromAscii(string) // ALIAS, deprecated
+    xdc3.utils.asciiToHex(string)
+    xdc3.utils.fromAscii(string) // ALIAS, deprecated
 
 
 Returns the HEX representation of a given ASCII string.
@@ -1007,7 +1007,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.utils.asciiToHex('I have 100!');
+    xdc3.utils.asciiToHex('I have 100!');
     > "0x4920686176652031303021"
 
 
@@ -1018,7 +1018,7 @@ hexToBytes
 
 .. code-block:: javascript
 
-    web3.utils.hexToBytes(hex)
+    xdc3.utils.hexToBytes(hex)
 
 Returns a byte array from the given HEX string.
 
@@ -1040,10 +1040,10 @@ Example
 
 .. code-block:: javascript
 
-    web3.utils.hexToBytes('0x000000ea');
+    xdc3.utils.hexToBytes('0x000000ea');
     > [ 0, 0, 0, 234 ]
 
-    web3.utils.hexToBytes(0x000000ea);
+    xdc3.utils.hexToBytes(0x000000ea);
     > [ 234 ]
 
 
@@ -1055,7 +1055,7 @@ bytesToHex
 
 .. code-block:: javascript
 
-    web3.utils.bytesToHex(byteArray)
+    xdc3.utils.bytesToHex(byteArray)
 
 Returns a HEX string from a byte array.
 
@@ -1077,7 +1077,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.utils.bytesToHex([ 72, 101, 108, 108, 111, 33, 36 ]);
+    xdc3.utils.bytesToHex([ 72, 101, 108, 108, 111, 33, 36 ]);
     > "0x48656c6c6f2125"
 
 
@@ -1089,7 +1089,7 @@ toWei
 
 .. code-block:: javascript
 
-    web3.utils.toWei(number [, unit])
+    xdc3.utils.toWei(number [, unit])
 
 
 Converts any `ether value <http://ethdocs.org/en/latest/ether.html>`_ value into `wei <http://ethereum.stackexchange.com/questions/253/the-ether-denominations-are-called-finney-szabo-and-wei-what-who-are-these-na>`_.
@@ -1142,16 +1142,16 @@ Example
 
 .. code-block:: javascript
 
-    web3.utils.toWei('1', 'ether');
+    xdc3.utils.toWei('1', 'ether');
     > "1000000000000000000"
 
-    web3.utils.toWei('1', 'finney');
+    xdc3.utils.toWei('1', 'finney');
     > "1000000000000000"
 
-    web3.utils.toWei('1', 'szabo');
+    xdc3.utils.toWei('1', 'szabo');
     > "1000000000000"
 
-    web3.utils.toWei('1', 'shannon');
+    xdc3.utils.toWei('1', 'shannon');
     > "1000000000"
 
 
@@ -1163,7 +1163,7 @@ fromWei
 
 .. code-block:: javascript
 
-    web3.utils.fromWei(number [, unit])
+    xdc3.utils.fromWei(number [, unit])
 
 
 Converts any `wei <http://ethereum.stackexchange.com/questions/253/the-ether-denominations-are-called-finney-szabo-and-wei-what-who-are-these-na>`_ value into a `ether value <http://ethdocs.org/en/latest/ether.html>`_.
@@ -1216,16 +1216,16 @@ Example
 
 .. code-block:: javascript
 
-    web3.utils.fromWei('1', 'ether');
+    xdc3.utils.fromWei('1', 'ether');
     > "0.000000000000000001"
 
-    web3.utils.fromWei('1', 'finney');
+    xdc3.utils.fromWei('1', 'finney');
     > "0.000000000000001"
 
-    web3.utils.fromWei('1', 'szabo');
+    xdc3.utils.fromWei('1', 'szabo');
     > "0.000000000001"
 
-    web3.utils.fromWei('1', 'shannon');
+    xdc3.utils.fromWei('1', 'shannon');
     > "0.000000001"
 
 ------------------------------------------------------------------------------
@@ -1235,7 +1235,7 @@ unitMap
 
 .. code-block:: javascript
 
-    web3.utils.unitMap
+    xdc3.utils.unitMap
 
 
 Shows all possible `ether value <http://ethdocs.org/en/latest/ether.html>`_ and their amount in `wei <http://ethereum.stackexchange.com/questions/253/the-ether-denominations-are-called-finney-szabo-and-wei-what-who-are-these-na>`_.
@@ -1280,7 +1280,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.utils.unitMap
+    xdc3.utils.unitMap
     > {
         noether: '0',
         wei:        '1',
@@ -1318,8 +1318,8 @@ padLeft
 
 .. code-block:: javascript
 
-    web3.utils.padLeft(string, characterAmount [, sign])
-    web3.utils.leftPad(string, characterAmount [, sign]) // ALIAS
+    xdc3.utils.padLeft(string, characterAmount [, sign])
+    xdc3.utils.leftPad(string, characterAmount [, sign]) // ALIAS
 
 
 Adds a padding on the left of a string, Useful for adding paddings to HEX strings.
@@ -1345,13 +1345,13 @@ Example
 
 .. code-block:: javascript
 
-    web3.utils.padLeft('0x3456ff', 20);
+    xdc3.utils.padLeft('0x3456ff', 20);
     > "0x000000000000003456ff"
 
-    web3.utils.padLeft(0x3456ff, 20);
+    xdc3.utils.padLeft(0x3456ff, 20);
     > "0x000000000000003456ff"
 
-    web3.utils.padLeft('Hello', 20, 'x');
+    xdc3.utils.padLeft('Hello', 20, 'x');
     > "xxxxxxxxxxxxxxxHello"
 
 ------------------------------------------------------------------------------
@@ -1361,8 +1361,8 @@ padRight
 
 .. code-block:: javascript
 
-    web3.utils.padRight(string, characterAmount [, sign])
-    web3.utils.rightPad(string, characterAmount [, sign]) // ALIAS
+    xdc3.utils.padRight(string, characterAmount [, sign])
+    xdc3.utils.rightPad(string, characterAmount [, sign]) // ALIAS
 
 
 Adds a padding on the right of a string, Useful for adding paddings to HEX strings.
@@ -1388,13 +1388,13 @@ Example
 
 .. code-block:: javascript
 
-    web3.utils.padRight('0x3456ff', 20);
+    xdc3.utils.padRight('0x3456ff', 20);
     > "0x3456ff00000000000000"
 
-    web3.utils.padRight(0x3456ff, 20);
+    xdc3.utils.padRight(0x3456ff, 20);
     > "0x3456ff00000000000000"
 
-    web3.utils.padRight('Hello', 20, 'x');
+    xdc3.utils.padRight('Hello', 20, 'x');
     > "Helloxxxxxxxxxxxxxxx"
 
 ------------------------------------------------------------------------------
@@ -1404,7 +1404,7 @@ toTwosComplement
 
 .. code-block:: javascript
 
-    web3.utils.toTwosComplement(number)
+    xdc3.utils.toTwosComplement(number)
 
 
 Converts a negative numer into a two's complement.
@@ -1428,17 +1428,17 @@ Example
 
 .. code-block:: javascript
 
-    web3.utils.toTwosComplement('-1');
+    xdc3.utils.toTwosComplement('-1');
     > "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
 
-    web3.utils.toTwosComplement(-1);
+    xdc3.utils.toTwosComplement(-1);
     > "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
 
-    web3.utils.toTwosComplement('0x1');
+    xdc3.utils.toTwosComplement('0x1');
     > "0x0000000000000000000000000000000000000000000000000000000000000001"
 
-    web3.utils.toTwosComplement(-15);
+    xdc3.utils.toTwosComplement(-15);
     > "0xfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1"
 
-    web3.utils.toTwosComplement('-0x1');
+    xdc3.utils.toTwosComplement('-0x1');
     > "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"

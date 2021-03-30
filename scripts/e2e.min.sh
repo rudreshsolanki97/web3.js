@@ -9,7 +9,7 @@ set -o errexit
 
 echo " "
 echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
-echo "E2E: web3/dist/web3.min.js (Chrome).     "
+echo "E2E: xdc3/dist/xdc3.min.js (Chrome).     "
 echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
 echo " "
 
@@ -19,7 +19,7 @@ BROWSER_BUNDLE_TEST="publishedDist" karma start \
 
 echo " "
 echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
-echo "E2E: web3/dist/web3.min.js (Chrome).     "
+echo "E2E: xdc3/dist/xdc3.min.js (Chrome).     "
 echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
 echo " "
 

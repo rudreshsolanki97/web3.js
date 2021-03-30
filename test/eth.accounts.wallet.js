@@ -1,8 +1,8 @@
-var Accounts = require("./../packages/web3-eth-accounts");
+var Accounts = require("./../packages/xdc3-eth-accounts");
 var chai = require('chai');
 var assert = chai.assert;
-var Web3 = require('../packages/web3');
-var web3 = new Web3();
+var Web3 = require('../packages/xdc3');
+var xdc3 = new Web3();
 
 var tests = [
     {
@@ -40,8 +40,8 @@ describe("eth", function () {
                 assert.equal(ethAccounts.wallet.length, 5);
                 assert.equal(wallet.length, 5);
 
-                assert.isTrue(web3.utils.isAddress(wallet[1].address));
-                assert.isTrue(web3.utils.isAddress(ethAccounts.wallet[2].address));
+                assert.isTrue(xdc3.utils.isAddress(wallet[1].address));
+                assert.isTrue(xdc3.utils.isAddress(ethAccounts.wallet[2].address));
             });
 
             it("add wallet using a privatekey", function() {
@@ -206,8 +206,8 @@ describe("eth", function () {
                 assert.equal(ethAccounts.wallet.length, 3);
 
                 ethAccounts.wallet.create(2);
-                assert.isTrue(web3.utils.isAddress(wallet[2].address));
-                assert.isTrue(web3.utils.isAddress(wallet[4].address));
+                assert.isTrue(xdc3.utils.isAddress(wallet[2].address));
+                assert.isTrue(xdc3.utils.isAddress(wallet[4].address));
                 assert.isUndefined(ethAccounts.wallet[5]);
 
                 var afterMoreCreation = remainingAddresses.map(function(n) { return wallet[n].address } );

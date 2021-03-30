@@ -24,4 +24,4 @@ Steps before creating an issue:
 
 #### Environment
 
-<!-- e.g. Versions used of: npm, Node, web3.js, OS, device -->
+<!-- e.g. Versions used of: npm, Node, xdc3.js, OS, device -->

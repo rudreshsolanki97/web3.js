@@ -1,6 +1,6 @@
 var FakeHttpProvider = require('./helpers/FakeIpcProvider');
-var Web3 = require('../packages/web3');
-var Accounts = require("./../packages/web3-eth-accounts");
+var Web3 = require('../packages/xdc3');
+var Accounts = require("./../packages/xdc3-eth-accounts");
 var chai = require('chai');
 var _ = require('underscore');
 var assert = chai.assert;
@@ -146,7 +146,7 @@ var tests = [
             data: "0x0123abcd",
             common: common
         },
-        // web3.eth.signTransaction({from: "0xEB014f8c8B418Db6b45774c326A0E64C78914dC0", gasPrice: "230000000000", gas: "50000", to: '0xFCAd0B19bB29D4674531d6f115237E16AfCE377c', value: "1000000000000000000", data: "0x0123abcd"}).then(console.log);
+        // xdc3.eth.signTransaction({from: "0xEB014f8c8B418Db6b45774c326A0E64C78914dC0", gasPrice: "230000000000", gas: "50000", to: '0xFCAd0B19bB29D4674531d6f115237E16AfCE377c', value: "1000000000000000000", data: "0x0123abcd"}).then(console.log);
         // signature from eth_signTransaction
         rawTransaction: "0xf8708085358d117c0082c35094fcad0b19bb29d4674531d6f115237e16afce377c880de0b6b3a7640000840123abcd26a031bb05bd1535150d312dcaa870a4a69c130a51aa80537659c1f308bf1f180ac6a012c938a8e04ac4e279d0b7c29811609031a96e949ad98f1ca74ca6078910bede",
         oldSignature: "0xf8708085358d117c0082c35094fcad0b19bb29d4674531d6f115237e16afce377c880de0b6b3a7640000840123abcd1ba081bba037015419ab5ce36e930b987da71b0ed5f0efb1849613223bf72399f598a05d2c1f109ad13f98a7693cfc35291e404ea8795755a176eb58a818de44f3756d",
@@ -167,7 +167,7 @@ var tests = [
             data: "0x0123abcd",
             common: common
         },
-        // web3.eth.signTransaction({from: "0xEB014f8c8B418Db6b45774c326A0E64C78914dC0", gasPrice: "230000000000", gas: "50000", to: '0xFCAd0B19bB29D4674531d6f115237E16AfCE377c', value: "1000000000000000000", data: "0x0123abcd"}).then(console.log);
+        // xdc3.eth.signTransaction({from: "0xEB014f8c8B418Db6b45774c326A0E64C78914dC0", gasPrice: "230000000000", gas: "50000", to: '0xFCAd0B19bB29D4674531d6f115237E16AfCE377c', value: "1000000000000000000", data: "0x0123abcd"}).then(console.log);
         // signature from eth_signTransaction
         rawTransaction: "0xf8700a85358d117c0082c35094fcad0b19bb29d4674531d6f115237e16afce377c880de0b6b3a7640000840123abcd25a0496e628e8348a24312ded09ee3d99d85b1b8f947725aa382dcf4003b7389d5aaa00c1b1cfdd66c510fd708d33279a1a61e53dff3c6ced67cf7f7b830862d6e2029",
         oldSignature: "0xf8700a85358d117c0082c35094fcad0b19bb29d4674531d6f115237e16afce377c880de0b6b3a7640000840123abcd25a0496e628e8348a24312ded09ee3d99d85b1b8f947725aa382dcf4003b7389d5aaa00c1b1cfdd66c510fd708d33279a1a61e53dff3c6ced67cf7f7b830862d6e2029",
@@ -188,7 +188,7 @@ var tests = [
             data: "0x0123abcd",
             common: common
         },
-        // web3.eth.signTransaction({from: "0xEB014f8c8B418Db6b45774c326A0E64C78914dC0", gasPrice: "230000000000", gas: "50000", to: '0xFCAd0B19bB29D4674531d6f115237E16AfCE377c', value: "1000000000000000000", data: "0x0123abcd"}).then(console.log);
+        // xdc3.eth.signTransaction({from: "0xEB014f8c8B418Db6b45774c326A0E64C78914dC0", gasPrice: "230000000000", gas: "50000", to: '0xFCAd0B19bB29D4674531d6f115237E16AfCE377c', value: "1000000000000000000", data: "0x0123abcd"}).then(console.log);
         // signature from eth_signTransaction
         rawTransaction: "0xf8700a85358d117c0082c35094fcad0b19bb29d4674531d6f115237e16afce377c880de0b6b3a7640000840123abcd25a0496e628e8348a24312ded09ee3d99d85b1b8f947725aa382dcf4003b7389d5aaa00c1b1cfdd66c510fd708d33279a1a61e53dff3c6ced67cf7f7b830862d6e2029",
         oldSignature: "0xf8700a85358d117c0082c35094fcad0b19bb29d4674531d6f115237e16afce377c880de0b6b3a7640000840123abcd25a0496e628e8348a24312ded09ee3d99d85b1b8f947725aa382dcf4003b7389d5aaa00c1b1cfdd66c510fd708d33279a1a61e53dff3c6ced67cf7f7b830862d6e2029",
@@ -209,7 +209,7 @@ var tests = [
             data: "0x0123abcd",
             common: common
         },
-        // web3.eth.signTransaction({from: "0xEB014f8c8B418Db6b45774c326A0E64C78914dC0", gasPrice: "230000000000", gas: "50000", to: '0xFCAd0B19bB29D4674531d6f115237E16AfCE377c', value: "1000000000000000000", data: "0x0123abcd"}).then(console.log);
+        // xdc3.eth.signTransaction({from: "0xEB014f8c8B418Db6b45774c326A0E64C78914dC0", gasPrice: "230000000000", gas: "50000", to: '0xFCAd0B19bB29D4674531d6f115237E16AfCE377c', value: "1000000000000000000", data: "0x0123abcd"}).then(console.log);
         // signature from eth_signTransaction
         rawTransaction: "0xf8701085358d117c0082c35094fcad0b19bb29d4674531d6f115237e16afce377c880de0b6b3a7640000840123abcd25a04ba217e16f62ac277698e8853bcc010db07285b457606e9f3487c70ccc5e6508a05c6cfaa17fc1a52bede0cf25c8bd2e024b4fb89ed205f62cb3e177a83654f29d",
         oldSignature: "0xf8701085358d117c0082c35094fcad0b19bb29d4674531d6f115237e16afce377c880de0b6b3a7640000840123abcd25a04ba217e16f62ac277698e8853bcc010db07285b457606e9f3487c70ccc5e6508a05c6cfaa17fc1a52bede0cf25c8bd2e024b4fb89ed205f62cb3e177a83654f29d",
@@ -230,7 +230,7 @@ var tests = [
             data: "0x0123abcd",
             common: common
         },
-        // web3.eth.signTransaction({from: "0xEB014f8c8B418Db6b45774c326A0E64C78914dC0", gasPrice: "230000000000", gas: "50000", to: '0xFCAd0B19bB29D4674531d6f115237E16AfCE377c', value: "1000000000000000000", data: "0x0123abcd"}).then(console.log);
+        // xdc3.eth.signTransaction({from: "0xEB014f8c8B418Db6b45774c326A0E64C78914dC0", gasPrice: "230000000000", gas: "50000", to: '0xFCAd0B19bB29D4674531d6f115237E16AfCE377c', value: "1000000000000000000", data: "0x0123abcd"}).then(console.log);
         // signature from eth_signTransaction
         rawTransaction: "0xf8701085358d117c0082c35094fcad0b19bb29d4674531d6f115237e16afce377c880de0b6b3a7640000840123abcd25a04ba217e16f62ac277698e8853bcc010db07285b457606e9f3487c70ccc5e6508a05c6cfaa17fc1a52bede0cf25c8bd2e024b4fb89ed205f62cb3e177a83654f29d",
         oldSignature: "0xf8701085358d117c0082c35094fcad0b19bb29d4674531d6f115237e16afce377c880de0b6b3a7640000840123abcd25a04ba217e16f62ac277698e8853bcc010db07285b457606e9f3487c70ccc5e6508a05c6cfaa17fc1a52bede0cf25c8bd2e024b4fb89ed205f62cb3e177a83654f29d",
@@ -251,7 +251,7 @@ var tests = [
             data: "0x0123abcd",
             common: common
         },
-        // web3.eth.signTransaction({from: "0xEB014f8c8B418Db6b45774c326A0E64C78914dC0", gasPrice: "230000000000", gas: "50000", to: '0xFCAd0B19bB29D4674531d6f115237E16AfCE377c', value: "1000000000000000000", data: "0x0123abcd"}).then(console.log);
+        // xdc3.eth.signTransaction({from: "0xEB014f8c8B418Db6b45774c326A0E64C78914dC0", gasPrice: "230000000000", gas: "50000", to: '0xFCAd0B19bB29D4674531d6f115237E16AfCE377c', value: "1000000000000000000", data: "0x0123abcd"}).then(console.log);
         // signature from eth_signTransaction
         rawTransaction: "0xf8701685358d117c0082c35094fcad0b19bb29d4674531d6f115237e16afce377c880de0b6b3a7640000840123abcd26a0e027ec9e9921975678b73de44f7d2cd6b987a6655b9d0291b2cdff15836c6efba051b4e20835793bf0cdf268339111a24d80a4a7bb141e975a66d0edbcc20542d0",
         oldSignature: "0xf8701685358d117c0082c35094fcad0b19bb29d4674531d6f115237e16afce377c880de0b6b3a7640000840123abcd26a0e027ec9e9921975678b73de44f7d2cd6b987a6655b9d0291b2cdff15836c6efba051b4e20835793bf0cdf268339111a24d80a4a7bb141e975a66d0edbcc20542d0",
@@ -272,7 +272,7 @@ var tests = [
             input: "0x0123abcd",
             common: common
         },
-        // web3.eth.signTransaction({from: "0xEB014f8c8B418Db6b45774c326A0E64C78914dC0", gasPrice: "230000000000", gas: "50000", to: '0xFCAd0B19bB29D4674531d6f115237E16AfCE377c', value: "1000000000000000000", data: "0x0123abcd"}).then(console.log);
+        // xdc3.eth.signTransaction({from: "0xEB014f8c8B418Db6b45774c326A0E64C78914dC0", gasPrice: "230000000000", gas: "50000", to: '0xFCAd0B19bB29D4674531d6f115237E16AfCE377c', value: "1000000000000000000", data: "0x0123abcd"}).then(console.log);
         // signature from eth_signTransaction
         rawTransaction: "0xf8701685358d117c0082c35094fcad0b19bb29d4674531d6f115237e16afce377c880de0b6b3a7640000840123abcd26a0e027ec9e9921975678b73de44f7d2cd6b987a6655b9d0291b2cdff15836c6efba051b4e20835793bf0cdf268339111a24d80a4a7bb141e975a66d0edbcc20542d0",
         oldSignature: "0xf8701685358d117c0082c35094fcad0b19bb29d4674531d6f115237e16afce377c880de0b6b3a7640000840123abcd26a0e027ec9e9921975678b73de44f7d2cd6b987a6655b9d0291b2cdff15836c6efba051b4e20835793bf0cdf268339111a24d80a4a7bb141e975a66d0edbcc20542d0",
@@ -511,7 +511,7 @@ describe("eth", function () {
 
                 it("signTransaction will call for nonce", function(done) {
                     var provider = new FakeHttpProvider();
-                    var web3 = new Web3(provider);
+                    var xdc3 = new Web3(provider);
 
                     provider.injectResult('0xa');
                     provider.injectValidation(function (payload) {
@@ -520,7 +520,7 @@ describe("eth", function () {
                         assert.deepEqual(payload.params, [test.address, "latest"]);
                     });
 
-                    var ethAccounts = new Accounts(web3);
+                    var ethAccounts = new Accounts(xdc3);
 
                     var testAccount = ethAccounts.privateKeyToAccount(test.privateKey);
                     assert.equal(testAccount.address, test.address);
@@ -538,7 +538,7 @@ describe("eth", function () {
 
                 it("signTransaction will call for gasPrice", function(done) {
                     var provider = new FakeHttpProvider();
-                    var web3 = new Web3(provider);
+                    var xdc3 = new Web3(provider);
 
                     provider.injectResult('0x5022');
                     provider.injectValidation(function (payload) {
@@ -547,7 +547,7 @@ describe("eth", function () {
                         assert.deepEqual(payload.params, []);
                     });
 
-                    var ethAccounts = new Accounts(web3);
+                    var ethAccounts = new Accounts(xdc3);
 
                     var testAccount = ethAccounts.privateKeyToAccount(test.privateKey);
                     assert.equal(testAccount.address, test.address);
@@ -565,7 +565,7 @@ describe("eth", function () {
 
                 it("signTransaction will call for chainId", function(done) {
                     var provider = new FakeHttpProvider();
-                    var web3 = new Web3(provider);
+                    var xdc3 = new Web3(provider);
 
                     provider.injectResult(1);
                     provider.injectValidation(function (payload) {
@@ -574,7 +574,7 @@ describe("eth", function () {
                         assert.deepEqual(payload.params, []);
                     });
 
-                    var ethAccounts = new Accounts(web3);
+                    var ethAccounts = new Accounts(xdc3);
 
                     var testAccount = ethAccounts.privateKeyToAccount(test.privateKey);
                     assert.equal(testAccount.address, test.address);
@@ -592,7 +592,7 @@ describe("eth", function () {
 
                 it("signTransaction will call for networkId", function(done) {
                     var provider = new FakeHttpProvider();
-                    var web3 = new Web3(provider);
+                    var xdc3 = new Web3(provider);
 
                     provider.injectResult(1);
                     provider.injectValidation(function (payload) {
@@ -601,7 +601,7 @@ describe("eth", function () {
                         assert.deepEqual(payload.params, []);
                     });
 
-                    var ethAccounts = new Accounts(web3);
+                    var ethAccounts = new Accounts(xdc3);
 
                     var testAccount = ethAccounts.privateKeyToAccount(test.privateKey);
                     assert.equal(testAccount.address, test.address);
@@ -619,7 +619,7 @@ describe("eth", function () {
 
                 it("signTransaction will call for nonce, gasPrice, chainId and networkId", function(done) {
                     var provider = new FakeHttpProvider();
-                    var web3 = new Web3(provider);
+                    var xdc3 = new Web3(provider);
 
                     provider.injectResult(1);
                     provider.injectValidation(function (payload) {
@@ -646,7 +646,7 @@ describe("eth", function () {
                         assert.deepEqual(payload.params, []);
                     });
 
-                    var ethAccounts = new Accounts(web3);
+                    var ethAccounts = new Accounts(xdc3);
 
                     var testAccount = ethAccounts.privateKeyToAccount(test.privateKey);
                     assert.equal(testAccount.address, test.address);

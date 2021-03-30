@@ -1,8 +1,8 @@
-var Accounts = require("./../packages/web3-eth-accounts");
+var Accounts = require("./../packages/xdc3-eth-accounts");
 var chai = require('chai');
 var assert = chai.assert;
-var Web3 = require('../packages/web3');
-var web3 = new Web3();
+var Web3 = require('../packages/xdc3');
+var xdc3 = new Web3();
 
 var tests = [
     {
@@ -42,7 +42,7 @@ describe("eth", function () {
             it("sign data using a utf8 encoded hex string", function() {
                 var ethAccounts = new Accounts();
 
-                var data = web3.utils.isHexStrict(test.data) ? test.data : web3.utils.utf8ToHex(test.data);
+                var data = xdc3.utils.isHexStrict(test.data) ? test.data : xdc3.utils.utf8ToHex(test.data);
                 var data = ethAccounts.sign(data, test.privateKey);
 
                 assert.equal(data.signature, test.signature);
@@ -77,7 +77,7 @@ describe("eth", function () {
             it("recover signature (pre encoded) using a signature object", function() {
                 var ethAccounts = new Accounts();
 
-                var data = web3.utils.isHexStrict(test.data) ? test.data : web3.utils.utf8ToHex(test.data);
+                var data = xdc3.utils.isHexStrict(test.data) ? test.data : xdc3.utils.utf8ToHex(test.data);
                 var sig = ethAccounts.sign(data, test.privateKey);
                 var address = ethAccounts.recover(sig);
 
@@ -96,7 +96,7 @@ describe("eth", function () {
             it("recover signature (pre encoded) using a hash and r s v values", function() {
                 var ethAccounts = new Accounts();
 
-                var data = web3.utils.isHexStrict(test.data) ? test.data : web3.utils.utf8ToHex(test.data);
+                var data = xdc3.utils.isHexStrict(test.data) ? test.data : xdc3.utils.utf8ToHex(test.data);
                 var sig = ethAccounts.sign(data, test.privateKey);
                 var address = ethAccounts.recover(test.data, sig.v, sig.r, sig.s);
 
@@ -153,7 +153,7 @@ describe("eth", function () {
         const hashMessage = ethAccounts.hashMessage(message)
         assert.equal(hashMessage, '0x716ce69c5d2d629c168bc02e24a961456bdc5a362d366119305aea73978a0332')
 
-        const hashMessageHex = ethAccounts.hashMessage(web3.utils.utf8ToHex(message))
+        const hashMessageHex = ethAccounts.hashMessage(xdc3.utils.utf8ToHex(message))
         assert.equal(hashMessageHex, '0x716ce69c5d2d629c168bc02e24a961456bdc5a362d366119305aea73978a0332')
     });
 });

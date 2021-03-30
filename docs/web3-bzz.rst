@@ -1,34 +1,34 @@
 .. _bzz:
 
 ========
-web3.bzz
+xdc3.bzz
 ========
 
 .. note:: This API might change over time.
 
 
-The ``web3-bzz`` package allows you to interact with swarm, the decentralized file store.
+The ``xdc3-bzz`` package allows you to interact with swarm, the decentralized file store.
 For more see the `Swarm Docs <http://swarm-guide.readthedocs.io/en/latest/>`_.
 
 
 .. code-block:: javascript
 
-    var Bzz = require('web3-bzz');
+    var Bzz = require('xdc3-bzz');
 
     // will autodetect if the "ethereum" object is present and will either connect to the local swarm node, or the swarm-gateways.net.
     // Optional you can give your own provider URL; If no provider URL is given it will use "http://swarm-gateways.net"
     var bzz = new Bzz(Bzz.givenProvider || 'http://swarm-gateways.net');
 
 
-    // or using the web3 umbrella package
+    // or using the xdc3 umbrella package
 
-    var Web3 = require('web3');
-    var web3 = new Web3(Web3.givenProvider || 'ws://some.local-or-remote.node:8546');
+    var Web3 = require('xdc3');
+    var xdc3 = new Web3(Web3.givenProvider || 'ws://some.local-or-remote.node:8546');
 
-    // -> web3.bzz.currentProvider // if Web3.givenProvider was an ethereum provider it will set: "http://localhost:8500" otherwise it will set: "http://swarm-gateways.net"
+    // -> xdc3.bzz.currentProvider // if Web3.givenProvider was an ethereum provider it will set: "http://localhost:8500" otherwise it will set: "http://swarm-gateways.net"
 
     // set the provider manually if necessary
-    web3.bzz.setProvider("http://localhost:8500");
+    xdc3.bzz.setProvider("http://localhost:8500");
 
 
 ------------------------------------------------------------------------------
@@ -39,17 +39,17 @@ setProvider
 
 .. code-block:: javascript
 
-    web3.bzz.setProvider(myProvider)
+    xdc3.bzz.setProvider(myProvider)
 
 Will change the provider for its module.
 
-.. note:: When called on the umbrella package ``web3`` it will also set the provider for all sub modules ``web3.eth``, ``web3.shh``, etc. EXCEPT ``web3.bzz`` which needs a separate provider at all times.
+.. note:: When called on the umbrella package ``xdc3`` it will also set the provider for all sub modules ``xdc3.eth``, ``xdc3.shh``, etc. EXCEPT ``xdc3.bzz`` which needs a separate provider at all times.
 
 ----------
 Parameters
 ----------
 
-1. ``Object`` - ``myProvider``: :ref:`a valid provider <web3-providers>`.
+1. ``Object`` - ``myProvider``: :ref:`a valid provider <xdc3-providers>`.
 
 -------
 Returns
@@ -63,7 +63,7 @@ Example
 
 .. code-block:: javascript
 
-    var Bzz = require('web3-bzz');
+    var Bzz = require('xdc3-bzz');
     var bzz = new Bzz('http://localhost:8500');
 
     // change provider
@@ -77,9 +77,9 @@ givenProvider
 
 .. code-block:: javascript
 
-    web3.bzz.givenProvider
+    xdc3.bzz.givenProvider
 
-When using web3.js in an Ethereum compatible browser, it will set with the current native provider by that browser.
+When using xdc3.js in an Ethereum compatible browser, it will set with the current native provider by that browser.
 Returns the given provider by the (browser) environment, otherwise ``null``.
 
 
@@ -149,7 +149,7 @@ upload
 
 .. code-block:: javascript
 
-   web3.bzz.upload(mixed)
+   xdc3.bzz.upload(mixed)
 
 Uploads files, folders or raw data to swarm.
 
@@ -185,7 +185,7 @@ Example
 
 .. code-block:: javascript
 
-    var bzz = web3.bzz;
+    var bzz = xdc3.bzz;
 
     // raw data
     bzz.upload("test file").then(function(hash) {
@@ -221,7 +221,7 @@ download
 
 .. code-block:: javascript
 
-   web3.bzz.download(bzzHash [, localpath])
+   xdc3.bzz.download(bzzHash [, localpath])
 
 Downloads files and folders from swarm as buffer or to disk (only node.js).
 
@@ -245,7 +245,7 @@ Example
 
 .. code-block:: javascript
 
-    var bzz = web3.bzz;
+    var bzz = xdc3.bzz;
 
     // download raw file
     var fileHash = "a5c10851ef054c268a2438f10a21f6efe3dc3dcdcc2ea0e6a1a7a38bf8c91e23";
@@ -278,9 +278,9 @@ pick
 
 .. code-block:: javascript
 
-   web3.bzz.pick.file()
-   web3.bzz.pick.directory()
-   web3.bzz.pick.data()
+   xdc3.bzz.pick.file()
+   xdc3.bzz.pick.directory()
+   xdc3.bzz.pick.data()
 
 Opens a file picker in the browser to select file(s), directory or data.
 
@@ -302,7 +302,7 @@ Example
 
 .. code-block:: javascript
 
-    web3.bzz.pick.file()
+    xdc3.bzz.pick.file()
     .then(console.log);
     > {
         ...

@@ -1,10 +1,10 @@
 var assert = require('assert');
 var ganache = require('ganache-cli');
-var Web3 = require('../packages/web3');
+var Web3 = require('../packages/xdc3');
 var Basic = require('./sources/Basic');
 
 describe('web.providers.givenProvider (ganache)', function(){
-    var web3;
+    var xdc3;
     var accounts;
     var basic;
     var provider;
@@ -17,9 +17,9 @@ describe('web.providers.givenProvider (ganache)', function(){
 
     before(async function(){
         provider = ganache.provider();
-        web3 = new Web3(provider);
-        accounts = await web3.eth.getAccounts();
-        basic = new web3.eth.Contract(Basic.abi, basicOptions);
+        xdc3 = new Web3(provider);
+        accounts = await xdc3.eth.getAccounts();
+        basic = new xdc3.eth.Contract(Basic.abi, basicOptions);
     })
 
     after(function(done){
@@ -27,18 +27,18 @@ describe('web.providers.givenProvider (ganache)', function(){
     })
 
     it('requestManager attaches 4 listeners', async function(){
-        assert.equal(1, web3.currentProvider.listenerCount('data'))
-        assert.equal(1, web3.currentProvider.listenerCount('connect'))
-        assert.equal(1, web3.currentProvider.listenerCount('error'))
+        assert.equal(1, xdc3.currentProvider.listenerCount('data'))
+        assert.equal(1, xdc3.currentProvider.listenerCount('connect'))
+        assert.equal(1, xdc3.currentProvider.listenerCount('error'))
         // TODO: Remove close once the standard allows it
         assert(
-            web3.currentProvider.listenerCount("disconnect") === 1 || web3.currentProvider.listenerCount("close") === 1
+            xdc3.currentProvider.listenerCount("disconnect") === 1 || xdc3.currentProvider.listenerCount("close") === 1
         );
     });
 
     it('deploys a contract', async function(){
         var instance = await basic.deploy().send({from: accounts[0]})
-        assert(web3.utils.isAddress(instance.options.address));
+        assert(xdc3.utils.isAddress(instance.options.address));
     });
 
     it('can repeatedly setProvider without triggering MaxListeners', function(done){
