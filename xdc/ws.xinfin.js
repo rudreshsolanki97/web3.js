@@ -10,7 +10,7 @@ describe("xdc3 - ws provider", function () {
                 const interations = 10;
                 let count = 0;
 
-                const Xdc3 = require("../packages/xdc3/types");
+                const Xdc3 = require("../packages/xdc3");
 
                 const xdc3 = new Xdc3(
                     new Xdc3.providers.WebsocketProvider(provider)

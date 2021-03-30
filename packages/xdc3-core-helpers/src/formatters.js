@@ -51,7 +51,7 @@ var inputStorageKeysFormatter = function (keys) {
  * @returns {object}
  */
 var outputProofFormatter = function (proof) {
-    proof.address = utils.toChecksumAddress(proof.address);
+    proof.address = utils.toXdcAddress(utils.toChecksumAddress(proof.address));
     proof.nonce = utils.hexToNumberString(proof.nonce);
     proof.balance = utils.hexToNumberString(proof.balance);
 
@@ -243,13 +243,13 @@ var outputTransactionFormatter = function (tx) {
     tx.value = outputBigNumberFormatter(tx.value);
 
     if (tx.to && utils.isAddress(tx.to)) { // tx.to could be `0x0` or `null` while contract creation
-        tx.to = utils.toChecksumAddress(tx.to);
+        tx.to = utils.toXdcAddress(utils.toChecksumAddress(tx.to));
     } else {
         tx.to = null; // set to `null` if invalid address
     }
 
     if (tx.from) {
-        tx.from = utils.toChecksumAddress(tx.from);
+        tx.from = utils.toXdcAddress(utils.toChecksumAddress(tx.from));
     }
 
     return tx;
@@ -279,7 +279,7 @@ var outputTransactionReceiptFormatter = function (receipt) {
     }
 
     if (receipt.contractAddress) {
-        receipt.contractAddress = utils.toChecksumAddress(receipt.contractAddress);
+        receipt.contractAddress = utils.toXdcAddress(utils.toChecksumAddress(receipt.contractAddress));
     }
 
     if (typeof receipt.status !== 'undefined' && receipt.status !== null) {
@@ -319,7 +319,7 @@ var outputBlockFormatter = function (block) {
     }
 
     if (block.miner)
-        block.miner = utils.toChecksumAddress(block.miner);
+        block.miner = utils.toXdcAddress(utils.toChecksumAddress(block.miner));
 
     return block;
 };
@@ -399,7 +399,7 @@ var outputLogFormatter = function (log) {
         log.logIndex = utils.hexToNumber(log.logIndex);
 
     if (log.address) {
-        log.address = utils.toChecksumAddress(log.address);
+        log.address = utils.toXdcAddress(utils.toChecksumAddress(log.address));
     }
 
     return log;
