@@ -469,6 +469,7 @@ var outputPostFormatter = function (post) {
 };
 
 var inputAddressFormatter = function (address) {
+    address=utils.fromXdcAddress(address);
     var iban = new Iban(address);
     if (iban.isValid() && iban.isDirect()) {
         return iban.toAddress().toLowerCase();
