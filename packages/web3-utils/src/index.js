@@ -1,18 +1,15 @@
 /*
- This file is part of web3.js.
-
- web3.js is free software: you can redistribute it and/or modify
+ This file is part of xdc3.js.
+ xdc3.js is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
  the Free Software Foundation, either version 3 of the License, or
  (at your option) any later version.
-
- web3.js is distributed in the hope that it will be useful,
+ xdc3.js is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
-
  You should have received a copy of the GNU Lesser General Public License
- along with web3.js.  If not, see <http://www.gnu.org/licenses/>.
+ along with xdc3.js.  If not, see <http://www.gnu.org/licenses/>.
  */
 /**
  * @file utils.js
@@ -296,6 +293,8 @@ var toWei = function(number, unit) {
 var toChecksumAddress = function (address) {
     if (typeof address === 'undefined') return '';
 
+    address = utils.fromXdcAddress(address);
+
     if(!/^(0x)?[0-9a-f]{40}$/i.test(address))
         throw new Error('Given address "'+ address +'" is not a valid Ethereum address.');
 
@@ -392,6 +391,9 @@ module.exports = {
     soliditySha3Raw: soliditySha3.soliditySha3Raw,
     encodePacked: soliditySha3.encodePacked,
     isAddress: utils.isAddress,
+    fromXdcAddress:utils.fromXdcAddress,
+    toXdcAddress:utils.toXdcAddress,
+    isXdcAddress:utils.isXdcAddress,
     checkAddressChecksum: utils.checkAddressChecksum,
     toChecksumAddress: toChecksumAddress,
     toHex: utils.toHex,

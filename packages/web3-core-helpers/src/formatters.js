@@ -1,18 +1,18 @@
 /*
-    This file is part of web3.js.
+    This file is part of xdc3.js.
 
-    web3.js is free software: you can redistribute it and/or modify
+    xdc3.js is free software: you can redistribute it and/or modify
     it under the terms of the GNU Lesser General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    web3.js is distributed in the hope that it will be useful,
+    xdc3.js is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU Lesser General Public License for more details.
 
     You should have received a copy of the GNU Lesser General Public License
-    along with web3.js.  If not, see <http://www.gnu.org/licenses/>.
+    along with xdc3.js.  If not, see <http://www.gnu.org/licenses/>.
 */
 /**
  * @file formatters.js
@@ -51,7 +51,7 @@ var inputStorageKeysFormatter = function (keys) {
  * @returns {object}
  */
 var outputProofFormatter = function (proof) {
-    proof.address = utils.toChecksumAddress(proof.address);
+    proof.address = utils.toXdcAddress(utils.toChecksumAddress(proof.address));
     proof.nonce = utils.hexToNumberString(proof.nonce);
     proof.balance = utils.hexToNumberString(proof.balance);
 
@@ -243,13 +243,13 @@ var outputTransactionFormatter = function (tx) {
     tx.value = outputBigNumberFormatter(tx.value);
 
     if (tx.to && utils.isAddress(tx.to)) { // tx.to could be `0x0` or `null` while contract creation
-        tx.to = utils.toChecksumAddress(tx.to);
+        tx.to = utils.toXdcAddress(utils.toChecksumAddress(tx.to));
     } else {
         tx.to = null; // set to `null` if invalid address
     }
 
     if (tx.from) {
-        tx.from = utils.toChecksumAddress(tx.from);
+        tx.from = utils.toXdcAddress(utils.toChecksumAddress(tx.from));
     }
 
     return tx;
@@ -279,7 +279,7 @@ var outputTransactionReceiptFormatter = function (receipt) {
     }
 
     if (receipt.contractAddress) {
-        receipt.contractAddress = utils.toChecksumAddress(receipt.contractAddress);
+        receipt.contractAddress = utils.toXdcAddress(utils.toChecksumAddress(receipt.contractAddress));
     }
 
     if (typeof receipt.status !== 'undefined' && receipt.status !== null) {
@@ -319,7 +319,7 @@ var outputBlockFormatter = function (block) {
     }
 
     if (block.miner)
-        block.miner = utils.toChecksumAddress(block.miner);
+        block.miner = utils.toXdcAddress(utils.toChecksumAddress(block.miner));
 
     return block;
 };
@@ -399,7 +399,7 @@ var outputLogFormatter = function (log) {
         log.logIndex = utils.hexToNumber(log.logIndex);
 
     if (log.address) {
-        log.address = utils.toChecksumAddress(log.address);
+        log.address = utils.toXdcAddress(utils.toChecksumAddress(log.address));
     }
 
     return log;
@@ -469,6 +469,7 @@ var outputPostFormatter = function (post) {
 };
 
 var inputAddressFormatter = function (address) {
+    address=utils.fromXdcAddress(address);
     var iban = new Iban(address);
     if (iban.isValid() && iban.isDirect()) {
         return iban.toAddress().toLowerCase();

@@ -1,18 +1,15 @@
 /*
- This file is part of web3.js.
-
- web3.js is free software: you can redistribute it and/or modify
+ This file is part of xdc3.js.
+ xdc3.js is free software: you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
  the Free Software Foundation, either version 3 of the License, or
  (at your option) any later version.
-
- web3.js is distributed in the hope that it will be useful,
+ xdc3.js is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU Lesser General Public License for more details.
-
  You should have received a copy of the GNU Lesser General Public License
- along with web3.js.  If not, see <http://www.gnu.org/licenses/>.
+ along with xdc3.js.  If not, see <http://www.gnu.org/licenses/>.
  */
 /**
  * @file utils.js
@@ -86,6 +83,8 @@ var toTwosComplement = function (number) {
  * @return {Boolean}
  */
 var isAddress = function (address) {
+    // convert XDC address to ETH address
+    address = fromXdcAddress(address);
     // check if it has the basic requirements of an address
     if (!/^(0x)?[0-9a-f]{40}$/i.test(address)) {
         return false;
@@ -98,7 +97,43 @@ var isAddress = function (address) {
     }
 };
 
+/**
+ * 
+ * Checks if the given string is a XDC-only address
+ * 
+ * @method isXdcAddress
+ * @param {String} address the given HEX address
+ * @return {Boolean}
+ */
+var isXdcAddress = function (address) {
+    return /^(xdc|XDC)?[0-9a-f]{40}$/.test(address) || /^(xdc|XDC)?[0-9A-F]{40}$/.test(address)
+}
 
+/**
+ * 
+ * convert an XDC-only address to ETH address, no change to ETH address
+ * 
+ * @method fromXdcAddress
+ * @param {String} address the given HEX address
+ * @return {String}
+ */
+var fromXdcAddress = function (address) {
+    if (isXdcAddress(address)) return address.replace(/^(xdc|XDC)/i,'0x');
+    return address;
+}
+
+/**
+ * 
+ * convert an ETH-only address to XDC address, no change to ETH address
+ * 
+ * @method toXdcAddress
+ * @param {String} address the given HEX address
+ * @return {String}
+ */
+var toXdcAddress = function (address) {
+    if (!isXdcAddress(address)) return address.replace(/^(0x|0X)/i,'xdc');
+    return address;
+}
 
 /**
  * Checks if the given string is a checksummed address
@@ -108,6 +143,8 @@ var isAddress = function (address) {
  * @return {Boolean}
  */
 var checkAddressChecksum = function (address) {
+    // convert xdc to eth
+    if (isXdcAddress(address)) address = fromXdcAddress(address);
     // Check each case
     address = address.replace(/^0x/i,'');
     var addressHash = sha3(address.toLowerCase()).replace(/^0x/i,'');
@@ -529,6 +566,9 @@ module.exports = {
     isBigNumber: isBigNumber,
     toBN: toBN,
     isAddress: isAddress,
+    isXdcAddress: isXdcAddress,
+    fromXdcAddress:fromXdcAddress,
+    toXdcAddress:toXdcAddress,
     isBloom: isBloom,
     isUserEthereumAddressInBloom: isUserEthereumAddressInBloom,
     isContractAddressInBloom: isContractAddressInBloom,
