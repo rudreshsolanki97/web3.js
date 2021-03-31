@@ -215,7 +215,7 @@ Released with 1.0.0-beta.37 code base.
 ### Changed
 
 - Websocket package from @xdc3-js/websocket@1.0.29 to websocket@1.0.31 (#3371)
-- Upgrade `@xdc3-js/scrypt-shim@1.3.4` to `scrypt-js@3.0.1`
+- Upgrade `@xdc3-js/scrypt-shim@0.1.3` to `scrypt-js@3.0.1`
 - sendSignedTransaction revert handling synthesizes tx without network call (#3457)
 - Make docs grammar more idiomatic, normalize punctuation (#3543)
 
@@ -321,7 +321,7 @@ Released with 1.0.0-beta.37 code base.
 
 - Update `dist` to latest release (`1.3.2`) (#3875)
 
-## [1.3.4]
+## [0.1.3]
 
 ### Changed
 
