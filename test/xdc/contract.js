@@ -8,8 +8,8 @@ const addr = "xdc07318f7651eeb9ba05b9ba6ccb9e195c23b72a51";
 describe("xdc3.eth.contract", function () {
     it("xdc3.eth.contract - pastLogs", function () {
         return new Promise((resolve, reject) => {
-            const Xdc3 = require("../packages/xdc3");
-            const Utils = require("../packages/xdc3-utils");
+            const Xdc3 = require("../../packages/xdc3");
+            const Utils = require("../../packages/xdc3-utils");
 
             const xdc3 = new Xdc3(
                 new Xdc3.providers.WebsocketProvider(provider)
