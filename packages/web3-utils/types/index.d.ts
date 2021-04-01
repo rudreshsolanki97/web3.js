@@ -56,13 +56,13 @@ export type Mixed =
     | number
     | BN
     | {
-          type: string;
-          value: string;
-      }
+        type: string;
+        value: string;
+    }
     | {
-          t: string;
-          v: string | BN | number;
-      }
+        t: string;
+        v: string | BN | number;
+    }
     | boolean;
 
 export type Hex = string | number;
@@ -73,6 +73,10 @@ export function isBigNumber(value: BN): boolean;
 export function toBN(value: number | string): BN;
 export function toTwosComplement(value: number | string | BN): string;
 export function isAddress(address: string, chainId?: number): boolean;
+export function isXdcAddress(address: string): boolean;
+export function toXdcAddress(address: string): String;
+export function fromXdcAddress(address: string): String;
+
 export function isHex(hex: Hex): boolean;
 export function isHexStrict(hex: Hex): boolean;
 export function asciiToHex(string: string, length?: number): string;
@@ -120,7 +124,7 @@ export function getUnitValue(unit: Unit): string;
 export function unitMap(): Units;
 export function testAddress(bloom: string, address: string): boolean;
 export function testTopic(bloom: string, topic: string): boolean;
-export function getSignatureParameters(signature: string): {r: string; s: string; v: number};
+export function getSignatureParameters(signature: string): { r: string; s: string; v: number };
 export function stripHexPrefix(str: string): string;
 
 // interfaces
@@ -176,7 +180,7 @@ export interface Utils {
     unitMap(): Units;
     testAddress(bloom: string, address: string): boolean;
     testTopic(bloom: string, topic: string): boolean;
-    getSignatureParameters(signature: string): {r: string; s: string; v: number};
+    getSignatureParameters(signature: string): { r: string; s: string; v: number };
     stripHexPrefix(str: string): string;
 }
 
@@ -229,13 +233,13 @@ export interface AbiInput {
     name: string;
     type: string;
     indexed?: boolean;
-	components?: AbiInput[];
+    components?: AbiInput[];
     internalType?: string;
 }
 
 export interface AbiOutput {
     name: string;
     type: string;
-	components?: AbiOutput[];
+    components?: AbiOutput[];
     internalType?: string;
 }

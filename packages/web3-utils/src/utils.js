@@ -119,7 +119,7 @@ var isXdcAddress = function (address) {
  */
 var fromXdcAddress = function (address) {
     if (isXdcAddress(address)) return address.replace(/^(xdc|XDC)/i,'0x');
-    return address;
+    return address.toLowerCase();
 }
 
 /**
@@ -132,7 +132,7 @@ var fromXdcAddress = function (address) {
  */
 var toXdcAddress = function (address) {
     if (!isXdcAddress(address)) return address.replace(/^(0x|0X)/i,'xdc');
-    return address;
+    return address.toLowerCase();
 }
 
 /**

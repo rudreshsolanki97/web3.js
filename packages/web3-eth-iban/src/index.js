@@ -132,6 +132,7 @@ class Iban {
             throw new Error('Provided address is not a valid address: '+ address);
         }
 
+        address =  utils.fromXdcAddress(address);
         address = address.replace('0x','').replace('0X','');
 
         const asBn = new BigNumber(address, 16);
