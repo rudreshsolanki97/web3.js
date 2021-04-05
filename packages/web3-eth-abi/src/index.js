@@ -23,7 +23,7 @@
 
 var Buffer = require('buffer').Buffer;
 var _ = require('underscore');
-var utils = require('web3-utils');
+var utils = require('../../web3-utils');
 
 var EthersAbiCoder = require('@ethersproject/abi').AbiCoder;
 var ParamType = require('@ethersproject/abi').ParamType;
@@ -111,6 +111,8 @@ ABICoder.prototype.encodeParameters = function (types, params) {
 
         param = self.formatParam(type, param);
 
+        if (type==="address") param = utils.fromXdcAddress(param);
+        
         // Format params for tuples
         if (typeof type === 'string' && type.includes('tuple')) {
             const coder = ethersAbiCoder._getCoder(ParamType.from(type));
