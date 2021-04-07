@@ -1,6 +1,6 @@
 {
     "name": "xdc3-rud-eth-ens",
-    "version": "1.3.4",
+    "version": "1.3.5",
     "description": "ENS support for web3.",
     "repository": "https://github.com/ethereum/web3.js/tree/1.x/packages/web3-eth-ens",
     "license": "LGPL-3.0",
@@ -17,13 +17,13 @@
         "content-hash": "^2.5.2",
         "eth-ens-namehash": "2.0.8",
         "underscore": "1.9.1",
-        "xdc3-rud-core": "1.3.4",
-        "xdc3-rud-core-helpers": "1.3.4",
-        "xdc3-rud-core-promievent": "1.3.4",
-        "xdc3-rud-eth-abi": "1.3.4",
-        "xdc3-rud-eth-contract": "1.3.4",
-        "xdc3-rud-utils": "1.3.4",
-        "xdc3-rud-eth": "1.3.4"
+        "xdc3-rud-core": "1.3.5",
+        "xdc3-rud-core-helpers": "1.3.5",
+        "xdc3-rud-core-promievent": "1.3.5",
+        "xdc3-rud-eth": "1.3.5",
+        "xdc3-rud-eth-abi": "1.3.5",
+        "xdc3-rud-eth-contract": "1.3.5",
+        "xdc3-rud-utils": "1.3.5"
     },
     "devDependencies": {
         "dtslint": "^3.4.1",
